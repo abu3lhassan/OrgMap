@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>⛽ تحويل Excel إلى data.js - نسخة مصححة</title>
+  <style>
+    :root{--bg:#0f172a;--panel:rgba(255,255,255,.06);--line:rgba(255,255,255,.12);--orange:#f97316}
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(circle at top,#172554 0%,#0f172a 45%,#020617 100%);color:#fff;font-family:Arial,sans-serif}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:0 18px 40px rgba(0,0,0,.22)}
+    h1{margin:0 0 10px}
+    .hint{color:#cbd5e1;line-height:1.8}
+    .warn{color:#fed7aa}
+    input,button,textarea{font-family:inherit}
+    input{display:block;width:100%;padding:14px;border-radius:16px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);color:#fff;margin:16px 0}
+    button{border:none;border-radius:16px;padding:13px 18px;background:var(--orange);color:#fff;font-weight:700;cursor:pointer;margin-inline-end:8px}
+    button:disabled{opacity:.45;cursor:not-allowed}
+    textarea{width:100%;height:360px;margin-top:16px;border-radius:16px;padding:14px;background:#020617;color:#d1fae5;border:1px solid rgba(255,255,255,.12);direction:ltr;text-align:left}
+    .status{margin-top:14px;padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);line-height:1.7}
+    .ok{color:#86efac}.bad{color:#fecaca}.info{color:#bfdbfe}
+    table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
+    th,td{border:1px solid rgba(255,255,255,.12);padding:8px;text-align:right}
+    th{background:rgba(249,115,22,.18)}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <h1>تحويل Excel إلى data.js</h1>
+    <div class="hint">
+      هذه نسخة مصححة وأكثر ذكاءً. تقرأ قالب <b>EasyData</b> حتى لو كانت أسماء الأعمدة فيها مسافات أو اختلافات بسيطة.
+      بعد اختيار ملف Excel سيظهر ملخص، ثم يمكنك تحميل <b>data.js</b>.
+    </div>
+    <p class="warn">تحتاج اتصال إنترنت لتحميل مكتبة قراءة Excel وقت التحويل فقط.</p>
+    <input type="file" id="fileInput" accept=".xlsx,.xls" />
+    <button id="downloadBtn" disabled>تحميل data.js</button>
+    <button id="copyBtn" disabled>نسخ الكود</button>
+    <div id="status" class="status info">اختر ملف Excel للبدء.</div>
+    <div id="preview"></div>
+    <textarea id="output" placeholder="سيظهر هنا محتوى data.js"></textarea>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script>
+const typeMap = {
+  "شركة":"company","company":"company",
+  "جذر تنفيذي":"executive_root","جذر تنفيذى":"executive_root","executive_root":"executive_root",
+  "C-Level":"c_level","c level":"c_level","clevel":"c_level","c_level":"c_level",
+  "إدارة":"department","ادارة":"department","department":"department",
+  "قسم فرعي":"division","قسم فرعى":"division","division":"division",
+  "مدير":"manager","manager":"manager",
+  "موظف":"employee","employee":"employee",
+  "مدير إقليمي":"regional_manager","مدير اقليمي":"regional_manager","regional_manager":"regional_manager",
+  "مدير منطقة":"area_manager","area_manager":"area_manager",
+  "مشرف محطة":"station_supervisor","station_supervisor":"station_supervisor",
+  "محطة":"station","station":"station",
+  "عامل":"worker","worker":"worker"
+};
+const toneMap = {
+  "رئيسي":"primary","رئيسى":"primary","primary":"primary",
+  "ثانوي":"secondary","ثانوى":"secondary","secondary":"secondary",
+  "مالي":"warning","مالى":"warning","warning":"warning",
+  "شاغر":"vacant","vacant":"vacant",
+  "داكن":"dark","dark":"dark",
+  "بنفسجي":"purple","بنفسجى":"purple","purple":"purple"
+};
+const layoutMap = {"عمودي":"vertical","عمودى":"vertical","vertical":"vertical","أفقي":"horizontal","افقي":"horizontal","افقى":"horizontal","horizontal":"horizontal"};
+const statusMap = {"نشط":"active","active":"active","شاغر":"vacant","vacant":"vacant"};
+
+function normalizeKey(s){
+  return String(s ?? "")
+    .replace(/\uFEFF/g,"")
+    .replace(/[ًٌٍَُِّْـ]/g,"")
+    .replace(/[إأآا]/g,"ا")
+    .replace(/ى/g,"ي")
+    .replace(/ة/g,"ه")
+    .replace(/\s+/g,"")
+    .replace(/[\/\\_\-–—:：|()]/g,"")
+    .toLowerCase()
+    .trim();
+}
+function clean(v){ return (v ?? "").toString().trim(); }
+function num(v){
+  const raw = clean(v).replace(/,/g,"").replace(/[^\d.-]/g,"");
+  const n = Number(raw || 0);
+  return Number.isFinite(n) ? n : 0;
+}
+function yes(v){
+  const x = normalizeKey(v);
+  return ["نعم","yes","true","1","صح"].includes(x);
+}
+const aliases = {
+  type:["نوعالعنصر","type"],
+  name:["الاسم","اسم","name"],
+  subtitle:["المسميالوصف","المسمىالوصف","المسميالوظيفي","المسمىالوظيفي","الوصف","subtitle","jobtitle","title"],
+  parent:["يتبعالي","يتبعالى","يتبع","الاب","parent","parentid","parent_id"],
+  salary:["الراتبالشهري","الراتب","salary","monthlysalary"],
+  layout:["طريقهظهورالتابعين","طريقةظهورالتابعين","layout"],
+  tone:["اللونالتصنيف","اللون","التصنيف","tone"],
+  status:["الحاله","الحالة","status"],
+  station:["هلهومحطه","هلهومحطة","محطه","محطة","station"],
+  station_workers:["عددعمالالمحطه","عددعمالالمحطة","stationworkers","station_workers"],
+  notes:["ملاحظات","notes"],
+  image:["الصوره","الصورة","صوره","صورة","image","photo","avatar","img"]
+};
+function canonicalHeader(header){
+  const h = normalizeKey(header);
+  for(const [key, list] of Object.entries(aliases)){
+    if(list.map(normalizeKey).includes(h)) return key;
+  }
+  return null;
+}
+function findHeaderRow(rows){
+  let best = {idx:-1, score:0, map:{}};
+  rows.forEach((row, idx) => {
+    const map = {};
+    let score = 0;
+    row.forEach((cell, col) => {
+      const k = canonicalHeader(cell);
+      if(k){ map[k] = col; score++; }
+    });
+    if(score > best.score) best = {idx, score, map};
+  });
+  return best;
+}
+function getCell(row, map, key){
+  const col = map[key];
+  if(col === undefined) return "";
+  return row[col];
+}
+function resolveType(value){
+  const raw = clean(value);
+  return typeMap[raw] || typeMap[normalizeKey(raw)] || "employee";
+}
+function resolveTone(value){
+  const raw = clean(value);
+  return toneMap[raw] || toneMap[normalizeKey(raw)] || "dark";
+}
+function resolveLayout(value){
+  const raw = clean(value);
+  return layoutMap[raw] || layoutMap[normalizeKey(raw)] || "vertical";
+}
+function resolveStatus(value){
+  const raw = clean(value);
+  return statusMap[raw] || statusMap[normalizeKey(raw)] || "active";
+}
+function buildTree(sheetRows, headerInfo){
+  const map = headerInfo.map;
+  const dataRows = sheetRows.slice(headerInfo.idx + 1);
+  const nodes = [];
+  const warnings = [];
+  const byName = new Map();
+
+  dataRows.forEach((row, i) => {
+    const name = clean(getCell(row, map, "name"));
+    if(!name) return;
+
+    const type = resolveType(getCell(row, map, "type"));
+    const stationFlag = yes(getCell(row, map, "station")) || type === "station";
+    const node = {
+      name,
+      subtitle: clean(getCell(row, map, "subtitle")),
+      type,
+      tone: resolveTone(getCell(row, map, "tone")),
+      layout: resolveLayout(getCell(row, map, "layout")),
+      status: resolveStatus(getCell(row, map, "status")),
+      children: []
+    };
+
+    const salary = num(getCell(row, map, "salary"));
+    if(salary && !stationFlag) node.salary = salary;
+
+    if(stationFlag){
+      node.station = true;
+      node.salary = 0;
+      const workers = num(getCell(row, map, "station_workers"));
+      if(workers) node.station_workers = workers;
+    }
+
+    const notes = clean(getCell(row, map, "notes"));
+    if(notes) node.notes = notes;
+
+    const image = clean(getCell(row, map, "image"));
+    if(image) node.image = image;
+
+    Object.keys(node).forEach(k => {
+      if(node[k] === "" || node[k] === undefined || node[k] === null) delete node[k];
+    });
+
+    const parentName = clean(getCell(row, map, "parent"));
+    node.__parentName = parentName;
+    node.__rowNumber = headerInfo.idx + i + 2;
+
+    if(byName.has(name)){
+      warnings.push("تنبيه: الاسم مكرر وقد يسبب ربط خاطئ: " + name);
+    }
+    byName.set(name, node);
+    nodes.push(node);
+  });
+
+  const roots = [];
+  nodes.forEach(node => {
+    const parentName = node.__parentName;
+    delete node.__parentName;
+    delete node.__rowNumber;
+    if(parentName && byName.has(parentName)){
+      byName.get(parentName).children.push(node);
+    }else{
+      if(parentName) warnings.push("لم يتم العثور على الأب '" + parentName + "' للعنصر '" + node.name + "'");
+      roots.push(node);
+    }
+  });
+
+  let company = roots.find(n => n.type === "company" || n.name === "الشركة") || roots[0];
+  if(!company){
+    company = {name:"الشركة", tone:"primary", layout:"vertical", children:[]};
+    warnings.push("لم يتم العثور على صفوف صالحة. تم إنشاء شركة فارغة.");
+  }
+
+  return {tree:{company}, nodes, warnings};
+}
+function makeDataJs(tree){
+  return "const data = " + JSON.stringify(tree, null, 2) + ";\\n";
+}
+function setStatus(message, cls="info"){
+  const el = document.getElementById("status");
+  el.className = "status " + cls;
+  el.textContent = message;
+}
+function renderPreview(nodes, warnings, sheetName, headerRow){
+  const html = `
+    <div class="status ${warnings.length ? "warn" : "ok"}">
+      الورقة المقروءة: ${sheetName} — صف العناوين: ${headerRow + 1} — عدد العناصر: ${nodes.length}
+      ${warnings.length ? "\\n" + warnings.slice(0,6).join("\\n") : ""}
+    </div>
+    <table>
+      <thead><tr><th>نوع</th><th>الاسم</th><th>المسمى</th><th>عدد الأبناء</th></tr></thead>
+      <tbody>
+        ${nodes.slice(0,12).map(n => `<tr><td>${n.type||""}</td><td>${n.name||""}</td><td>${n.subtitle||""}</td><td>${(n.children||[]).length}</td></tr>`).join("")}
+      </tbody>
+    </table>
+  `;
+  document.getElementById("preview").innerHTML = html;
+}
+let latest = "";
+document.getElementById("fileInput").addEventListener("change", async (e) => {
+  try{
+    if(typeof XLSX === "undefined"){
+      setStatus("لم يتم تحميل مكتبة قراءة Excel. تأكد من وجود اتصال إنترنت ثم أعد فتح الأداة.", "bad");
+      return;
+    }
+    const file = e.target.files[0];
+    if(!file) return;
+
+    setStatus("جاري قراءة الملف...", "info");
+    const buf = await file.arrayBuffer();
+    const wb = XLSX.read(buf, {type:"array"});
+
+    let selectedSheet = null;
+    let selectedRows = null;
+    let selectedHeader = null;
+
+    const preferred = ["EasyData","OrgData", ...wb.SheetNames];
+    for(const name of preferred){
+      if(!wb.Sheets[name]) continue;
+      const rows = XLSX.utils.sheet_to_json(wb.Sheets[name], {header:1, defval:""});
+      const header = findHeaderRow(rows);
+      if(header.score >= 3){
+        selectedSheet = name;
+        selectedRows = rows;
+        selectedHeader = header;
+        break;
+      }
+    }
+
+    if(!selectedSheet){
+      setStatus("لم أجد ورقة فيها أعمدة مفهومة. تأكد أن الشيت يحتوي على أعمدة مثل: الاسم، نوع العنصر، يتبع إلى.", "bad");
+      return;
+    }
+
+    const result = buildTree(selectedRows, selectedHeader);
+    latest = makeDataJs(result.tree);
+    document.getElementById("output").value = latest;
+    document.getElementById("downloadBtn").disabled = false;
+    document.getElementById("copyBtn").disabled = false;
+
+    if(result.nodes.length === 0){
+      setStatus("تم قراءة الورقة لكن لم يتم العثور على صفوف بيانات. تأكد أن عمود الاسم فيه بيانات.", "bad");
+    }else{
+      setStatus("تم التحويل بنجاح. يمكنك تحميل data.js الآن.", "ok");
+    }
+    renderPreview(result.nodes, result.warnings, selectedSheet, selectedHeader.idx);
+  }catch(err){
+    console.error(err);
+    setStatus("حدث خطأ أثناء التحويل: " + err.message, "bad");
+  }
+});
+document.getElementById("downloadBtn").addEventListener("click", () => {
+  if(!latest) return;
+  const blob = new Blob([latest], {type:"text/javascript;charset=utf-8"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "data.js";
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+document.getElementById("copyBtn").addEventListener("click", async () => {
+  if(!latest) return;
+  await navigator.clipboard.writeText(latest);
+  setStatus("تم نسخ كود data.js.", "ok");
+});
+</script>
+</body>
+</html>

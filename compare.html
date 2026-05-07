@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>⛽ مقارنة النسخ</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    :root{
+      --bg:#0f172a; --bg2:#0a1020; --muted:#cbd5e1; --orange:#f97316;
+      --panel:rgba(255,255,255,.055); --shadow:0 18px 40px rgba(0,0,0,.22);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(circle at top,#16233b 0%,var(--bg) 42%,var(--bg2) 100%);color:#fff;font-family:Arial,sans-serif}
+    .wrap{max-width:1300px;margin:0 auto;padding:24px}
+    .app-menu-btn{position:fixed;top:18px;inset-inline-start:18px;width:52px;height:52px;border-radius:18px;border:1px solid rgba(249,115,22,.28);background:rgba(15,23,42,.74);z-index:120;cursor:pointer;box-shadow:0 16px 34px rgba(0,0,0,.26),0 0 24px rgba(249,115,22,.10);backdrop-filter:blur(14px)}
+    .app-menu-btn span,.app-menu-btn::before,.app-menu-btn::after{content:"";position:absolute;left:14px;width:22px;height:2px;background:#fed7aa;border-radius:99px;transition:.18s ease}
+    .app-menu-btn span{top:25px}.app-menu-btn::before{top:18px}.app-menu-btn::after{top:32px}
+    body.menu-open .app-menu-btn span{opacity:0}body.menu-open .app-menu-btn::before{top:25px;transform:rotate(45deg)}body.menu-open .app-menu-btn::after{top:25px;transform:rotate(-45deg)}
+    .app-menu-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.34);backdrop-filter:blur(3px);z-index:100;opacity:0;pointer-events:none;transition:.18s ease}
+    body.menu-open .app-menu-backdrop{opacity:1;pointer-events:auto}
+    .app-drawer{position:fixed;top:86px;inset-inline-start:18px;width:min(340px,calc(100vw - 36px));border-radius:26px;border:1px solid rgba(249,115,22,.22);background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.055)),radial-gradient(circle at top left,rgba(249,115,22,.14),transparent 48%);box-shadow:0 30px 70px rgba(0,0,0,.38),0 0 38px rgba(249,115,22,.09);backdrop-filter:blur(18px);z-index:110;opacity:0;transform:translateY(-10px);pointer-events:none;overflow:hidden;transition:.18s ease}
+    body.menu-open .app-drawer{opacity:1;transform:translateY(0);pointer-events:auto}
+    .drawer-head{padding:18px 20px 12px;border-bottom:1px solid rgba(255,255,255,.08)}
+    .drawer-head b{display:block;font-size:18px}.drawer-head span{display:block;color:#cbd5e1;font-size:12px;margin-top:6px}
+    .drawer-nav{padding:12px;display:grid;gap:8px}.drawer-link{text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.045);border-radius:18px;padding:13px 14px;display:flex;justify-content:space-between;align-items:center;transition:.15s ease}
+    .drawer-link:hover,.drawer-link.active{border-color:rgba(249,115,22,.30);background:rgba(249,115,22,.11);color:#fed7aa}
+    .drawer-section{padding:9px 14px 2px;color:#94a3b8;font-size:12px;font-weight:700}
+    .hero,.card{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:24px;box-shadow:var(--shadow);margin-bottom:18px}
+    .hero{text-align:center}.hero h1{margin:0;font-size:40px}.hero p{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    input{width:100%;padding:14px;border-radius:16px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);color:#fff;margin-top:10px}
+    button{height:48px;border:none;border-radius:16px;padding:0 18px;background:#f97316;color:#fff;font-weight:800;cursor:pointer}
+    .summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+    .stat{border:1px solid rgba(255,255,255,.10);border-radius:18px;background:rgba(255,255,255,.045);padding:15px;text-align:center}
+    .stat .n{font-size:26px;font-weight:900;color:#fdba74}.stat .l{color:#cbd5e1;font-size:13px}
+    .list{display:grid;gap:10px}.item{border:1px solid rgba(255,255,255,.10);border-radius:16px;background:rgba(255,255,255,.045);padding:12px;line-height:1.7}.item b{color:#fed7aa}
+    @media(max-width:800px){.grid,.summary{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<button class="app-menu-btn" id="appMenuBtn" title="القائمة"><span></span></button>
+<div class="app-menu-backdrop" id="appMenuBackdrop"></div>
+<nav class="app-drawer" id="appDrawer">
+  <div class="drawer-head"><b>القائمة الرئيسية</b><span>الخارطة التنظيمية التفاعلية</span></div>
+  <div class="drawer-nav">
+    <a class="drawer-link" data-page="dashboard" href="index.html">لوحة القيادة <span>›</span></a>
+    <a class="drawer-link" data-page="org" href="org.html">الهيكل التنظيمي <span>›</span></a>
+    <div class="drawer-section">IT</div>
+    <a class="drawer-link" data-page="quality" href="quality.html">فحص البيانات <span>›</span></a>
+    <a class="drawer-link active" data-page="compare" href="compare.html">مقارنة النسخ <span>›</span></a>
+    <a class="drawer-link" data-page="converter" href="convert-ultra-easy-excel-to-data.html">تحويل Excel إلى data.js <span>›</span></a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="hero">
+    <h1>مقارنة نسخة قديمة ونسخة جديدة</h1>
+    <p>ارفع ملفي data.js للمقارنة بين الإضافات والحذف وتغيّر الرواتب والتبعية.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card"><h2>النسخة القديمة</h2><input type="file" id="oldFile" accept=".js,.txt,.json"></div>
+    <div class="card"><h2>النسخة الجديدة</h2><input type="file" id="newFile" accept=".js,.txt,.json"></div>
+  </div>
+  <button id="compareBtn">قارن الآن</button>
+  <div id="result"></div>
+</div>
+
+<script>
+function initAppMenu(activePage){
+  const btn=document.getElementById('appMenuBtn'), backdrop=document.getElementById('appMenuBackdrop');
+  document.querySelectorAll('.drawer-link').forEach(a=>a.classList.toggle('active',a.dataset.page===activePage));
+  function close(){document.body.classList.remove('menu-open')}
+  btn?.addEventListener('click',()=>document.body.classList.toggle('menu-open'));
+  backdrop?.addEventListener('click',close);
+}
+initAppMenu('compare');
+function money(n){return new Intl.NumberFormat("ar-SA",{style:"currency",currency:"SAR",maximumFractionDigits:0}).format(n||0)}
+async function readData(file){
+  const text = await file.text();
+  let code = text.replace(/^\s*const\s+data\s*=/, 'data =');
+  const fn = new Function(code + '; return data;');
+  return fn();
+}
+function computeCost(node){return (node.station?0:Number(node.salary||0)) + (node.children||[]).reduce((s,c)=>s+computeCost(c),0)}
+function flatten(root){
+  const out = new Map();
+  function walk(node,parent='',path=[]){
+    const p=[...path,node.name||'-'];
+    const key=node.name||p.join('>');
+    out.set(key,{name:node.name||'-',subtitle:node.subtitle||'',salary:Number(node.salary||0),parent,path:p.join(' › '),cost:computeCost(node),type:node.type||'',station:!!node.station});
+    (node.children||[]).forEach(c=>walk(c,node.name||'',p));
+  }
+  walk(root);
+  return out;
+}
+document.getElementById('compareBtn').addEventListener('click',async()=>{
+  const oldF=document.getElementById('oldFile').files[0], newF=document.getElementById('newFile').files[0];
+  if(!oldF||!newF){alert('اختر الملفين أولاً');return}
+  const oldD=await readData(oldF), newD=await readData(newF);
+  const oldM=flatten(oldD.company), newM=flatten(newD.company);
+  const added=[], removed=[], salaryChanged=[], parentChanged=[];
+  newM.forEach((v,k)=>{if(!oldM.has(k)) added.push(v); else {
+    const o=oldM.get(k);
+    if(o.salary!==v.salary) salaryChanged.push({name:v.name,old:o.salary,new:v.salary,path:v.path});
+    if(o.parent!==v.parent) parentChanged.push({name:v.name,old:o.parent,new:v.parent,path:v.path});
+  }});
+  oldM.forEach((v,k)=>{if(!newM.has(k)) removed.push(v)});
+  const totalOld=computeCost(oldD.company), totalNew=computeCost(newD.company);
+  function list(title,arr,mapper){return `<div class="card"><h2>${title}</h2><div class="list">${arr.length?arr.map(mapper).join(''):'<div class="item">لا يوجد</div>'}</div></div>`}
+  document.getElementById('result').innerHTML = `
+    <div class="summary">
+      <div class="stat"><div class="n">${added.length}</div><div class="l">مضاف</div></div>
+      <div class="stat"><div class="n">${removed.length}</div><div class="l">محذوف</div></div>
+      <div class="stat"><div class="n">${salaryChanged.length}</div><div class="l">تغير راتب</div></div>
+      <div class="stat"><div class="n">${money(totalNew-totalOld)}</div><div class="l">فرق الإجمالي</div></div>
+    </div>
+    ${list('العناصر المضافة',added,x=>`<div class="item"><b>${x.name}</b><br>${x.path}</div>`)}
+    ${list('العناصر المحذوفة',removed,x=>`<div class="item"><b>${x.name}</b><br>${x.path}</div>`)}
+    ${list('تغيّرات الرواتب',salaryChanged,x=>`<div class="item"><b>${x.name}</b><br>${money(x.old)} ← ${money(x.new)}<br>${x.path}</div>`)}
+    ${list('تغيّرات التبعية',parentChanged,x=>`<div class="item"><b>${x.name}</b><br>${x.old||'-'} ← ${x.new||'-'}<br>${x.path}</div>`)}
+  `;
+});
+</script>
+</body>
+</html>
