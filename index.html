@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الخارطة التنظيمية التفاعلية</title>
+  <style>
+    :root {
+      --bg: #111315;
+      --card: rgba(255,255,255,0.05);
+      --card-2: rgba(0,0,0,0.2);
+      --border: rgba(255,255,255,0.10);
+      --text: #ffffff;
+      --muted: #cbd5e1;
+      --green: rgba(16,185,129,0.15);
+      --green-border: rgba(16,185,129,0.35);
+      --blue: rgba(14,165,233,0.12);
+      --blue-border: rgba(14,165,233,0.30);
+      --amber: rgba(245,158,11,0.12);
+      --amber-border: rgba(245,158,11,0.30);
+      --shadow: 0 20px 50px rgba(0,0,0,0.25);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .hero {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+      backdrop-filter: blur(8px);
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 5vw, 48px);
+      text-align: center;
+    }
+
+    .hero p {
+      color: var(--muted);
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .summary-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      text-align: center;
+    }
+
+    .summary-card .label {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .summary-card .value {
+      margin-top: 6px;
+      font-weight: 700;
+      font-size: 22px;
+    }
+
+    .tree-root {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      padding-bottom: 40px;
+    }
+
+    .node-wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .node-btn {
+      width: 100%;
+      max-width: 520px;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      text-align: center;
+      padding: 16px 18px;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: transform 0.18s ease, background 0.18s ease;
+    }
+
+    .node-btn:hover { transform: translateY(-1px); }
+    .node-btn.primary { background: var(--green); border-color: var(--green-border); }
+    .node-btn.secondary { background: var(--blue); border-color: var(--blue-border); }
+    .node-btn.warning { background: var(--amber); border-color: var(--amber-border); }
+    .node-btn.light { background: var(--card-2); }
+
+    .node-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .node-subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .node-amount {
+      font-size: 14px;
+      margin-top: 8px;
+      color: #86efac;
+      font-weight: 600;
+    }
+
+    .node-hint {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 7px;
+    }
+
+    .line {
+      width: 1px;
+      height: 24px;
+      background: rgba(255,255,255,0.18);
+    }
+
+    .children {
+      width: 100%;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .children.open { display: flex; }
+
+    .station-meta {
+      width: 100%;
+      max-width: 520px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+    }
+
+    .meta-box {
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: var(--card-2);
+      padding: 14px;
+      text-align: center;
+    }
+
+    .meta-box .label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .meta-box .value {
+      font-size: 18px;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .footer-note {
+      margin-top: 24px;
+      color: #94a3b8;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (max-width: 640px) {
+      .container { padding: 14px; }
+      .hero { padding: 20px; }
+      .node-btn { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <h1>الخارطة التنظيمية التفاعلية</h1>
+      <p>نسخة جاهزة للنشر على GitHub Pages. العرض عمودي مثل الشجرة، وكل جزء يفتح عند الضغط عليه لتقليل الازدحام البصري. البيانات الحالية تجريبية ويمكن تعديلها بسهولة لاحقًا.</p>
+      <div class="summary-grid" id="summaryGrid"></div>
+    </section>
+
+    <section class="tree-root" id="treeRoot"></section>
+
+    <div class="footer-note">
+      هذه نسخة MVP للنشر السريع. يمكنك لاحقًا ربطها بملف بيانات خارجي أو SharePoint أو قاعدة بيانات.
+    </div>
+  </div>
+
+  <script>
+    const data = {
+      executive: {
+        id: "executive",
+        name: "الادارة التنفيذية",
+        manager: { name: "المدير التنفيذي", title: "Chief Executive Officer", salary: 45000 },
+        extraLeaders: [
+          {
+            name: "المدير المالي",
+            title: "CFO",
+            salary: 32000,
+            reports: [
+              {
+                name: "كبير المحاسبين",
+                title: "Chief Accountant",
+                salary: 18000,
+                reports: [
+                  { name: "محاسب 1", title: "Accountant", salary: 9000 },
+                  { name: "محاسب 2", title: "Accountant", salary: 9000 },
+                  { name: "محاسب 3", title: "Accountant", salary: 9000 }
+                ]
+              }
+            ]
+          }
+        ],
+        reports: [
+          { name: "مدير تنفيذي 1", title: "Executive Director", salary: 28000 },
+          { name: "مدير تنفيذي 2", title: "Executive Director", salary: 28000 },
+          { name: "مدير ادارة 1", title: "Department Director", salary: 22000 },
+          { name: "مدير ادارة 2", title: "Department Director", salary: 22000 },
+          { name: "مدير اقليمي 1", title: "Regional Manager", salary: 20000 },
+          { name: "مدير اقليمي 2", title: "Regional Manager", salary: 20000 },
+          { name: "مدير اقليمي 3", title: "Regional Manager", salary: 20000 }
+        ]
+      },
+      departments: [
+        {
+          id: "hr",
+          name: "ادارة الموارد البشرية",
+          manager: { name: "مدير الموارد البشرية", title: "HR Manager", salary: 20000 },
+          units: [
+            {
+              name: "ادارة الخدمات المساندة",
+              manager: { name: "مدير الخدمات المساندة", title: "Support Services Manager", salary: 14000 },
+              staff: [{ name: "موظف خدمات مساندة", title: "Officer", salary: 7000 }]
+            },
+            {
+              name: "ادارة خدمة العملاء",
+              manager: { name: "مدير خدمة العملاء", title: "Customer Service Manager", salary: 14000 },
+              staff: [{ name: "موظف خدمة عملاء", title: "Officer", salary: 7000 }]
+            }
+          ],
+          staff: [
+            { name: "موظف موارد بشرية 1", title: "HR Officer", salary: 8000 },
+            { name: "موظف موارد بشرية 2", title: "HR Officer", salary: 8000 }
+          ]
+        },
+        {
+          id: "procurement",
+          name: "قسم المشتريات",
+          manager: { name: "مدير المشتريات", title: "Procurement Manager", salary: 16000 },
+          staff: [{ name: "موظف مشتريات", title: "Procurement Officer", salary: 7000 }]
+        },
+        {
+          id: "development",
+          name: "قسم التطوير",
+          manager: { name: "مدير التطوير", title: "Development Manager", salary: 17000 },
+          staff: [
+            { name: "مخطط توسع 1", title: "Expansion Planner", salary: 9000 },
+            { name: "مخطط توسع 2", title: "Expansion Planner", salary: 9000 },
+            { name: "مخطط توسع 3", title: "Expansion Planner", salary: 9000 }
+          ]
+        },
+        {
+          id: "it",
+          name: "قسم تقنية المعلومات",
+          manager: { name: "مدير تقنية المعلومات", title: "IT Manager", salary: 18000 },
+          units: [
+            {
+              name: "قسم الدعم الفني",
+              manager: { name: "مسؤول الدعم الفني", title: "Support Lead", salary: 11000 },
+              staff: [{ name: "موظف دعم فني", title: "Support Technician", salary: 7000 }]
+            },
+            {
+              name: "قسم كاميرات المراقبة",
+              manager: { name: "مسؤول المراقبة", title: "CCTV Lead", salary: 11000 },
+              staff: [{ name: "فني كاميرات", title: "CCTV Technician", salary: 7000 }]
+            }
+          ],
+          staff: [{ name: "منسق تقنية معلومات", title: "IT Coordinator", salary: 8000 }]
+        },
+        {
+          id: "projects",
+          name: "قسم المشاريع",
+          manager: { name: "مدير المشاريع", title: "Projects Manager", salary: 19000 },
+          staff: [
+            { name: "مهندس 1", title: "Engineer", salary: 12000 },
+            { name: "مهندس 2", title: "Engineer", salary: 12000 },
+            { name: "رسام هندسي", title: "Draftsman", salary: 8500 }
+          ]
+        },
+        {
+          id: "maintenance",
+          name: "قسم الصيانة",
+          manager: { name: "مدير الصيانة", title: "Maintenance Manager", salary: 17000 },
+          staff: [
+            { name: "فني 1", title: "Technician", salary: 7000 },
+            { name: "فني 2", title: "Technician", salary: 7000 },
+            { name: "فني 3", title: "Technician", salary: 7000 }
+          ]
+        }
+      ],
+      operations: {
+        id: "operations",
+        name: "التشغيل الميداني والمحطات",
+        note: "لا يوجد حاليا مدير تشغيل تنفيذي، والتغطية بواسطة 3 مدراء اقليميين.",
+        regionalManagers: [
+          {
+            name: "مدير اقليمي 1",
+            title: "Regional Manager",
+            salary: 20000,
+            areaManagers: [
+              {
+                name: "مدير منطقة 1",
+                title: "Area Manager",
+                salary: 14000,
+                stations: [
+                  { name: "محطة الرياض 1", supervisorSalary: 5500, workers: 6, workerSalaryAvg: 2200 },
+                  { name: "محطة الرياض 2", supervisorSalary: 5500, workers: 8, workerSalaryAvg: 2200 },
+                  { name: "محطة الرياض 3", supervisorSalary: 5500, workers: 5, workerSalaryAvg: 2200 }
+                ]
+              },
+              {
+                name: "مدير منطقة 2",
+                title: "Area Manager",
+                salary: 14000,
+                stations: [
+                  { name: "محطة القصيم 1", supervisorSalary: 5200, workers: 4, workerSalaryAvg: 2100 },
+                  { name: "محطة القصيم 2", supervisorSalary: 5200, workers: 7, workerSalaryAvg: 2100 }
+                ]
+              }
+            ]
+          },
+          {
+            name: "مدير اقليمي 2",
+            title: "Regional Manager",
+            salary: 20000,
+            areaManagers: [
+              {
+                name: "مدير منطقة 3",
+                title: "Area Manager",
+                salary: 14000,
+                stations: [
+                  { name: "محطة جدة 1", supervisorSalary: 5600, workers: 6, workerSalaryAvg: 2300 },
+                  { name: "محطة جدة 2", supervisorSalary: 5600, workers: 9, workerSalaryAvg: 2300 }
+                ]
+              }
+            ]
+          },
+          {
+            name: "مدير اقليمي 3",
+            title: "Regional Manager",
+            salary: 20000,
+            areaManagers: [
+              {
+                name: "مدير منطقة 4",
+                title: "Area Manager",
+                salary: 14000,
+                stations: [
+                  { name: "محطة الدمام 1", supervisorSalary: 5400, workers: 10, workerSalaryAvg: 2200 },
+                  { name: "محطة الدمام 2", supervisorSalary: 5400, workers: 7, workerSalaryAvg: 2200 },
+                  { name: "محطة الخبر 1", supervisorSalary: 5400, workers: 3, workerSalaryAvg: 2200 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    };
+
+    const currency = (value) => new Intl.NumberFormat("ar-SA", {
+      style: "currency",
+      currency: "SAR",
+      maximumFractionDigits: 0
+    }).format(value);
+
+    const sum = (arr) => arr.reduce((a, b) => a + b, 0);
+    const stationCost = (station) => station.supervisorSalary + station.workers * station.workerSalaryAvg;
+    const stationPeople = (station) => 1 + station.workers;
+    const unitCost = (unit) => (unit.manager?.salary || 0) + sum((unit.staff || []).map((s) => s.salary || 0));
+    const departmentCost = (dept) => (dept.manager?.salary || 0) + sum((dept.staff || []).map((s) => s.salary || 0)) + sum((dept.units || []).map(unitCost));
+    const executiveCost = () => data.executive.manager.salary + sum(data.executive.reports.map((r) => r.salary)) + sum(data.executive.extraLeaders.map((leader) => leader.salary + sum((leader.reports || []).map((rep) => rep.salary + sum((rep.reports || []).map((s) => s.salary || 0))))));
+    const operationsCost = () => sum(data.operations.regionalManagers.map((rm) => rm.salary + sum(rm.areaManagers.map((am) => am.salary + sum(am.stations.map(stationCost))))));
+    const totalCompanyCost = executiveCost() + sum(data.departments.map(departmentCost)) + operationsCost();
+    const totalStations = sum(data.operations.regionalManagers.map((rm) => sum(rm.areaManagers.map((am) => am.stations.length))));
+    const totalStationWorkers = sum(data.operations.regionalManagers.map((rm) => sum(rm.areaManagers.map((am) => sum(am.stations.map(stationPeople))))));
+    const totalDepartmentEmployees = 1 + data.executive.reports.length + sum(data.executive.extraLeaders.map((leader) => 1 + sum((leader.reports || []).map((rep) => 1 + (rep.reports || []).length)))) + sum(data.departments.map((dept) => 1 + (dept.staff || []).length + sum((dept.units || []).map((u) => (u.manager ? 1 : 0) + (u.staff || []).length))));
+
+    function createNode({ title, subtitle = "", amount = null, tone = "", defaultOpen = false, children = [], extraContent = null }) {
+      const wrap = document.createElement("div");
+      wrap.className = "node-wrap";
+
+      const btn = document.createElement("button");
+      btn.className = `node-btn ${tone}`.trim();
+      btn.type = "button";
+      btn.innerHTML = `
+        <div class="node-title">${title}</div>
+        ${subtitle ? `<div class="node-subtitle">${subtitle}</div>` : ""}
+        ${typeof amount === "number" ? `<div class="node-amount">${currency(amount)}</div>` : ""}
+        <div class="node-hint">اضغط ${defaultOpen ? "للاخفاء" : "للاستعراض"}</div>
+      `;
+
+      const line = document.createElement("div");
+      line.className = "line";
+      line.style.display = defaultOpen && (children.length || extraContent) ? "block" : "none";
+
+      const childrenBox = document.createElement("div");
+      childrenBox.className = `children ${defaultOpen ? "open" : ""}`.trim();
+
+      if (extraContent) childrenBox.appendChild(extraContent);
+      children.forEach((child) => childrenBox.appendChild(child));
+
+      btn.addEventListener("click", () => {
+        const isOpen = childrenBox.classList.toggle("open");
+        btn.querySelector(".node-hint").textContent = `اضغط ${isOpen ? "للاخفاء" : "للاستعراض"}`;
+        line.style.display = isOpen && (children.length || extraContent) ? "block" : "none";
+      });
+
+      wrap.appendChild(btn);
+      if (children.length || extraContent) {
+        wrap.appendChild(line);
+        wrap.appendChild(childrenBox);
+      }
+      return wrap;
+    }
+
+    function personNode(person, tone = "light") {
+      return createNode({ title: person.name, subtitle: person.title, amount: person.salary, tone });
+    }
+
+    function stationMeta(station) {
+      const wrap = document.createElement("div");
+      wrap.className = "station-meta";
+      const items = [
+        ["راتب المشرف", currency(station.supervisorSalary)],
+        ["عدد العمال", station.workers],
+        ["متوسط راتب العامل", currency(station.workerSalaryAvg)]
+      ];
+      items.forEach(([label, value]) => {
+        const box = document.createElement("div");
+        box.className = "meta-box";
+        box.innerHTML = `<div class="label">${label}</div><div class="value">${value}</div>`;
+        wrap.appendChild(box);
+      });
+      return wrap;
+    }
+
+    function buildTree() {
+      const root = document.getElementById("treeRoot");
+
+      const executiveChildren = [
+        personNode(data.executive.manager, "primary"),
+        ...data.executive.reports.map((person) => personNode(person)),
+        ...data.executive.extraLeaders.map((leader) => createNode({
+          title: leader.name,
+          subtitle: leader.title,
+          amount: leader.salary,
+          tone: "warning",
+          children: (leader.reports || []).map((rep) => createNode({
+            title: rep.name,
+            subtitle: rep.title,
+            amount: rep.salary,
+            children: (rep.reports || []).map((person) => personNode(person))
+          }))
+        })),
+        createNode({ title: "تكلفة الادارة التنفيذية", subtitle: "إجمالي الرواتب في هذا المستوى", amount: executiveCost(), tone: "primary" })
+      ];
+
+      const departmentsChildren = data.departments.map((dept) => createNode({
+        title: dept.name,
+        subtitle: "اضغط لعرض المدير والوحدات والموظفين",
+        amount: departmentCost(dept),
+        children: [
+          personNode(dept.manager, "primary"),
+          ...(dept.units || []).map((unit) => createNode({
+            title: unit.name,
+            subtitle: "قسم / وحدة فرعية",
+            amount: unitCost(unit),
+            tone: "secondary",
+            children: [
+              ...(unit.manager ? [personNode(unit.manager, "primary")] : []),
+              ...(unit.staff || []).map((person) => personNode(person)),
+              createNode({ title: `تكلفة ${unit.name}`, subtitle: "إجمالي الوحدة", amount: unitCost(unit), tone: "warning" })
+            ]
+          })),
+          ...(dept.staff || []).map((person) => personNode(person)),
+          createNode({ title: `تكلفة ${dept.name}`, subtitle: "إجمالي القسم", amount: departmentCost(dept), tone: "warning" })
+        ]
+      }));
+
+      const operationsChildren = data.operations.regionalManagers.map((rm) => createNode({
+        title: rm.name,
+        subtitle: rm.title,
+        amount: rm.salary,
+        children: rm.areaManagers.map((am) => createNode({
+          title: am.name,
+          subtitle: am.title,
+          amount: am.salary,
+          tone: "secondary",
+          children: am.stations.map((st) => createNode({
+            title: st.name,
+            subtitle: `عدد العمالة: ${stationPeople(st)} افراد`,
+            amount: stationCost(st),
+            tone: "light",
+            extraContent: stationMeta(st),
+            children: [
+              createNode({ title: `تكلفة ${st.name}`, subtitle: "إجمالي عمالة المحطة", amount: stationCost(st), tone: "warning" })
+            ]
+          }))
+        }))
+      }));
+
+      const companyNode = createNode({
+        title: "الشركة",
+        subtitle: "الجذر الرئيسي للهيكل التنظيمي",
+        amount: totalCompanyCost,
+        tone: "primary",
+        defaultOpen: true,
+        children: [
+          createNode({ title: data.executive.name, subtitle: "القيادة العليا والاشراف التنفيذي", amount: executiveCost(), tone: "secondary", children: executiveChildren }),
+          createNode({ title: "الادارات والاقسام", subtitle: "الهيكل الإداري الداخلي", amount: sum(data.departments.map(departmentCost)), tone: "secondary", children: departmentsChildren }),
+          createNode({ title: data.operations.name, subtitle: data.operations.note, amount: operationsCost(), tone: "secondary", children: [...operationsChildren, createNode({ title: "إجمالي تكلفة التشغيل والمحطات", subtitle: "المجموع الكلي لهذا المسار", amount: operationsCost(), tone: "primary" })] })
+        ]
+      });
+
+      root.appendChild(companyNode);
+    }
+
+    function buildSummary() {
+      const grid = document.getElementById("summaryGrid");
+      const cards = [
+        ["إجمالي رواتب الشركة", currency(totalCompanyCost)],
+        ["عدد المحطات", totalStations],
+        ["عدد العاملين بالمحطات", totalStationWorkers],
+        ["عدد الموظفين الإداريين", totalDepartmentEmployees]
+      ];
+
+      cards.forEach(([label, value]) => {
+        const card = document.createElement("div");
+        card.className = "summary-card";
+        card.innerHTML = `<div class="label">${label}</div><div class="value">${value}</div>`;
+        grid.appendChild(card);
+      });
+    }
+
+    buildSummary();
+    buildTree();
+  </script>
+</body>
+</html>
