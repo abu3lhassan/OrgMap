@@ -28,7 +28,7 @@
       margin:0;
       background:radial-gradient(circle at top,#16233b 0%,var(--bg) 42%,var(--bg2) 100%);
       color:var(--txt);
-      font-family:Arial,sans-serif;
+      font-family:"Sakkal Majalla","Segoe UI",Tahoma,Arial,sans-serif;
     }
     .wrap{max-width:2100px;margin:0 auto;padding:24px}
     .hero{
@@ -756,7 +756,7 @@
       position:absolute;
       font-size:9px;
       font-weight:900;
-      font-family:Arial,sans-serif;
+      font-family:"Sakkal Majalla","Segoe UI",Tahoma,Arial,sans-serif;
       line-height:1;
       color:currentColor;
       margin-top:.5px;
@@ -1229,6 +1229,22 @@
     .issue b{color:#fff}
     .issue .path{color:#cbd5e1;font-size:12px;margin-top:4px}
     @media(max-width:800px){.quality-summary{grid-template-columns:1fr}}
+
+    .version-card{
+      min-width:280px;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:20px;
+      background:rgba(255,255,255,.045);
+      padding:14px 16px;
+      line-height:1.7;
+      color:#cbd5e1;
+      margin:0 auto 18px;
+      max-width:520px;
+      text-align:center;
+      box-shadow:0 18px 40px rgba(0,0,0,.16);
+    }
+    .version-card b{color:#fff}
+
 </style>
 </head>
 <body>
@@ -1263,6 +1279,7 @@
   </div>
 
   <section class="quality-page">
+    <div class="version-card" id="qualityVersionCard"></div>
     <div class="quality-summary" id="qualitySummary"></div>
     <div class="metric" style="text-align:initial">
       <h2 style="margin-top:0">التنبيهات</h2>
@@ -1378,6 +1395,17 @@ function analyzeDataQuality(){
 }
 
 initAppMenu('quality');
+function renderQualityVersion(){
+  const meta = data.meta || {};
+  const el = document.getElementById('qualityVersionCard');
+  if(!el) return;
+  el.innerHTML = `
+    <div><b>الإصدار:</b> ${meta.version || 'v1.0'}</div>
+    <div><b>آخر تحديث:</b> ${meta.lastUpdated || '-'}</div>
+    <div><b>ملاحظات:</b> ${meta.notes || ''}</div>
+  `;
+}
+renderQualityVersion();
 const items = analyzeDataQuality();
 const errors = items.filter(i=>i.level==='error').length;
 const warnings = items.filter(i=>i.level==='warning').length;
