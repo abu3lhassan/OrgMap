@@ -344,7 +344,7 @@
   <section class="hero">
     <div class="logo-shell"><img src="logo.png" alt="Company Logo" onerror="this.style.display='none'"></div>
     <h1>تقرير السعودة</h1>
-    <p>تحليل السعوديين وغير السعوديين حسب الإدارات والأقسام مع التكاليف والنسب.</p>
+    <p>تحليل السعوديين وغير السعوديين حسب الإدارات الرئيسية مع التكاليف والنسب بدون تكرار الأقسام الفرعية.</p>
   </section>
 
   <section class="panel">
@@ -363,7 +363,7 @@
     </div>
 
     <div class="chart-card">
-      <h2>نسبة السعودة حسب الإدارة / القسم</h2>
+      <h2>نسبة السعودة حسب الإدارات الرئيسية</h2>
       <div class="bar-list" id="ratioBars"></div>
     </div>
   </section>
@@ -384,13 +384,12 @@
       </select>
       <button id="resetBtn">مسح البحث</button>
     </div>
-    <div class="note">يعتمد التقرير على العناصر التي لديها <b>is_cost_center: true</b>، ويحسب الموظفين تحت كل إدارة/قسم.</div>
+    <div class="note">يعرض التقرير الإدارات الرئيسية فقط لتجنب تكرار نفس الموظفين في الإدارة والقسم الفرعي. تفاصيل النقص تظهر في صفحة فحص البيانات.</div>
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
             <th>الإدارة / القسم</th>
-            <th>المسار</th>
             <th>سعوديون</th>
             <th>غير سعوديين</th>
             <th>بلا تصنيف</th>
@@ -462,11 +461,21 @@ function statsFor(root){
   };
 }
 function costCenters(){
-  return flattenNodes(data.company).filter(x=>x.node.is_cost_center===true).map(x=>({
-    name:x.node.name||'-',
-    path:x.path.join(' › '),
-    ...statsFor(x.node)
-  })).filter(x=>x.total>0);
+  // التقرير الرئيسي يعرض فقط مراكز التكلفة العليا.
+  // إذا كان مركز تكلفة تحت مركز تكلفة آخر، يتم استبعاده هنا لتجنب التكرار والحشو.
+  const flat = flattenNodes(data.company);
+  return flat
+    .filter(x => x.node.is_cost_center === true)
+    .filter(x => !x.path.slice(0,-1).some(parentName => {
+      const parent = flat.find(y => y.node.name === parentName);
+      return parent && parent.node.is_cost_center === true;
+    }))
+    .map(x=>({
+      name:x.node.name||'-',
+      path:x.path.join(' › '),
+      ...statsFor(x.node)
+    }))
+    .filter(x=>x.total>0);
 }
 function badge(type,value){
   if(type==='saudi') return `<span class="badge saudi">🇸🇦 ${value}</span>`;
@@ -499,7 +508,6 @@ function renderTable(){
   document.getElementById('reportBody').innerHTML=rows.length?rows.map(r=>`
     <tr>
       <td><b>${r.name}</b></td>
-      <td>${r.path}</td>
       <td>${badge('saudi',r.saudi)}</td>
       <td>${badge('non',r.non)}</td>
       <td>${badge('unknown',r.unknown)}</td>
@@ -507,7 +515,7 @@ function renderTable(){
       <td>${money(r.saudiCost)}</td>
       <td>${money(r.nonCost)}</td>
     </tr>
-  `).join(''):`<tr><td colspan="8">لا توجد نتائج مطابقة.</td></tr>`;
+  `).join(''):`<tr><td colspan="7">لا توجد نتائج مطابقة.</td></tr>`;
 }
 
 function renderCharts(){
