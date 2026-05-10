@@ -81,11 +81,7 @@ const data = {
                                             "subtitle": "8 Staff",
                                             "salary": 20500,
                                             "tone": "dark",
-                                            "children": [],
-                                            "type": "employee",
-                                            "nationality_group": "non_saudi",
-                                            "layout": "vertical",
-                                            "status": "active"
+                                            "children": []
                                           }
                                         ]
                                       }
@@ -111,11 +107,7 @@ const data = {
                                             "subtitle": "Station Supervisor",
                                             "salary": 7500,
                                             "tone": "dark",
-                                            "children": [],
-                                            "type": "employee",
-                                            "nationality_group": "non_saudi",
-                                            "layout": "vertical",
-                                            "status": "active"
+                                            "children": []
                                           },
                                           {
                                             "name": "عمالة المحطة",
@@ -503,10 +495,7 @@ const data = {
                   }
                 ]
               }
-            ],
-            "type": "employee",
-            "nationality_group": "non_saudi",
-            "status": "active"
+            ]
           },
           {
             "name": "CFO",
@@ -533,22 +522,14 @@ const data = {
                         "subtitle": "Accountant",
                         "salary": 9000,
                         "tone": "dark",
-                        "children": [],
-                        "type": "employee",
-                        "nationality_group": "saudi",
-                        "layout": "vertical",
-                        "status": "active"
+                        "children": []
                       },
                       {
                         "name": "محاسب 2",
                         "subtitle": "Accountant",
                         "salary": 9000,
                         "tone": "dark",
-                        "children": [],
-                        "type": "employee",
-                        "nationality_group": "saudi",
-                        "layout": "vertical",
-                        "status": "active"
+                        "children": []
                       },
                       {
                         "name": "محاسب 3",
@@ -598,10 +579,7 @@ const data = {
                   }
                 ]
               }
-            ],
-            "type": "employee",
-            "nationality_group": "non_saudi",
-            "status": "active"
+            ]
           },
           {
             "name": "CEO",
@@ -641,11 +619,7 @@ const data = {
                             "subtitle": "Support Coordinator",
                             "salary": 8000,
                             "tone": "dark",
-                            "children": [],
-                            "type": "employee",
-                            "nationality_group": "saudi",
-                            "layout": "vertical",
-                            "status": "active"
+                            "children": []
                           },
                           {
                             "name": "موظف خدمات مساندة",
@@ -667,33 +641,21 @@ const data = {
                             "subtitle": "Customer Service Manager",
                             "salary": 15000,
                             "tone": "dark",
-                            "children": [],
-                            "type": "employee",
-                            "nationality_group": "saudi",
-                            "layout": "vertical",
-                            "status": "active"
+                            "children": []
                           },
                           {
                             "name": "ممثل خدمة عملاء 1",
                             "subtitle": "Customer Service Officer",
                             "salary": 7500,
                             "tone": "dark",
-                            "children": [],
-                            "type": "employee",
-                            "nationality_group": "saudi",
-                            "layout": "vertical",
-                            "status": "active"
+                            "children": []
                           },
                           {
                             "name": "ممثل خدمة عملاء 2",
                             "subtitle": "Customer Service Officer",
                             "salary": 7500,
                             "tone": "dark",
-                            "children": [],
-                            "type": "employee",
-                            "nationality_group": "saudi",
-                            "layout": "vertical",
-                            "status": "active"
+                            "children": []
                           }
                         ]
                       },

@@ -313,6 +313,15 @@
       .bar-value{text-align:right}
     }
 
+
+    /* Unified numeric style: Latin digits with tabular alignment */
+    .n,.value,.dash-metric .n,.saud-card .n,.stat .n,.metric .value,.rank-item span,
+    .dashboard-bar-value,.kpi-bar-value,.bar-value,.cost-head span:last-child,
+    .salary-cost-sensitive,.amount{
+      font-variant-numeric:tabular-nums;
+      font-feature-settings:"tnum" 1;
+    }
+
 </style>
 </head>
 <body>
@@ -408,7 +417,14 @@ function initAppMenu(activePage){
 }
 initAppMenu('saudization');
 
-function money(n){return new Intl.NumberFormat("ar-SA",{style:"currency",currency:"SAR",maximumFractionDigits:0}).format(n||0)}
+
+function isVacantNode(node){
+  const status = String(node.status || '').trim().toLowerCase();
+  const tone = String(node.tone || '').trim().toLowerCase();
+  return status === 'vacant' || status === 'شاغر' || tone === 'vacant';
+}
+
+function money(n){return new Intl.NumberFormat("ar-SA-u-nu-latn",{style:"currency",currency:"SAR",maximumFractionDigits:0}).format(n||0)}
 function flattenNodes(root){
   const out=[];
   function walk(node,parent=null,depth=0,path=[]){
@@ -421,7 +437,7 @@ function flattenNodes(root){
 }
 function isPerson(node){
   const personTypes=['c_level','manager','employee','regional_manager','area_manager','station_supervisor','worker'];
-  return personTypes.includes(node.type) || (!!Number(node.salary||0) && !node.station);
+  return !isVacantNode(node) && (personTypes.includes(node.type) || (!!Number(node.salary||0) && !node.station));
 }
 function nationality(node){
   const g=String(node.nationality_group||node.nationality||'').trim().toLowerCase();
@@ -441,8 +457,8 @@ function statsFor(root){
     non:non.length,
     unknown:unknown.length,
     ratio:classified?Math.round((saudi.length/classified)*100):0,
-    saudiCost:saudi.reduce((s,x)=>s+Number(x.node.salary||0),0),
-    nonCost:non.reduce((s,x)=>s+Number(x.node.salary||0),0)
+    saudiCost:saudi.reduce((s,x)=>s+(isVacantNode(x.node)?0:Number(x.node.salary||0)),0),
+    nonCost:non.reduce((s,x)=>s+(isVacantNode(x.node)?0:Number(x.node.salary||0)),0)
   };
 }
 function costCenters(){

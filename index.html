@@ -1714,6 +1714,15 @@
       .kpi-bar-value{text-align:right}
     }
 
+
+    /* Unified numeric style: Latin digits with tabular alignment */
+    .n,.value,.dash-metric .n,.saud-card .n,.stat .n,.metric .value,.rank-item span,
+    .dashboard-bar-value,.kpi-bar-value,.bar-value,.cost-head span:last-child,
+    .salary-cost-sensitive,.amount{
+      font-variant-numeric:tabular-nums;
+      font-feature-settings:"tnum" 1;
+    }
+
 </style>
 </head>
 <body>
@@ -1816,8 +1825,15 @@ function initAppMenu(activePage){
 }
 
 
-function money(n){return new Intl.NumberFormat("ar-SA",{style:"currency",currency:"SAR",maximumFractionDigits:0}).format(n||0)}
-function computeCost(node){const self=node.station?0:Number(node.salary||0);return self+(node.children||[]).reduce((s,c)=>s+computeCost(c),0)}
+function money(n){return new Intl.NumberFormat("ar-SA-u-nu-latn",{style:"currency",currency:"SAR",maximumFractionDigits:0}).format(n||0)}
+
+function isVacantNode(node){
+  const status = String(node.status || '').trim().toLowerCase();
+  const tone = String(node.tone || '').trim().toLowerCase();
+  return status === 'vacant' || status === 'شاغر' || tone === 'vacant';
+}
+
+function computeCost(node){const self=(node.station||isVacantNode(node))?0:Number(node.salary||0);return self+(node.children||[]).reduce((s,c)=>s+computeCost(c),0)}
 function flattenNodes(root){
   const out=[];
   function walk(node,parent=null,depth=0,path=[]){
@@ -1830,6 +1846,7 @@ function flattenNodes(root){
 }
 function countStationWorkers(node){return Number(node.station_workers||0)+(node.children||[]).reduce((s,c)=>s+countStationWorkers(c),0)}
 function isExecutive(node){
+  if(isVacantNode(node)) return false;
   const name=String(node.name||'').trim().toUpperCase();
   return node.type==='c_level'||['CEO','CFO','COO'].includes(name);
 }
@@ -1843,6 +1860,7 @@ function isAreaOrRegionalOrSupervisor(node){
     || name.includes('مشرف محطة');
 }
 function isManager(node){
+  if(isVacantNode(node)) return false;
   const name=String(node.name||'');
   const sub=String(node.subtitle||'').toLowerCase();
   if(isExecutive(node) || isAreaOrRegionalOrSupervisor(node)) return false;
@@ -1857,7 +1875,7 @@ function isWorkerGroup(node){
   return node.type==='worker'||name.includes('عمالة')||name.includes('عامل')||sub.includes('staff')||sub.includes('worker');
 }
 function isPerson(node){
-  return !!Number(node.salary||0) && !node.station;
+  return !isVacantNode(node) && !!Number(node.salary||0) && !node.station;
 }
 function countDepartments(){
   return flattenNodes(data.company).filter(x => {
@@ -1901,8 +1919,8 @@ function saudizationStatsForNode(root){
   const unknown = rows.filter(x => personNationalityGroup(x.node) === 'unknown');
   const totalKnown = saudi.length + nonSaudi.length;
   const totalAll = rows.length;
-  const saudiSalary = saudi.reduce((s,x)=>s+Number(x.node.salary||0),0);
-  const nonSaudiSalary = nonSaudi.reduce((s,x)=>s+Number(x.node.salary||0),0);
+  const saudiSalary = saudi.reduce((s,x)=>s+(isVacantNode(x.node)?0:Number(x.node.salary||0)),0);
+  const nonSaudiSalary = nonSaudi.reduce((s,x)=>s+(isVacantNode(x.node)?0:Number(x.node.salary||0)),0);
   const knownRatio = totalKnown ? Math.round((saudi.length / totalKnown) * 100) : 0;
   const companyRatio = totalAll ? Math.round((saudi.length / totalAll) * 100) : 0;
   return {
@@ -1930,8 +1948,8 @@ function saudizationStatsForNode(root){
   const unknown = rows.filter(x => personNationalityGroup(x.node) === 'unknown');
   const totalKnown = saudi.length + nonSaudi.length;
   const totalAll = rows.length;
-  const saudiSalary = saudi.reduce((s,x)=>s+Number(x.node.salary||0),0);
-  const nonSaudiSalary = nonSaudi.reduce((s,x)=>s+Number(x.node.salary||0),0);
+  const saudiSalary = saudi.reduce((s,x)=>s+(isVacantNode(x.node)?0:Number(x.node.salary||0)),0);
+  const nonSaudiSalary = nonSaudi.reduce((s,x)=>s+(isVacantNode(x.node)?0:Number(x.node.salary||0)),0);
   return {
     saudiCount: saudi.length,
     nonSaudiCount: nonSaudi.length,

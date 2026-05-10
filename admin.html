@@ -58,6 +58,35 @@
     }
     @media(max-width:720px){.admin-filters{grid-template-columns:1fr}}
 
+
+    /* Unified numeric style: Latin digits with tabular alignment */
+    .n,.value,.dash-metric .n,.saud-card .n,.stat .n,.metric .value,.rank-item span,
+    .dashboard-bar-value,.kpi-bar-value,.bar-value,.cost-head span:last-child,
+    .salary-cost-sensitive,.amount{
+      font-variant-numeric:tabular-nums;
+      font-feature-settings:"tnum" 1;
+    }
+
+
+    .meta-grid{
+      display:grid;
+      grid-template-columns:180px 200px 1fr auto;
+      gap:10px;
+      align-items:end;
+      margin-top:12px;
+    }
+    .meta-grid label{
+      margin-top:0;
+    }
+    .meta-grid textarea{
+      min-height:42px;
+      height:42px;
+      resize:vertical;
+    }
+    @media(max-width:980px){
+      .meta-grid{grid-template-columns:1fr}
+    }
+
 </style>
 </head>
 <body>
@@ -75,6 +104,22 @@
       <button class="primary-btn" id="refreshBtn">تحديث المعاينة</button>
     </div>
     <div class="muted">إذا فتحت الصفحة داخل نفس مجلد المشروع، سيتم تحميل <b>data.js</b> تلقائيًا. إذا لم يعمل، ارفع الملف يدويًا.</div>
+
+    <div class="meta-grid">
+      <div>
+        <label>الإصدار</label>
+        <input id="metaVersionInput" placeholder="v1.0" />
+      </div>
+      <div>
+        <label>آخر تحديث</label>
+        <input id="metaLastUpdatedInput" type="date" />
+      </div>
+      <div>
+        <label>ملاحظات الإصدار</label>
+        <textarea id="metaNotesInput" placeholder="مثال: تحديث لوحة القيادة وتحليلات السعودة"></textarea>
+      </div>
+      <button class="primary-btn" id="todayMetaBtn" type="button">تاريخ اليوم</button>
+    </div>
     <div class="mini-stats" id="stats"></div>
   </section>
   <div class="grid">
@@ -119,18 +164,52 @@
 </div>
 <script src="data.js"></script>
 <script>
+
+function isVacantNode(node){
+  const status = String(node.status || '').trim().toLowerCase();
+  const tone = String(node.tone || '').trim().toLowerCase();
+  return status === 'vacant' || status === 'شاغر' || tone === 'vacant';
+}
+
 let rootData=null, selectedId=null, idCounter=1;
 const personTypes=new Set(["c_level","manager","employee","regional_manager","area_manager","station_supervisor","worker"]);
-const els={list:document.getElementById("employeeList"),stats:document.getElementById("stats"),status:document.getElementById("statusBox"),output:document.getElementById("output"),search:document.getElementById("searchInput"),nationalityFilter:document.getElementById("nationalityFilter"),parentFilter:document.getElementById("parentFilter"),selectedPath:document.getElementById("selectedPathBox"),file:document.getElementById("fileInput"),name:document.getElementById("nameInput"),subtitle:document.getElementById("subtitleInput"),type:document.getElementById("typeInput"),salary:document.getElementById("salaryInput"),nationality:document.getElementById("nationalityInput"),parent:document.getElementById("parentInput"),layout:document.getElementById("layoutInput"),tone:document.getElementById("toneInput"),statusInput:document.getElementById("statusInput"),image:document.getElementById("imageInput"),notes:document.getElementById("notesInput"),formTitle:document.getElementById("formTitle")};
+const els={list:document.getElementById("employeeList"),stats:document.getElementById("stats"),status:document.getElementById("statusBox"),output:document.getElementById("output"),search:document.getElementById("searchInput"),nationalityFilter:document.getElementById("nationalityFilter"),parentFilter:document.getElementById("parentFilter"),selectedPath:document.getElementById("selectedPathBox"),metaVersion:document.getElementById("metaVersionInput"),metaLastUpdated:document.getElementById("metaLastUpdatedInput"),metaNotes:document.getElementById("metaNotesInput"),file:document.getElementById("fileInput"),name:document.getElementById("nameInput"),subtitle:document.getElementById("subtitleInput"),type:document.getElementById("typeInput"),salary:document.getElementById("salaryInput"),nationality:document.getElementById("nationalityInput"),parent:document.getElementById("parentInput"),layout:document.getElementById("layoutInput"),tone:document.getElementById("toneInput"),statusInput:document.getElementById("statusInput"),image:document.getElementById("imageInput"),notes:document.getElementById("notesInput"),formTitle:document.getElementById("formTitle")};
 function setStatus(msg,kind=""){els.status.className="status "+kind;els.status.textContent=msg}
 function cloneData(obj){return JSON.parse(JSON.stringify(obj))}
-function ensureData(){if(rootData)return;try{if(typeof data!=="undefined"){rootData=cloneData(data);normalizeTree();setStatus("تم تحميل data.js تلقائيًا.","ok")}}catch(e){}if(!rootData){rootData={meta:{version:"v1.0",lastUpdated:"-",notes:""},company:{name:"الشركة",type:"company",layout:"vertical",tone:"primary",children:[]}};setStatus("لم يتم تحميل data.js تلقائيًا. ارفع الملف يدويًا.","bad")}}
+function ensureData(){if(rootData)return;try{if(typeof data!=="undefined"){rootData=cloneData(data);normalizeTree();loadMetaForm();setStatus("تم تحميل data.js تلقائيًا.","ok")}}catch(e){}if(!rootData){rootData={meta:{version:"v1.0",lastUpdated:"-",notes:""},company:{name:"الشركة",type:"company",layout:"vertical",tone:"primary",children:[]}};loadMetaForm();setStatus("لم يتم تحميل data.js تلقائيًا. ارفع الملف يدويًا.","bad")}}
 function flattenAll(){const out=[];function walk(node,parent=null,path=[]){if(!node.__admin_id)node.__admin_id="n"+(idCounter++);const current=[...path,node.name||"-"];out.push({id:node.__admin_id,node,parent,path:current});(node.children||[]).forEach(c=>walk(c,node,current))}if(rootData?.company)walk(rootData.company);return out}
 function normalizeTree(){flattenAll();for(const row of flattenAll())if(!row.node.children)row.node.children=[]}
 function isPerson(node){return personTypes.has(node.type)|| (!!Number(node.salary||0)&&!node.station)}
 function employees(){return flattenAll().filter(x=>isPerson(x.node)&&!x.node.station)}
 function parentOptions(){const selected=selectedId?flattenAll().find(x=>x.id===selectedId):null;const banned=new Set();if(selected){function ban(n){banned.add(n.__admin_id);(n.children||[]).forEach(ban)}ban(selected.node)}return flattenAll().filter(x=>!banned.has(x.id))}
-function renderStats(){const people=employees();const saudi=people.filter(x=>x.node.nationality_group==="saudi").length;const non=people.filter(x=>x.node.nationality_group==="non_saudi").length;const totalSalary=people.reduce((s,x)=>s+Number(x.node.salary||0),0);els.stats.innerHTML=`<div class="stat"><div class="n">${people.length}</div><div class="l">عدد الأشخاص</div></div><div class="stat"><div class="n">${saudi}</div><div class="l">سعوديون</div></div><div class="stat"><div class="n">${non}</div><div class="l">غير سعوديين</div></div><div class="stat"><div class="n">${new Intl.NumberFormat("ar-SA").format(totalSalary)}</div><div class="l">إجمالي الرواتب</div></div>`}
+
+function ensureMeta(){
+  if(!rootData.meta) rootData.meta = {};
+}
+function loadMetaForm(){
+  ensureMeta();
+  if(els.metaVersion) els.metaVersion.value = rootData.meta.version || "v1.0";
+  if(els.metaLastUpdated) els.metaLastUpdated.value = rootData.meta.lastUpdated && rootData.meta.lastUpdated !== "-" ? rootData.meta.lastUpdated : "";
+  if(els.metaNotes) els.metaNotes.value = rootData.meta.notes || "";
+}
+function saveMetaFromForm(){
+  ensureMeta();
+  rootData.meta.version = els.metaVersion?.value.trim() || "v1.0";
+  rootData.meta.lastUpdated = els.metaLastUpdated?.value || "-";
+  rootData.meta.notes = els.metaNotes?.value.trim() || "";
+}
+function setMetaToday(){
+  const d = new Date();
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth()+1).padStart(2,"0");
+  const dd = String(d.getDate()).padStart(2,"0");
+  if(els.metaLastUpdated) els.metaLastUpdated.value = `${yyyy}-${mm}-${dd}`;
+  saveMetaFromForm();
+  updateOutput();
+  setStatus("تم تحديث تاريخ آخر تحديث داخل بيانات الإصدار. لا تنس تحميل data.js الجديد.", "ok");
+}
+
+function renderStats(){const people=employees();const saudi=people.filter(x=>x.node.nationality_group==="saudi").length;const non=people.filter(x=>x.node.nationality_group==="non_saudi").length;const totalSalary=people.reduce((s,x)=>s+Number(x.node.salary||0),0);els.stats.innerHTML=`<div class="stat"><div class="n">${people.length}</div><div class="l">عدد الأشخاص</div></div><div class="stat"><div class="n">${saudi}</div><div class="l">سعوديون</div></div><div class="stat"><div class="n">${non}</div><div class="l">غير سعوديين</div></div><div class="stat"><div class="n">${new Intl.NumberFormat("ar-SA-u-nu-latn").format(totalSalary)}</div><div class="l">إجمالي الرواتب</div></div>`}
 function renderParentSelect(currentParentId=""){const opts=parentOptions();els.parent.innerHTML=opts.map(x=>`<option value="${x.id}">${escapeHtml(x.path.join(" › "))}</option>`).join("");if(currentParentId&&opts.some(x=>x.id===currentParentId))els.parent.value=currentParentId}
 
 function renderParentFilter(){
@@ -173,11 +252,11 @@ function newEmployee(){const selected=selectedId?flattenAll().find(x=>x.id===sel
 function deleteSelected(){if(!selectedId)return setStatus("اختر موظفًا للحذف.","bad");const row=flattenAll().find(x=>x.id===selectedId);if(!row||!row.parent)return setStatus("لا يمكن حذف هذا العنصر.","bad");if((row.node.children||[]).length && !confirm("هذا الموظف لديه تابعين. حذفه سيحذف كل ما تحته. هل أنت متأكد؟"))return; if(!confirm("تأكيد حذف: "+(row.node.name||"-")+"؟"))return;row.parent.children=(row.parent.children||[]).filter(c=>c.__admin_id!==selectedId);selectedId=null;clearForm();setStatus("تم الحذف داخل الأداة. حمّل data.js الجديد لتطبيقه.","ok");renderAll()}
 function clearForm(){els.formTitle.textContent="تعديل موظف";["name","subtitle","salary","image","notes"].forEach(k=>els[k].value="");els.type.value="employee";els.nationality.value="";els.layout.value="vertical";els.tone.value="dark";els.statusInput.value="active"}
 function cleanForExport(obj){if(Array.isArray(obj))return obj.map(cleanForExport);if(obj&&typeof obj==="object"){const out={};for(const[k,v]of Object.entries(obj)){if(k==="__admin_id")continue;if(v===""||v===undefined||v===null)continue;if(k==="children"&&Array.isArray(v)&&v.length===0){out.children=[];continue}out[k]=cleanForExport(v)}return out}return obj}
-function makeDataJs(){return"const data = "+JSON.stringify(cleanForExport(rootData),null,2)+";\n"}
+function makeDataJs(){saveMetaFromForm();return"const data = "+JSON.stringify(cleanForExport(rootData),null,2)+";\n"}
 function updateOutput(){els.output.value=makeDataJs()}
 function renderAll(){renderStats();renderParentSelect();renderParentFilter();renderList();updateOutput()}
 function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-async function readDataFile(file){const text=await file.text();const code=text.replace(/^\s*const\s+data\s*=/,"data =");const fn=new Function(code+"; return data;");rootData=fn();selectedId=null;idCounter=1;normalizeTree();setStatus("تم استيراد data.js بنجاح.","ok");renderAll()}
+async function readDataFile(file){const text=await file.text();const code=text.replace(/^\s*const\s+data\s*=/,"data =");const fn=new Function(code+"; return data;");rootData=fn();selectedId=null;idCounter=1;normalizeTree();loadMetaForm();setStatus("تم استيراد data.js بنجاح.","ok");renderAll()}
 function downloadData(){const b=new Blob([makeDataJs()],{type:"text/javascript;charset=utf-8"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="data.js";a.click();URL.revokeObjectURL(a.href)}
 async function copyData(){await navigator.clipboard.writeText(makeDataJs());setStatus("تم نسخ كود data.js.","ok")}
 document.getElementById("saveBtn").addEventListener("click",saveCurrent);
@@ -187,12 +266,16 @@ document.getElementById("resetBtn").addEventListener("click",()=>selectedId&&sel
 document.getElementById("downloadBtn").addEventListener("click",downloadData);
 document.getElementById("copyBtn").addEventListener("click",copyData);
 document.getElementById("refreshBtn").addEventListener("click",renderAll);
+document.getElementById("todayMetaBtn")?.addEventListener("click",setMetaToday);
+els.metaVersion?.addEventListener("input",()=>{saveMetaFromForm();updateOutput();});
+els.metaLastUpdated?.addEventListener("change",()=>{saveMetaFromForm();updateOutput();});
+els.metaNotes?.addEventListener("input",()=>{saveMetaFromForm();updateOutput();});
 els.search.addEventListener("input",renderList);
 els.type.addEventListener("change",applyAutoToneByType);
 document.getElementById("nationalityFilter")?.addEventListener("change",renderList);
 document.getElementById("parentFilter")?.addEventListener("change",renderList);
 els.file.addEventListener("change",e=>e.target.files[0]&&readDataFile(e.target.files[0]));
-ensureData();renderAll();const first=employees()[0];if(first)selectNode(first.id);
+ensureData();loadMetaForm();renderAll();const first=employees()[0];if(first)selectNode(first.id);
 </script>
 </body>
 </html>

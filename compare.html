@@ -36,7 +36,16 @@
     .stat .n{font-size:26px;font-weight:900;color:#fdba74}.stat .l{color:#cbd5e1;font-size:13px}
     .list{display:grid;gap:10px}.item{border:1px solid rgba(255,255,255,.10);border-radius:16px;background:rgba(255,255,255,.045);padding:12px;line-height:1.7}.item b{color:#fed7aa}
     @media(max-width:800px){.grid,.summary{grid-template-columns:1fr}}
-  </style>
+  
+    /* Unified numeric style: Latin digits with tabular alignment */
+    .n,.value,.dash-metric .n,.saud-card .n,.stat .n,.metric .value,.rank-item span,
+    .dashboard-bar-value,.kpi-bar-value,.bar-value,.cost-head span:last-child,
+    .salary-cost-sensitive,.amount{
+      font-variant-numeric:tabular-nums;
+      font-feature-settings:"tnum" 1;
+    }
+
+</style>
 </head>
 <body>
 <button class="app-menu-btn" id="appMenuBtn" title="القائمة"><span></span></button>
@@ -76,7 +85,7 @@ function initAppMenu(activePage){
   backdrop?.addEventListener('click',close);
 }
 initAppMenu('compare');
-function money(n){return new Intl.NumberFormat("ar-SA",{style:"currency",currency:"SAR",maximumFractionDigits:0}).format(n||0)}
+function money(n){return new Intl.NumberFormat("ar-SA-u-nu-latn",{style:"currency",currency:"SAR",maximumFractionDigits:0}).format(n||0)}
 async function readData(file){
   const text = await file.text();
   let code = text.replace(/^\s*const\s+data\s*=/, 'data =');

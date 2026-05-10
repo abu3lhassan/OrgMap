@@ -1298,6 +1298,15 @@
       color:#bfdbfe;
     }
 
+
+    /* Unified numeric style: Latin digits with tabular alignment */
+    .n,.value,.dash-metric .n,.saud-card .n,.stat .n,.metric .value,.rank-item span,
+    .dashboard-bar-value,.kpi-bar-value,.bar-value,.cost-head span:last-child,
+    .salary-cost-sensitive,.amount{
+      font-variant-numeric:tabular-nums;
+      font-feature-settings:"tnum" 1;
+    }
+
 </style>
 </head>
 <body>
@@ -1418,7 +1427,7 @@ initAppMenu('org');
 
 function getNationalityBadge(node){
   const personTypes = ['c_level','manager','employee','regional_manager','area_manager','station_supervisor','worker'];
-  const isPerson = personTypes.includes(node.type) || (!!Number(node.salary || 0) && !node.station);
+  const isPerson = personTypes.includes(node.type) || (!isVacantNode(node) && !!Number(node.salary || 0) && !node.station);
   if(!isPerson) return '';
 
   const g = String(node.nationality_group || node.nationality || '').trim().toLowerCase();
@@ -1432,10 +1441,17 @@ function getNationalityBadge(node){
 }
 
 function money(n){
-  return new Intl.NumberFormat("ar-SA",{style:"currency",currency:"SAR",maximumFractionDigits:0}).format(n || 0);
+  return new Intl.NumberFormat("ar-SA-u-nu-latn",{style:"currency",currency:"SAR",maximumFractionDigits:0}).format(n || 0);
 }
+
+function isVacantNode(node){
+  const status = String(node.status || '').trim().toLowerCase();
+  const tone = String(node.tone || '').trim().toLowerCase();
+  return status === 'vacant' || status === 'شاغر' || tone === 'vacant';
+}
+
 function computeCost(node){
-  const self = node.station ? 0 : Number(node.salary || 0);
+  const self = (node.station || isVacantNode(node)) ? 0 : Number(node.salary || 0);
   return self + (node.children || []).reduce((s, child) => s + computeCost(child), 0);
 }
 function countStations(node){

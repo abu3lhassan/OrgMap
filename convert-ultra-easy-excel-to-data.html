@@ -129,6 +129,15 @@
     .search-box.has-value .search-clear-inline{display:block}
     .search-box.has-value input{padding-inline-end:42px}
 
+
+    /* Unified numeric style: Latin digits with tabular alignment */
+    .n,.value,.dash-metric .n,.saud-card .n,.stat .n,.metric .value,.rank-item span,
+    .dashboard-bar-value,.kpi-bar-value,.bar-value,.cost-head span:last-child,
+    .salary-cost-sensitive,.amount{
+      font-variant-numeric:tabular-nums;
+      font-feature-settings:"tnum" 1;
+    }
+
 </style>
 </head>
 <body>
