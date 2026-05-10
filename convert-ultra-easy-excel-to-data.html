@@ -146,13 +146,14 @@
     <div class="drawer-section">IT</div>
     <a class="drawer-link" data-page="quality" href="quality.html">فحص البيانات <span>›</span></a>
     <a class="drawer-link" data-page="compare" href="compare.html">مقارنة النسخ <span>›</span></a>
+    <a class="drawer-link" data-page="saudization" href="saudization.html">تقرير السعودة <span>›</span></a>
     <a class="drawer-link" data-page="converter" href="convert-ultra-easy-excel-to-data.html">تحويل Excel إلى data.js <span>›</span></a>
   </div>
 </nav>
 
 <div class="wrap"><div class="card">
 <h1>تحويل القالب المبسط إلى data.js</h1>
-<div class="hint">اختر ملف <b>org-template-ultra-easy-hr.xlsx</b>. الأداة تقرأ أوراق: 1-الإدارات، 2-الموظفين، 3-المحطات.</div>
+<div class="hint">اختر ملف <b>org-template-ultra-easy-hr.xlsx</b>. الأداة تقرأ أوراق: 1-الإدارات، 2-الموظفين، 3-المحطات. وتدعم أعمدة مركز تكلفة والجنسية.</div>
 <p class="warn">تحتاج إنترنت وقت التحويل فقط لتحميل مكتبة Excel.</p>
 <input type="file" id="fileInput" accept=".xlsx,.xls" />
 <button id="downloadBtn" disabled>تحميل data.js</button>
@@ -172,6 +173,19 @@ const layoutMap = {"عمودي":"vertical","أفقي":"horizontal"};
 const statusMap = {"نشط":"active","شاغر":"vacant"};
 function clean(v){return (v??"").toString().trim()}
 function num(v){const n=Number(clean(v).replace(/,/g,""));return Number.isFinite(n)?n:0}
+function parseNationality(v){
+  const value = clean(v).toLowerCase();
+  if(["سعودي","saudi","ksa","sa"].includes(value)) return "saudi";
+  if(["غير سعودي","غير_سعودي","non_saudi","non-saudi","nonsaudi","expat"].includes(value)) return "non_saudi";
+  return "";
+}
+function parseCostCenter(v, type){
+  const value = clean(v);
+  if(["نعم","yes","true","1","صح"].includes(value.toLowerCase())) return true;
+  if(["لا","no","false","0","خطأ"].includes(value.toLowerCase())) return false;
+  if(type === "إدارة" || type === "قسم فرعي" || type === "مجموعة") return true;
+  return false;
+}
 function readSheet(wb, name){const ws=wb.Sheets[name]; if(!ws) return []; return XLSX.utils.sheet_to_json(ws,{defval:""});}
 function addNode(nodes, byName, node, parentName){
   if(!node.name) return;
@@ -186,6 +200,7 @@ function build(rowsOrg, rowsPeople, rowsStations){
     const name=clean(r["اسم الوحدة"]); if(!name) return;
     addNode(nodes,byName,{
       name, subtitle:clean(r["المسمى / الوصف"]), type:typeMap[clean(r["نوع الوحدة"])]||"division",
+      is_cost_center: parseCostCenter(r["مركز تكلفة"], clean(r["نوع الوحدة"])),
       layout:layoutMap[clean(r["طريقة ظهور التابعين"])]||"vertical", tone:toneMap[clean(r["اللون / التصنيف"])]||"dark",
       status:statusMap[clean(r["الحالة"])]||"active", image:clean(r["الصورة"]), notes:clean(r["ملاحظات"])
     }, clean(r["تتبع إلى"]));
@@ -193,7 +208,7 @@ function build(rowsOrg, rowsPeople, rowsStations){
   rowsPeople.forEach(r=>{
     const name=clean(r["الاسم"]); if(!name) return;
     const salary=num(r["الراتب الشهري"]);
-    const node={name, subtitle:clean(r["المسمى الوظيفي"]), type:typeMap[clean(r["نوع الشخص/المنصب"])]||"employee",
+    const node={name, subtitle:clean(r["المسمى الوظيفي"]), type:typeMap[clean(r["نوع الشخص/المنصب"])]||"employee", nationality_group:parseNationality(r["الجنسية"]), is_cost_center:false,
       layout:layoutMap[clean(r["طريقة ظهور التابعين"])]||"vertical", tone:toneMap[clean(r["اللون / التصنيف"])]||"dark",
       status:statusMap[clean(r["الحالة"])]||"active", image:clean(r["الصورة"]), notes:clean(r["ملاحظات"])};
     if(salary) node.salary=salary;
@@ -206,7 +221,7 @@ function build(rowsOrg, rowsPeople, rowsStations){
     const supSalary=num(r["راتب المشرف"]);
     const workersCount=num(r["عدد العمال"]);
     const workersSalary=num(r["إجمالي رواتب العمال"]);
-    const stationNode={name:stationName, subtitle:"Station", type:"station", station:true, salary:0,
+    const stationNode={name:stationName, subtitle:"Station", type:"station", station:true, is_cost_center:false, salary:0,
       station_workers:workersCount||undefined, layout:layoutMap[clean(r["طريقة ظهور التابعين"])]||"vertical",
       tone:toneMap[clean(r["اللون / التصنيف"])]||"dark", status:statusMap[clean(r["الحالة"])]||"active",
       image:clean(r["الصورة"]), notes:clean(r["ملاحظات"]), children:[]};

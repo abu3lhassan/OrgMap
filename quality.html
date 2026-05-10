@@ -1245,6 +1245,53 @@
     }
     .version-card b{color:#fff}
 
+
+    /* Saudization quality section */
+    .saudization-quality{
+      margin:18px 0;
+      border:1px solid rgba(34,197,94,.16);
+      border-radius:24px;
+      background:
+        linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.032)),
+        radial-gradient(circle at top right,rgba(34,197,94,.08),transparent 42%);
+      padding:16px;
+      box-shadow:0 18px 38px rgba(0,0,0,.16);
+    }
+    .saudization-quality h2{
+      margin:0 0 12px;
+      font-size:22px;
+      color:#fff7ed;
+    }
+    .saudization-quality-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:12px;
+      margin-bottom:14px;
+    }
+    .saudization-quality-card{
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:20px;
+      background:rgba(255,255,255,.045);
+      padding:14px;
+      text-align:center;
+      min-height:90px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      box-shadow:0 10px 24px rgba(0,0,0,.13);
+    }
+    .saudization-quality-card .n{
+      font-size:26px;
+      font-weight:900;
+      color:#fdba74;
+      margin-bottom:6px;
+    }
+    .saudization-quality-card .l{
+      color:#cbd5e1;
+      font-size:13px;
+      line-height:1.4;
+    }
+
 </style>
 </head>
 <body>
@@ -1262,6 +1309,7 @@
     <div class="drawer-section">IT</div>
     <a class="drawer-link" data-page="quality" href="quality.html">فحص البيانات <span>›</span></a>
     <a class="drawer-link" data-page="compare" href="compare.html">مقارنة النسخ <span>›</span></a>
+    <a class="drawer-link" data-page="saudization" href="saudization.html">تقرير السعودة <span>›</span></a>
     <a class="drawer-link" data-page="converter" href="convert-ultra-easy-excel-to-data.html">تحويل Excel إلى data.js <span>›</span></a>
   </div>
 </nav>
@@ -1281,6 +1329,12 @@
   <section class="quality-page">
     <div class="version-card" id="qualityVersionCard"></div>
     <div class="quality-summary" id="qualitySummary"></div>
+    <section class="saudization-quality">
+      <h2>فحص بيانات السعودة</h2>
+      <div class="saudization-quality-grid" id="saudizationQualitySummary"></div>
+      <div id="saudizationQualityList"></div>
+    </section>
+
     <div class="metric" style="text-align:initial">
       <h2 style="margin-top:0">التنبيهات</h2>
       <div id="qualityList"></div>
@@ -1394,6 +1448,92 @@ function analyzeDataQuality(){
   return items;
 }
 
+
+function personNationalityGroup(node){
+  const g = String(node.nationality_group || node.nationality || '').trim().toLowerCase();
+  if(['saudi','سعودي','ksa','sa'].includes(g)) return 'saudi';
+  if(['non_saudi','non-saudi','nonsaudi','غير سعودي','غير_سعودي','expat'].includes(g)) return 'non_saudi';
+  return 'unknown';
+}
+function analyzeSaudizationQuality(){
+  const flat = flattenNodes(data.company);
+  const people = flat.filter(x => isPerson(x.node));
+  const missingNationality = people.filter(x => personNationalityGroup(x.node) === 'unknown');
+  const missingSalary = people.filter(x => !Number(x.node.salary || 0));
+  const saudi = people.filter(x => personNationalityGroup(x.node) === 'saudi');
+  const nonSaudi = people.filter(x => personNationalityGroup(x.node) === 'non_saudi');
+  const departmentWarnings = [];
+
+  flat.forEach(x => {
+    const n = x.node;
+    const isOrgUnit = n.is_cost_center === true || ['department','division'].includes(n.type);
+    if(!isOrgUnit) return;
+    const subPeople = flattenNodes(n).filter(y => isPerson(y.node));
+    if(!subPeople.length) return;
+    const missing = subPeople.filter(y => personNationalityGroup(y.node) === 'unknown');
+    if(missing.length){
+      departmentWarnings.push({
+        name: n.name || '-',
+        path: x.path.join(' › '),
+        missing: missing.length,
+        total: subPeople.length
+      });
+    }
+  });
+
+  return {people, missingNationality, missingSalary, saudi, nonSaudi, departmentWarnings};
+}
+function renderSaudizationQuality(){
+  const summaryEl = document.getElementById('saudizationQualitySummary');
+  const listEl = document.getElementById('saudizationQualityList');
+  if(!summaryEl || !listEl) return;
+
+  const q = analyzeSaudizationQuality();
+  const classified = q.saudi.length + q.nonSaudi.length;
+  const ratio = classified ? Math.round((q.saudi.length / classified) * 100) : 0;
+
+  summaryEl.innerHTML = `
+    <div class="saudization-quality-card"><div class="n">${q.saudi.length}</div><div class="l">سعوديون</div></div>
+    <div class="saudization-quality-card"><div class="n">${q.nonSaudi.length}</div><div class="l">غير سعوديين</div></div>
+    <div class="saudization-quality-card"><div class="n">${q.missingNationality.length}</div><div class="l">بلا تصنيف جنسية</div></div>
+    <div class="saudization-quality-card"><div class="n">${ratio}%</div><div class="l">نسبة السعوديين من المصنفين</div></div>
+  `;
+
+  const issues = [];
+  q.missingNationality.forEach(x => {
+    issues.push({
+      level:'warning',
+      title:'موظف بدون تصنيف جنسية',
+      detail:'هذا الموظف لن يدخل بشكل صحيح في تحليلات السعودة حتى يتم تحديد الجنسية.',
+      path:x.path.join(' › ')
+    });
+  });
+  q.missingSalary.forEach(x => {
+    issues.push({
+      level:'warning',
+      title:'موظف بدون راتب',
+      detail:'تكلفة السعودة ستكون ناقصة إذا لم يتم إدخال الراتب.',
+      path:x.path.join(' › ')
+    });
+  });
+  q.departmentWarnings.forEach(x => {
+    issues.push({
+      level:'info',
+      title:'إدارة/قسم يحتوي موظفين بلا جنسية',
+      detail:`${x.missing} من ${x.total} موظف/موظفين تحت هذا النطاق بلا تصنيف جنسية.`,
+      path:x.path
+    });
+  });
+
+  listEl.innerHTML = issues.length ? issues.map(i => `
+    <div class="issue ${i.level}">
+      <b>${i.title}</b><br>
+      ${i.detail}
+      <div class="path">${i.path}</div>
+    </div>
+  `).join('') : '<div class="issue"><b>بيانات السعودة مكتملة مبدئيًا</b><br>لا توجد ملاحظات سعودة واضحة.</div>';
+}
+
 initAppMenu('quality');
 function renderQualityVersion(){
   const meta = data.meta || {};
@@ -1406,6 +1546,7 @@ function renderQualityVersion(){
   `;
 }
 renderQualityVersion();
+renderSaudizationQuality();
 const items = analyzeDataQuality();
 const errors = items.filter(i=>i.level==='error').length;
 const warnings = items.filter(i=>i.level==='warning').length;

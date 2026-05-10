@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>⛽ تقرير السعودة</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    :root{
+      --bg:#0f172a; --bg2:#020617; --muted:#cbd5e1; --orange:#f97316;
+      --panel:rgba(255,255,255,.055); --line:rgba(255,255,255,.12);
+      --shadow:0 18px 40px rgba(0,0,0,.22);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:radial-gradient(circle at top,#16233b 0%,var(--bg) 45%,var(--bg2) 100%);
+      color:#fff;
+      font-family:"Sakkal Majalla","Segoe UI",Tahoma,Arial,sans-serif;
+    }
+    .wrap{max-width:1550px;margin:0 auto;padding:24px}
+    .hero{
+      border:1px solid rgba(249,115,22,.18);
+      background:
+        linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.04)),
+        radial-gradient(circle at top right,rgba(34,197,94,.10),transparent 45%);
+      border-radius:30px;
+      padding:28px;
+      text-align:center;
+      box-shadow:var(--shadow);
+      margin-bottom:18px;
+    }
+    .logo-shell{
+      width:150px;height:96px;margin:0 auto 16px;border-radius:26px;
+      border:1px solid rgba(251,146,60,.22);
+      background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.04));
+      display:flex;align-items:center;justify-content:center;padding:14px;
+      box-shadow:0 18px 36px rgba(0,0,0,.22);
+    }
+    .logo-shell img{width:100%;height:100%;object-fit:contain}
+    .hero h1{margin:0 0 8px;font-size:42px}.hero p{margin:0;color:var(--muted);font-size:18px}
+    .app-menu-btn{position:fixed;top:18px;inset-inline-start:18px;width:52px;height:52px;border-radius:18px;border:1px solid rgba(249,115,22,.28);background:rgba(15,23,42,.74);z-index:120;cursor:pointer;box-shadow:0 16px 34px rgba(0,0,0,.26),0 0 24px rgba(249,115,22,.10);backdrop-filter:blur(14px)}
+    .app-menu-btn span,.app-menu-btn::before,.app-menu-btn::after{content:"";position:absolute;left:14px;width:22px;height:2px;background:#fed7aa;border-radius:99px;transition:.18s ease}
+    .app-menu-btn span{top:25px}.app-menu-btn::before{top:18px}.app-menu-btn::after{top:32px}
+    body.menu-open .app-menu-btn span{opacity:0}body.menu-open .app-menu-btn::before{top:25px;transform:rotate(45deg)}body.menu-open .app-menu-btn::after{top:25px;transform:rotate(-45deg)}
+    .app-menu-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.34);backdrop-filter:blur(3px);z-index:100;opacity:0;pointer-events:none;transition:.18s ease}
+    body.menu-open .app-menu-backdrop{opacity:1;pointer-events:auto}
+    .app-drawer{position:fixed;top:86px;inset-inline-start:18px;width:min(340px,calc(100vw - 36px));border-radius:26px;border:1px solid rgba(249,115,22,.22);background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.055)),radial-gradient(circle at top left,rgba(249,115,22,.14),transparent 48%);box-shadow:0 30px 70px rgba(0,0,0,.38),0 0 38px rgba(249,115,22,.09);backdrop-filter:blur(18px);z-index:110;opacity:0;transform:translateY(-10px);pointer-events:none;overflow:hidden;transition:.18s ease}
+    body.menu-open .app-drawer{opacity:1;transform:translateY(0);pointer-events:auto}
+    .drawer-head{padding:18px 20px 12px;border-bottom:1px solid rgba(255,255,255,.08)}
+    .drawer-head b{display:block;font-size:18px}.drawer-head span{display:block;color:#cbd5e1;font-size:12px;margin-top:6px}
+    .drawer-nav{padding:12px;display:grid;gap:8px}
+    .drawer-link{text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.045);border-radius:18px;padding:13px 14px;display:flex;justify-content:space-between;align-items:center;transition:.15s ease}
+    .drawer-link:hover,.drawer-link.active{border-color:rgba(249,115,22,.30);background:rgba(249,115,22,.11);color:#fed7aa}
+    .drawer-section{padding:9px 14px 2px;color:#94a3b8;font-size:12px;font-weight:700}
+    .panel{
+      border:1px solid var(--line);
+      background:var(--panel);
+      border-radius:26px;
+      padding:18px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(12px);
+      margin-bottom:16px;
+    }
+    .top-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+    .stat{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.045);
+      border-radius:20px;
+      padding:15px;
+      min-height:96px;
+      text-align:center;
+      display:flex;flex-direction:column;justify-content:center;
+      box-shadow:0 10px 24px rgba(0,0,0,.13);
+    }
+    .stat .n{font-size:25px;font-weight:900;color:#fdba74;margin-bottom:6px}
+    .stat .l{font-size:13px;color:#cbd5e1;line-height:1.4}
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+    input,select{
+      min-height:42px;border-radius:15px;border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.07);color:#fff;padding:10px 12px;outline:none;
+      font-family:inherit;font-size:16px;
+    }
+    select option{background:#0f172a;color:#fff}
+    .toolbar input{min-width:260px;flex:1}
+    button{
+      border:none;border-radius:16px;min-height:42px;padding:10px 14px;
+      background:rgba(249,115,22,.12);color:#fff7ed;border:1px solid rgba(249,115,22,.28);
+      cursor:pointer;font-weight:800;font-family:inherit;
+    }
+    .table-wrap{overflow:auto}
+    table{width:100%;border-collapse:separate;border-spacing:0 9px}
+    th{color:#fed7aa;font-size:14px;text-align:right;padding:0 12px 4px;white-space:nowrap}
+    td{
+      background:rgba(255,255,255,.045);
+      border-top:1px solid rgba(255,255,255,.09);
+      border-bottom:1px solid rgba(255,255,255,.09);
+      padding:12px;
+      color:#e5e7eb;
+      white-space:nowrap;
+    }
+    tr td:first-child{border-inline-start:1px solid rgba(255,255,255,.09);border-radius:0 16px 16px 0}
+    tr td:last-child{border-inline-end:1px solid rgba(255,255,255,.09);border-radius:16px 0 0 16px}
+    .badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 9px;font-weight:800;font-size:12px}
+    .badge.saudi{border:1px solid rgba(34,197,94,.25);background:rgba(34,197,94,.10);color:#bbf7d0}
+    .badge.non{border:1px solid rgba(96,165,250,.25);background:rgba(59,130,246,.10);color:#bfdbfe}
+    .badge.unknown{border:1px solid rgba(251,191,36,.25);background:rgba(251,191,36,.08);color:#fde68a}
+    .note{color:#94a3b8;font-size:13px;line-height:1.7}
+    @media(max-width:760px){.hero h1{font-size:32px}.toolbar input,.toolbar select,.toolbar button{width:100%}}
+  
+    /* Premium CSS charts */
+    .charts-grid{
+      display:grid;
+      grid-template-columns:420px 1fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    .chart-card{
+      border:1px solid rgba(255,255,255,.10);
+      background:
+        linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.032)),
+        radial-gradient(circle at top right,rgba(249,115,22,.08),transparent 46%);
+      border-radius:24px;
+      padding:18px;
+      box-shadow:0 18px 38px rgba(0,0,0,.17);
+      overflow:hidden;
+    }
+    .chart-card h2{
+      margin:0 0 14px;
+      font-size:21px;
+      color:#fff7ed;
+    }
+    .pie-wrap{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      justify-content:center;
+      flex-wrap:wrap;
+      min-height:260px;
+    }
+    .pie-chart{
+      width:210px;
+      height:210px;
+      border-radius:50%;
+      background:
+        conic-gradient(
+          #22c55e 0deg var(--saudi-deg),
+          #3b82f6 var(--saudi-deg) var(--non-deg),
+          #f59e0b var(--non-deg) 360deg
+        );
+      box-shadow:
+        0 18px 36px rgba(0,0,0,.25),
+        inset 0 0 0 14px rgba(255,255,255,.045),
+        inset 0 0 0 1px rgba(255,255,255,.12);
+      position:relative;
+    }
+    .pie-chart::after{
+      content:"";
+      position:absolute;
+      inset:54px;
+      border-radius:50%;
+      background:radial-gradient(circle at top,#172554,#0f172a 70%);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:inset 0 6px 18px rgba(0,0,0,.25);
+    }
+    .pie-center{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      z-index:2;
+      font-weight:900;
+      pointer-events:none;
+    }
+    .pie-center b{
+      font-size:30px;
+      color:#fdba74;
+      line-height:1;
+    }
+    .pie-center span{
+      font-size:12px;
+      color:#cbd5e1;
+      margin-top:6px;
+    }
+    .legend{
+      display:grid;
+      gap:10px;
+      min-width:170px;
+    }
+    .legend-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      border:1px solid rgba(255,255,255,.09);
+      background:rgba(255,255,255,.045);
+      border-radius:16px;
+      padding:10px 12px;
+      color:#cbd5e1;
+      font-size:13px;
+    }
+    .legend-item .name{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      display:inline-block;
+      box-shadow:0 0 12px currentColor;
+    }
+    .dot.saudi{background:#22c55e;color:#22c55e}
+    .dot.non{background:#3b82f6;color:#3b82f6}
+    .dot.unknown{background:#f59e0b;color:#f59e0b}
+    .bar-list{
+      display:grid;
+      gap:12px;
+      max-height:390px;
+      overflow:auto;
+      padding-inline-end:4px;
+    }
+    .bar-row{
+      display:grid;
+      grid-template-columns:minmax(140px,240px) 1fr 64px;
+      gap:12px;
+      align-items:center;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.035);
+      border-radius:18px;
+      padding:11px 12px;
+    }
+    .bar-name{
+      color:#fff;
+      font-weight:800;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .bar-track{
+      height:14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      overflow:hidden;
+      box-shadow:inset 0 1px 4px rgba(0,0,0,.22);
+    }
+    .bar-fill{
+      height:100%;
+      width:var(--w);
+      border-radius:999px;
+      background:linear-gradient(90deg,#16a34a,#86efac);
+      box-shadow:0 0 18px rgba(34,197,94,.22);
+    }
+    .bar-value{
+      color:#fdba74;
+      font-weight:900;
+      text-align:left;
+      white-space:nowrap;
+    }
+    .cost-bars{
+      display:grid;
+      gap:13px;
+      max-height:390px;
+      overflow:auto;
+      padding-inline-end:4px;
+    }
+    .cost-row{
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.035);
+      border-radius:18px;
+      padding:12px;
+    }
+    .cost-head{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+      margin-bottom:9px;
+      color:#fff;
+      font-weight:800;
+    }
+    .stack-track{
+      height:16px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      overflow:hidden;
+      display:flex;
+      box-shadow:inset 0 1px 4px rgba(0,0,0,.22);
+    }
+    .stack-saudi{
+      width:var(--sw);
+      background:linear-gradient(90deg,#16a34a,#86efac);
+    }
+    .stack-non{
+      width:var(--nw);
+      background:linear-gradient(90deg,#2563eb,#93c5fd);
+    }
+    .cost-meta{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:8px;
+      color:#cbd5e1;
+      font-size:12px;
+    }
+    @media(max-width:1050px){
+      .charts-grid{grid-template-columns:1fr}
+      .bar-row{grid-template-columns:1fr;gap:8px}
+      .bar-value{text-align:right}
+    }
+
+</style>
+</head>
+<body>
+<button class="app-menu-btn" id="appMenuBtn" title="القائمة"><span></span></button>
+<div class="app-menu-backdrop" id="appMenuBackdrop"></div>
+<nav class="app-drawer" id="appDrawer">
+  <div class="drawer-head"><b>القائمة الرئيسية</b><span>الخارطة التنظيمية التفاعلية</span></div>
+  <div class="drawer-nav">
+    <a class="drawer-link" data-page="dashboard" href="index.html">لوحة القيادة <span>›</span></a>
+    <a class="drawer-link" data-page="org" href="org.html">الهيكل التنظيمي <span>›</span></a>
+    <div class="drawer-section">IT</div>
+    <a class="drawer-link" data-page="quality" href="quality.html">فحص البيانات <span>›</span></a>
+    <a class="drawer-link" data-page="compare" href="compare.html">مقارنة النسخ <span>›</span></a>
+    <a class="drawer-link active" data-page="saudization" href="saudization.html">تقرير السعودة <span>›</span></a>
+    <a class="drawer-link" data-page="converter" href="convert-ultra-easy-excel-to-data.html">تحويل Excel إلى data.js <span>›</span></a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="logo-shell"><img src="logo.png" alt="Company Logo" onerror="this.style.display='none'"></div>
+    <h1>تقرير السعودة</h1>
+    <p>تحليل السعوديين وغير السعوديين حسب الإدارات والأقسام مع التكاليف والنسب.</p>
+  </section>
+
+  <section class="panel">
+    <div class="top-grid" id="summaryGrid"></div>
+  </section>
+
+  <section class="charts-grid">
+    <div class="chart-card">
+      <h2>توزيع السعودة</h2>
+      <div class="pie-wrap">
+        <div class="pie-chart" id="pieChart">
+          <div class="pie-center"><b id="pieRatio">0%</b><span>نسبة السعودة</span></div>
+        </div>
+        <div class="legend" id="pieLegend"></div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <h2>نسبة السعودة حسب الإدارة / القسم</h2>
+      <div class="bar-list" id="ratioBars"></div>
+    </div>
+  </section>
+
+  <section class="chart-card">
+    <h2>توزيع تكلفة الرواتب حسب الجنسية</h2>
+    <div class="cost-bars" id="costBars"></div>
+  </section>
+
+  <section class="panel">
+    <div class="toolbar">
+      <input id="searchInput" placeholder="بحث في الإدارات أو الأقسام" />
+      <select id="sortInput">
+        <option value="ratioAsc">الأقل سعودة أولاً</option>
+        <option value="ratioDesc">الأعلى سعودة أولاً</option>
+        <option value="totalDesc">الأكبر عددًا أولاً</option>
+        <option value="missingDesc">الأكثر نقصًا بالتصنيف</option>
+      </select>
+      <button id="resetBtn">مسح البحث</button>
+    </div>
+    <div class="note">يعتمد التقرير على العناصر التي لديها <b>is_cost_center: true</b>، ويحسب الموظفين تحت كل إدارة/قسم.</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>الإدارة / القسم</th>
+            <th>المسار</th>
+            <th>سعوديون</th>
+            <th>غير سعوديين</th>
+            <th>بلا تصنيف</th>
+            <th>نسبة السعودة</th>
+            <th>تكلفة السعوديين</th>
+            <th>تكلفة غير السعوديين</th>
+          </tr>
+        </thead>
+        <tbody id="reportBody"></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<script src="data.js"></script>
+<script>
+function initAppMenu(activePage){
+  const btn=document.getElementById('appMenuBtn'), backdrop=document.getElementById('appMenuBackdrop');
+  document.querySelectorAll('.drawer-link').forEach(a=>a.classList.toggle('active',a.dataset.page===activePage));
+  function close(){document.body.classList.remove('menu-open')}
+  btn?.addEventListener('click',()=>document.body.classList.toggle('menu-open'));
+  backdrop?.addEventListener('click',close);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape') close();});
+}
+initAppMenu('saudization');
+
+function money(n){return new Intl.NumberFormat("ar-SA",{style:"currency",currency:"SAR",maximumFractionDigits:0}).format(n||0)}
+function flattenNodes(root){
+  const out=[];
+  function walk(node,parent=null,depth=0,path=[]){
+    const current=[...path,node.name||'-'];
+    out.push({node,parent,depth,path:current});
+    (node.children||[]).forEach(c=>walk(c,node,depth+1,current));
+  }
+  walk(root);
+  return out;
+}
+function isPerson(node){
+  const personTypes=['c_level','manager','employee','regional_manager','area_manager','station_supervisor','worker'];
+  return personTypes.includes(node.type) || (!!Number(node.salary||0) && !node.station);
+}
+function nationality(node){
+  const g=String(node.nationality_group||node.nationality||'').trim().toLowerCase();
+  if(['saudi','سعودي','ksa','sa'].includes(g)) return 'saudi';
+  if(['non_saudi','non-saudi','nonsaudi','غير سعودي','غير_سعودي','expat'].includes(g)) return 'non';
+  return 'unknown';
+}
+function statsFor(root){
+  const people=flattenNodes(root).filter(x=>isPerson(x.node));
+  const saudi=people.filter(x=>nationality(x.node)==='saudi');
+  const non=people.filter(x=>nationality(x.node)==='non');
+  const unknown=people.filter(x=>nationality(x.node)==='unknown');
+  const classified=saudi.length+non.length;
+  return {
+    total:people.length,
+    saudi:saudi.length,
+    non:non.length,
+    unknown:unknown.length,
+    ratio:classified?Math.round((saudi.length/classified)*100):0,
+    saudiCost:saudi.reduce((s,x)=>s+Number(x.node.salary||0),0),
+    nonCost:non.reduce((s,x)=>s+Number(x.node.salary||0),0)
+  };
+}
+function costCenters(){
+  return flattenNodes(data.company).filter(x=>x.node.is_cost_center===true).map(x=>({
+    name:x.node.name||'-',
+    path:x.path.join(' › '),
+    ...statsFor(x.node)
+  })).filter(x=>x.total>0);
+}
+function badge(type,value){
+  if(type==='saudi') return `<span class="badge saudi">🇸🇦 ${value}</span>`;
+  if(type==='non') return `<span class="badge non">🌐 ${value}</span>`;
+  return `<span class="badge unknown">⚠️ ${value}</span>`;
+}
+function renderSummary(){
+  const s=statsFor(data.company);
+  document.getElementById('summaryGrid').innerHTML=`
+    <div class="stat"><div class="n">${s.total}</div><div class="l">إجمالي الموظفين</div></div>
+    <div class="stat"><div class="n">${s.saudi}</div><div class="l">سعوديون</div></div>
+    <div class="stat"><div class="n">${s.non}</div><div class="l">غير سعوديين</div></div>
+    <div class="stat"><div class="n">${s.unknown}</div><div class="l">بلا تصنيف</div></div>
+    <div class="stat"><div class="n">${s.ratio}%</div><div class="l">نسبة السعودة من المصنفين</div></div>
+    <div class="stat"><div class="n">${money(s.saudiCost)}</div><div class="l">تكلفة رواتب السعوديين</div></div>
+    <div class="stat"><div class="n">${money(s.nonCost)}</div><div class="l">تكلفة رواتب غير السعوديين</div></div>
+  `;
+}
+function renderTable(){
+  const q=document.getElementById('searchInput').value.trim().toLowerCase();
+  const sort=document.getElementById('sortInput').value;
+  let rows=costCenters().filter(r=>!q || (r.name+' '+r.path).toLowerCase().includes(q));
+  rows.sort((a,b)=>{
+    if(sort==='ratioAsc') return a.ratio-b.ratio || b.total-a.total;
+    if(sort==='ratioDesc') return b.ratio-a.ratio || b.total-a.total;
+    if(sort==='totalDesc') return b.total-a.total;
+    if(sort==='missingDesc') return b.unknown-a.unknown;
+    return 0;
+  });
+  document.getElementById('reportBody').innerHTML=rows.length?rows.map(r=>`
+    <tr>
+      <td><b>${r.name}</b></td>
+      <td>${r.path}</td>
+      <td>${badge('saudi',r.saudi)}</td>
+      <td>${badge('non',r.non)}</td>
+      <td>${badge('unknown',r.unknown)}</td>
+      <td><b>${r.ratio}%</b></td>
+      <td>${money(r.saudiCost)}</td>
+      <td>${money(r.nonCost)}</td>
+    </tr>
+  `).join(''):`<tr><td colspan="8">لا توجد نتائج مطابقة.</td></tr>`;
+}
+
+function renderCharts(){
+  const summary = statsFor(data.company);
+  const total = summary.saudi + summary.non + summary.unknown;
+  const saudiDeg = total ? Math.round((summary.saudi / total) * 360) : 0;
+  const nonDeg = total ? Math.round(((summary.saudi + summary.non) / total) * 360) : 0;
+
+  const pie = document.getElementById('pieChart');
+  if(pie){
+    pie.style.setProperty('--saudi-deg', saudiDeg + 'deg');
+    pie.style.setProperty('--non-deg', nonDeg + 'deg');
+  }
+  const pieRatio = document.getElementById('pieRatio');
+  if(pieRatio) pieRatio.textContent = (summary.ratio || 0) + '%';
+
+  const pieLegend = document.getElementById('pieLegend');
+  if(pieLegend){
+    pieLegend.innerHTML = `
+      <div class="legend-item"><span class="name"><i class="dot saudi"></i>🇸🇦 سعوديون</span><b>${summary.saudi}</b></div>
+      <div class="legend-item"><span class="name"><i class="dot non"></i>🌐 غير سعوديين</span><b>${summary.non}</b></div>
+      <div class="legend-item"><span class="name"><i class="dot unknown"></i>⚠️ بلا تصنيف</span><b>${summary.unknown}</b></div>
+    `;
+  }
+
+  const centers = costCenters().sort((a,b)=>a.ratio-b.ratio || b.total-a.total).slice(0,12);
+
+  const ratioBars = document.getElementById('ratioBars');
+  if(ratioBars){
+    ratioBars.innerHTML = centers.length ? centers.map(r => `
+      <div class="bar-row" title="${r.path}">
+        <div class="bar-name">${r.name}</div>
+        <div class="bar-track"><div class="bar-fill" style="--w:${r.ratio || 0}%"></div></div>
+        <div class="bar-value">${r.ratio || 0}%</div>
+      </div>
+    `).join('') : '<div class="note">لا توجد مراكز تكلفة تحتوي موظفين.</div>';
+  }
+
+  const costBars = document.getElementById('costBars');
+  if(costBars){
+    const costRows = costCenters().filter(r => (r.saudiCost + r.nonCost) > 0).sort((a,b)=>(b.saudiCost+b.nonCost)-(a.saudiCost+a.nonCost)).slice(0,12);
+    costBars.innerHTML = costRows.length ? costRows.map(r => {
+      const totalCost = r.saudiCost + r.nonCost;
+      const sw = totalCost ? Math.round((r.saudiCost / totalCost) * 100) : 0;
+      const nw = Math.max(0, 100 - sw);
+      return `
+        <div class="cost-row">
+          <div class="cost-head"><span>${r.name}</span><span>${money(totalCost)}</span></div>
+          <div class="stack-track">
+            <div class="stack-saudi" style="--sw:${sw}%"></div>
+            <div class="stack-non" style="--nw:${nw}%"></div>
+          </div>
+          <div class="cost-meta">
+            <span>🇸🇦 السعوديون: ${money(r.saudiCost)}</span>
+            <span>🌐 غير السعوديين: ${money(r.nonCost)}</span>
+          </div>
+        </div>
+      `;
+    }).join('') : '<div class="note">لا توجد بيانات تكلفة كافية.</div>';
+  }
+}
+
+
+document.getElementById('searchInput').addEventListener('input',renderTable);
+document.getElementById('sortInput').addEventListener('change',renderTable);
+document.getElementById('resetBtn').addEventListener('click',()=>{document.getElementById('searchInput').value='';renderTable();});
+renderSummary();
+renderTable();
+renderCharts();
+</script>
+</body>
+</html>

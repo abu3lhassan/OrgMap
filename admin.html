@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>⛽ Admin Data Editor</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    :root{--bg:#0f172a;--bg2:#020617;--panel:rgba(255,255,255,.055);--line:rgba(255,255,255,.12);--muted:#cbd5e1;--shadow:0 18px 40px rgba(0,0,0,.22)}
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(circle at top,#16233b 0%,var(--bg) 45%,var(--bg2) 100%);color:#fff;font-family:"Sakkal Majalla","Segoe UI",Tahoma,Arial,sans-serif}
+    .wrap{max-width:1550px;margin:0 auto;padding:26px}
+    .hero{border:1px solid rgba(249,115,22,.18);background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.04)),radial-gradient(circle at top right,rgba(249,115,22,.12),transparent 45%);border-radius:30px;padding:26px;text-align:center;box-shadow:var(--shadow);margin-bottom:18px}
+    .hero h1{margin:0 0 8px;font-size:42px}.hero p{margin:0;color:var(--muted);font-size:18px;line-height:1.8}
+    .warning{margin:14px auto 0;width:max-content;max-width:100%;padding:10px 14px;border:1px solid rgba(251,146,60,.22);background:rgba(249,115,22,.08);color:#fed7aa;border-radius:18px;line-height:1.7}
+    .grid{display:grid;grid-template-columns:390px 1fr;gap:16px;align-items:start}
+    .panel{border:1px solid var(--line);background:var(--panel);border-radius:26px;padding:18px;box-shadow:var(--shadow);backdrop-filter:blur(12px)}
+    .panel h2,.panel h3{margin-top:0}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+    button,.btn-file{border:none;border-radius:16px;min-height:42px;padding:10px 14px;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.12);cursor:pointer;font-weight:800;font-family:inherit;box-shadow:0 10px 22px rgba(0,0,0,.15)}
+    button:hover,.btn-file:hover{border-color:rgba(249,115,22,.35);background:rgba(249,115,22,.10)}
+    .primary-btn{background:linear-gradient(135deg,rgba(249,115,22,.35),rgba(251,146,60,.16));border-color:rgba(249,115,22,.42);color:#fff7ed}
+    .danger-btn{background:rgba(239,68,68,.10);border-color:rgba(248,113,113,.24);color:#fecaca}
+    .success-btn{background:rgba(34,197,94,.10);border-color:rgba(134,239,172,.24);color:#bbf7d0}
+    input,select,textarea{width:100%;min-height:42px;border-radius:15px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);color:#fff;padding:10px 12px;outline:none;font-family:inherit;font-size:16px}
+    textarea{min-height:84px;resize:vertical}option{background:#0f172a;color:#fff}
+    label{display:block;color:#cbd5e1;font-size:14px;margin:12px 0 6px}.search{margin-bottom:12px}
+    .list{display:grid;gap:8px;max-height:660px;overflow:auto;padding-inline-end:4px}
+    .item{border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.045);border-radius:18px;padding:11px 12px;cursor:pointer;line-height:1.5}
+    .item:hover,.item.active{border-color:rgba(249,115,22,.35);background:rgba(249,115,22,.10)}
+    .item b{display:block;color:#fff;font-size:17px}.item span{display:block;color:#cbd5e1;font-size:13px}
+    .badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 8px;margin-top:7px;border:1px solid rgba(255,255,255,.10);color:#fed7aa;background:rgba(249,115,22,.08);font-size:12px}
+    .form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 14px}.full{grid-column:1/-1}
+    .status{margin-top:12px;border-radius:16px;padding:11px 13px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.045);color:#cbd5e1;white-space:pre-line;line-height:1.7}
+    .status.ok{color:#bbf7d0;border-color:rgba(134,239,172,.24);background:rgba(34,197,94,.08)}
+    .status.bad{color:#fecaca;border-color:rgba(248,113,113,.24);background:rgba(239,68,68,.08)}
+    .mini-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
+    .stat{border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.045);border-radius:18px;padding:12px;text-align:center}
+    .stat .n{font-size:24px;font-weight:900;color:#fdba74}.stat .l{font-size:12px;color:#cbd5e1;margin-top:4px}
+    .output{direction:ltr;text-align:left;height:260px;font-family:Consolas,"Courier New",monospace;font-size:12px;color:#bbf7d0;background:#020617}
+    input[type=file]{display:none}.muted{color:#94a3b8;font-size:13px;line-height:1.7}
+    @media(max-width:1000px){.grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.mini-stats{grid-template-columns:repeat(2,1fr)}}
+  
+    .admin-filters{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+      margin-bottom:10px;
+    }
+    .selected-path{
+      margin:8px 0 4px;
+      padding:10px 12px;
+      border:1px solid rgba(249,115,22,.18);
+      border-radius:16px;
+      background:rgba(249,115,22,.07);
+      color:#fed7aa;
+      line-height:1.7;
+      font-size:13px;
+    }
+    @media(max-width:720px){.admin-filters{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <h1>Admin Data Editor</h1>
+    <p>أداة محلية لتعديل بيانات الموظفين داخل data.js بدون Backend. لا تحفظ مباشرة في GitHub.</p>
+    <div class="warning">صفحة مخفية وغير مربوطة بالقائمة. افتحها يدويًا: <b>admin.html</b></div>
+  </section>
+  <section class="panel">
+    <div class="toolbar">
+      <label class="btn-file">استيراد data.js<input type="file" id="fileInput" accept=".js,.txt,.json" /></label>
+      <button class="success-btn" id="downloadBtn">تحميل data.js الجديد</button>
+      <button id="copyBtn">نسخ الكود</button>
+      <button class="primary-btn" id="refreshBtn">تحديث المعاينة</button>
+    </div>
+    <div class="muted">إذا فتحت الصفحة داخل نفس مجلد المشروع، سيتم تحميل <b>data.js</b> تلقائيًا. إذا لم يعمل، ارفع الملف يدويًا.</div>
+    <div class="mini-stats" id="stats"></div>
+  </section>
+  <div class="grid">
+    <aside class="panel">
+      <h2>الموظفون والمناصب</h2>
+      <input class="search" id="searchInput" placeholder="بحث بالاسم أو المسمى أو التبعية" />
+      <div class="admin-filters">
+        <select id="nationalityFilter">
+          <option value="all">كل الجنسيات</option>
+          <option value="saudi">السعوديون فقط</option>
+          <option value="non_saudi">غير السعوديين فقط</option>
+          <option value="unknown">بلا تصنيف جنسية</option>
+        </select>
+        <select id="parentFilter">
+          <option value="all">كل الإدارات والأقسام</option>
+        </select>
+      </div>
+      <div class="toolbar"><button class="primary-btn" id="newBtn">+ موظف جديد</button><button class="danger-btn" id="deleteBtn">حذف المحدد</button></div>
+      <div class="list" id="employeeList"></div>
+    </aside>
+    <main class="panel">
+      <h2 id="formTitle">تعديل موظف</h2>
+      <div class="selected-path" id="selectedPathBox">المسار التنظيمي: -</div>
+      <div class="form-grid">
+        <div><label>الاسم</label><input id="nameInput" /></div>
+        <div><label>المسمى الوظيفي</label><input id="subtitleInput" /></div>
+        <div><label>النوع</label><select id="typeInput"><option value="employee">موظف</option><option value="manager">مدير</option><option value="c_level">C-Level</option><option value="regional_manager">مدير إقليمي</option><option value="area_manager">مدير منطقة</option><option value="station_supervisor">مشرف محطة</option><option value="worker">عامل / عمالة</option></select></div>
+        <div><label>الراتب الشهري</label><input id="salaryInput" type="number" step="1" /></div>
+        <div><label>الجنسية</label><select id="nationalityInput"><option value="">غير محدد</option><option value="saudi">سعودي 🇸🇦</option><option value="non_saudi">غير سعودي</option></select></div>
+        <div><label>الحالة</label><select id="statusInput"><option value="active">نشط</option><option value="vacant">شاغر</option></select></div>
+        <div><label>يتبع إلى</label><select id="parentInput"></select></div>
+        <div><label>طريقة ظهور التابعين</label><select id="layoutInput"><option value="vertical">عمودي</option><option value="horizontal">أفقي</option></select></div>
+        <div><label>اللون / التصنيف</label><select id="toneInput"><option value="dark">داكن</option><option value="primary">رئيسي</option><option value="secondary">ثانوي</option><option value="warning">مالي</option><option value="vacant">شاغر</option><option value="purple">بنفسجي</option></select><div class="muted" id="autoToneHint">يتحدد تلقائيًا حسب نوع المنصب، ويمكنك تغييره يدويًا.</div></div>
+        <div><label>الصورة</label><input id="imageInput" placeholder="مثال: ali.png" /></div>
+        <div class="full"><label>ملاحظات</label><textarea id="notesInput"></textarea></div>
+      </div>
+      <div class="toolbar" style="margin-top:14px"><button class="primary-btn" id="saveBtn">حفظ التعديل داخل الأداة</button><button id="resetBtn">إلغاء / إعادة تحميل المحدد</button></div>
+      <div class="status" id="statusBox">جاهز.</div>
+      <h3>معاينة data.js الناتج</h3><textarea class="output" id="output"></textarea>
+    </main>
+  </div>
+</div>
+<script src="data.js"></script>
+<script>
+let rootData=null, selectedId=null, idCounter=1;
+const personTypes=new Set(["c_level","manager","employee","regional_manager","area_manager","station_supervisor","worker"]);
+const els={list:document.getElementById("employeeList"),stats:document.getElementById("stats"),status:document.getElementById("statusBox"),output:document.getElementById("output"),search:document.getElementById("searchInput"),nationalityFilter:document.getElementById("nationalityFilter"),parentFilter:document.getElementById("parentFilter"),selectedPath:document.getElementById("selectedPathBox"),file:document.getElementById("fileInput"),name:document.getElementById("nameInput"),subtitle:document.getElementById("subtitleInput"),type:document.getElementById("typeInput"),salary:document.getElementById("salaryInput"),nationality:document.getElementById("nationalityInput"),parent:document.getElementById("parentInput"),layout:document.getElementById("layoutInput"),tone:document.getElementById("toneInput"),statusInput:document.getElementById("statusInput"),image:document.getElementById("imageInput"),notes:document.getElementById("notesInput"),formTitle:document.getElementById("formTitle")};
+function setStatus(msg,kind=""){els.status.className="status "+kind;els.status.textContent=msg}
+function cloneData(obj){return JSON.parse(JSON.stringify(obj))}
+function ensureData(){if(rootData)return;try{if(typeof data!=="undefined"){rootData=cloneData(data);normalizeTree();setStatus("تم تحميل data.js تلقائيًا.","ok")}}catch(e){}if(!rootData){rootData={meta:{version:"v1.0",lastUpdated:"-",notes:""},company:{name:"الشركة",type:"company",layout:"vertical",tone:"primary",children:[]}};setStatus("لم يتم تحميل data.js تلقائيًا. ارفع الملف يدويًا.","bad")}}
+function flattenAll(){const out=[];function walk(node,parent=null,path=[]){if(!node.__admin_id)node.__admin_id="n"+(idCounter++);const current=[...path,node.name||"-"];out.push({id:node.__admin_id,node,parent,path:current});(node.children||[]).forEach(c=>walk(c,node,current))}if(rootData?.company)walk(rootData.company);return out}
+function normalizeTree(){flattenAll();for(const row of flattenAll())if(!row.node.children)row.node.children=[]}
+function isPerson(node){return personTypes.has(node.type)|| (!!Number(node.salary||0)&&!node.station)}
+function employees(){return flattenAll().filter(x=>isPerson(x.node)&&!x.node.station)}
+function parentOptions(){const selected=selectedId?flattenAll().find(x=>x.id===selectedId):null;const banned=new Set();if(selected){function ban(n){banned.add(n.__admin_id);(n.children||[]).forEach(ban)}ban(selected.node)}return flattenAll().filter(x=>!banned.has(x.id))}
+function renderStats(){const people=employees();const saudi=people.filter(x=>x.node.nationality_group==="saudi").length;const non=people.filter(x=>x.node.nationality_group==="non_saudi").length;const totalSalary=people.reduce((s,x)=>s+Number(x.node.salary||0),0);els.stats.innerHTML=`<div class="stat"><div class="n">${people.length}</div><div class="l">عدد الأشخاص</div></div><div class="stat"><div class="n">${saudi}</div><div class="l">سعوديون</div></div><div class="stat"><div class="n">${non}</div><div class="l">غير سعوديين</div></div><div class="stat"><div class="n">${new Intl.NumberFormat("ar-SA").format(totalSalary)}</div><div class="l">إجمالي الرواتب</div></div>`}
+function renderParentSelect(currentParentId=""){const opts=parentOptions();els.parent.innerHTML=opts.map(x=>`<option value="${x.id}">${escapeHtml(x.path.join(" › "))}</option>`).join("");if(currentParentId&&opts.some(x=>x.id===currentParentId))els.parent.value=currentParentId}
+
+function renderParentFilter(){
+  if(!els.parentFilter) return;
+  const previous=els.parentFilter.value||"all";
+  const rows=flattenAll().filter(x=>{
+    const n=x.node;
+    return n.is_cost_center===true || ['department','division','executive_root','company'].includes(n.type) || (!isPerson(n)&&!n.station&&(n.children||[]).length);
+  });
+  els.parentFilter.innerHTML='<option value="all">كل الإدارات والأقسام</option>'+rows.map(x=>`<option value="${x.id}">${escapeHtml(x.path.join(" › "))}</option>`).join("");
+  if([...els.parentFilter.options].some(o=>o.value===previous)) els.parentFilter.value=previous;
+}
+
+function renderList(){const q=els.search.value.trim().toLowerCase();const rows=employees().filter(x=>{const n=x.node;const txt=[n.name,n.subtitle,n.type,n.nationality_group,x.path.join(" ")].join(" ").toLowerCase();const nationalityFilter=els.nationalityFilter?.value||"all";
+    const parentFilter=els.parentFilter?.value||"all";
+    const nat=n.nationality_group||"unknown";
+    const nationalityOk = nationalityFilter==="all" || (nationalityFilter==="unknown" ? !n.nationality_group : nat===nationalityFilter);
+    const parentOk = parentFilter==="all" || x.path.some((_,idx)=>flattenAll().find(y=>y.id===parentFilter)?.node?.name===x.path[idx]);
+    return (!q||txt.includes(q)) && nationalityOk && parentOk});els.list.innerHTML=rows.map(x=>{const n=x.node;const nat=n.nationality_group==="saudi"?"🇸🇦 سعودي":n.nationality_group==="non_saudi"?"🌐 غير سعودي":"غير محدد";return `<div class="item ${x.id===selectedId?'active':''}" data-id="${x.id}"><b>${escapeHtml(n.name||"-")}</b><span>${escapeHtml(n.subtitle||n.type||"-")}</span><span>${escapeHtml(x.path.slice(0,-1).join(" › ")||"-")}</span><span class="badge">${nat}</span></div>`}).join("");document.querySelectorAll(".item[data-id]").forEach(el=>el.addEventListener("click",()=>selectNode(el.dataset.id)))}
+function selectNode(id){selectedId=id;const row=flattenAll().find(x=>x.id===id);if(!row)return;renderParentSelect(row.parent?.__admin_id||"");const n=row.node;els.formTitle.textContent="تعديل: "+(n.name||"-");els.name.value=n.name||"";els.subtitle.value=n.subtitle||"";els.type.value=n.type||"employee";els.salary.value=Number(n.salary||0)||"";els.nationality.value=n.nationality_group||"";els.layout.value=n.layout||"vertical";els.tone.value=n.tone||"dark";els.statusInput.value=n.status||"active";els.image.value=n.image||"";els.notes.value=n.notes||"";renderList();updateOutput()}
+
+function getAutoToneByType(type){
+  const t = String(type || '').trim();
+  if(t === 'c_level') return 'primary';
+  if(t === 'manager') return 'purple';
+  if(t === 'regional_manager' || t === 'area_manager') return 'purple';
+  if(t === 'station_supervisor') return 'dark';
+  if(t === 'worker') return 'dark';
+  if(t === 'employee') return 'dark';
+  return 'dark';
+}
+function applyAutoToneByType(){
+  if(!els.type || !els.tone) return;
+  els.tone.value = getAutoToneByType(els.type.value);
+}
+
+function collectForm(){return{name:els.name.value.trim(),subtitle:els.subtitle.value.trim(),type:els.type.value,salary:Number(els.salary.value||0),nationality_group:els.nationality.value,layout:els.layout.value,tone:els.tone.value,status:els.statusInput.value,image:els.image.value.trim(),notes:els.notes.value.trim()}}
+function saveCurrent(){if(!selectedId)return setStatus("اختر موظفًا أو اضغط موظف جديد.","bad");const row=flattenAll().find(x=>x.id===selectedId);if(!row)return setStatus("لم يتم العثور على العنصر المحدد.","bad");const form=collectForm();if(!form.name)return setStatus("الاسم مطلوب.","bad");const oldParent=row.parent;const newParent=flattenAll().find(x=>x.id===els.parent.value)?.node;row.node.name=form.name;row.node.subtitle=form.subtitle;row.node.type=form.type;if(form.salary)row.node.salary=form.salary;else delete row.node.salary;if(form.nationality_group)row.node.nationality_group=form.nationality_group;else delete row.node.nationality_group;row.node.layout=form.layout;row.node.tone=form.tone;row.node.status=form.status;if(form.image)row.node.image=form.image;else delete row.node.image;if(form.notes)row.node.notes=form.notes;else delete row.node.notes;if(!row.node.children)row.node.children=[];if(newParent&&oldParent&&oldParent.__admin_id!==newParent.__admin_id){oldParent.children=(oldParent.children||[]).filter(c=>c.__admin_id!==selectedId);newParent.children=newParent.children||[];newParent.children.push(row.node)}setStatus("تم حفظ التعديل داخل الأداة. لا تنس تحميل data.js الجديد.","ok");renderAll();selectNode(selectedId)}
+function newEmployee(){const selected=selectedId?flattenAll().find(x=>x.id===selectedId):null;const parent=selected?.node||rootData.company;const node={__admin_id:"n"+(idCounter++),name:"موظف جديد",subtitle:"مسمى وظيفي",type:"employee",salary:0,nationality_group:"",layout:"vertical",tone:"dark",status:"active",children:[]};parent.children=parent.children||[];parent.children.push(node);selectedId=node.__admin_id;setStatus("تم إنشاء موظف جديد تحت: "+(parent.name||"-")+". عدّل البيانات ثم اضغط حفظ.","ok");renderAll();selectNode(selectedId)}
+function deleteSelected(){if(!selectedId)return setStatus("اختر موظفًا للحذف.","bad");const row=flattenAll().find(x=>x.id===selectedId);if(!row||!row.parent)return setStatus("لا يمكن حذف هذا العنصر.","bad");if((row.node.children||[]).length && !confirm("هذا الموظف لديه تابعين. حذفه سيحذف كل ما تحته. هل أنت متأكد؟"))return; if(!confirm("تأكيد حذف: "+(row.node.name||"-")+"؟"))return;row.parent.children=(row.parent.children||[]).filter(c=>c.__admin_id!==selectedId);selectedId=null;clearForm();setStatus("تم الحذف داخل الأداة. حمّل data.js الجديد لتطبيقه.","ok");renderAll()}
+function clearForm(){els.formTitle.textContent="تعديل موظف";["name","subtitle","salary","image","notes"].forEach(k=>els[k].value="");els.type.value="employee";els.nationality.value="";els.layout.value="vertical";els.tone.value="dark";els.statusInput.value="active"}
+function cleanForExport(obj){if(Array.isArray(obj))return obj.map(cleanForExport);if(obj&&typeof obj==="object"){const out={};for(const[k,v]of Object.entries(obj)){if(k==="__admin_id")continue;if(v===""||v===undefined||v===null)continue;if(k==="children"&&Array.isArray(v)&&v.length===0){out.children=[];continue}out[k]=cleanForExport(v)}return out}return obj}
+function makeDataJs(){return"const data = "+JSON.stringify(cleanForExport(rootData),null,2)+";\n"}
+function updateOutput(){els.output.value=makeDataJs()}
+function renderAll(){renderStats();renderParentSelect();renderParentFilter();renderList();updateOutput()}
+function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+async function readDataFile(file){const text=await file.text();const code=text.replace(/^\s*const\s+data\s*=/,"data =");const fn=new Function(code+"; return data;");rootData=fn();selectedId=null;idCounter=1;normalizeTree();setStatus("تم استيراد data.js بنجاح.","ok");renderAll()}
+function downloadData(){const b=new Blob([makeDataJs()],{type:"text/javascript;charset=utf-8"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="data.js";a.click();URL.revokeObjectURL(a.href)}
+async function copyData(){await navigator.clipboard.writeText(makeDataJs());setStatus("تم نسخ كود data.js.","ok")}
+document.getElementById("saveBtn").addEventListener("click",saveCurrent);
+document.getElementById("newBtn").addEventListener("click",newEmployee);
+document.getElementById("deleteBtn").addEventListener("click",deleteSelected);
+document.getElementById("resetBtn").addEventListener("click",()=>selectedId&&selectNode(selectedId));
+document.getElementById("downloadBtn").addEventListener("click",downloadData);
+document.getElementById("copyBtn").addEventListener("click",copyData);
+document.getElementById("refreshBtn").addEventListener("click",renderAll);
+els.search.addEventListener("input",renderList);
+els.type.addEventListener("change",applyAutoToneByType);
+document.getElementById("nationalityFilter")?.addEventListener("change",renderList);
+document.getElementById("parentFilter")?.addEventListener("change",renderList);
+els.file.addEventListener("change",e=>e.target.files[0]&&readDataFile(e.target.files[0]));
+ensureData();renderAll();const first=employees()[0];if(first)selectNode(first.id);
+</script>
+</body>
+</html>

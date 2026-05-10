@@ -28,7 +28,7 @@
       margin:0;
       background:radial-gradient(circle at top,#16233b 0%,var(--bg) 42%,var(--bg2) 100%);
       color:var(--txt);
-      font-family:Arial,sans-serif;
+      font-family:"Sakkal Majalla","Segoe UI",Tahoma,Arial,sans-serif;
     }
     .wrap{max-width:2100px;margin:0 auto;padding:24px}
     .hero{
@@ -756,7 +756,7 @@
       position:absolute;
       font-size:9px;
       font-weight:900;
-      font-family:Arial,sans-serif;
+      font-family:"Sakkal Majalla","Segoe UI",Tahoma,Arial,sans-serif;
       line-height:1;
       color:currentColor;
       margin-top:.5px;
@@ -1269,7 +1269,7 @@
     }
     .dash-metric .n{font-size:24px;font-weight:900;color:#fdba74;margin-bottom:6px}
     .dash-metric .l{color:#cbd5e1;font-size:13px;line-height:1.4}
-    .dashboard-split{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .dashboard-split{display:grid;grid-template-columns:1fr;gap:14px}
     .dash-section{
       border:1px solid rgba(255,255,255,.10);
       border-radius:22px;
@@ -1294,6 +1294,426 @@
     .dashboard-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
     @media(max-width:1100px){.dashboard-grid{grid-template-columns:repeat(3,1fr)}.dashboard-split{grid-template-columns:1fr}}
     @media(max-width:640px){.dashboard-grid{grid-template-columns:1fr}.dashboard-head{display:block}.version-card{min-width:0;margin-top:12px}}
+
+    /* Dashboard cost-only visibility: keep count cards visible */
+    .dashboard-cost-toggle{
+      display:flex;
+      justify-content:center;
+      margin:0 auto 14px;
+    }
+    .dashboard-cost-toggle .btn{
+      height:42px;
+      min-width:145px;
+      border-radius:16px;
+      border-color:rgba(249,115,22,.24);
+      background:rgba(249,115,22,.10);
+      color:#fff7ed;
+      box-shadow:0 14px 28px rgba(0,0,0,.16),0 0 18px rgba(249,115,22,.08);
+    }
+    body.dashboard-cost-hidden #topCostBranches .rank-item span{
+      color:#fed7aa;
+      font-size:0;
+    }
+    body.dashboard-cost-hidden #topCostBranches .rank-item span::after{
+      content:"مخفي";
+      font-size:14px;
+      font-weight:900;
+      color:#fed7aa;
+    }
+
+
+    /* Saudization Analytics */
+    .saudization-panel{
+      margin-top:16px;
+      border:1px solid rgba(249,115,22,.16);
+      border-radius:24px;
+      background:
+        linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.032)),
+        radial-gradient(circle at top right,rgba(34,197,94,.08),transparent 42%);
+      padding:16px;
+      box-shadow:0 18px 38px rgba(0,0,0,.18);
+    }
+    .saudization-panel h3{
+      margin:0 0 12px;
+      font-size:20px;
+      color:#fff7ed;
+    }
+    .saudization-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:12px;
+    }
+    .saud-card{
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:20px;
+      background:rgba(255,255,255,.045);
+      padding:14px;
+      text-align:center;
+      min-height:92px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      box-shadow:0 10px 24px rgba(0,0,0,.13);
+    }
+    .saud-card .n{
+      font-size:24px;
+      font-weight:900;
+      color:#fdba74;
+      margin-bottom:6px;
+    }
+    .saud-card .l{
+      color:#cbd5e1;
+      font-size:13px;
+      line-height:1.4;
+    }
+    body.dashboard-cost-hidden .salary-cost-sensitive{
+      color:#fed7aa;
+      font-size:0;
+    }
+    body.dashboard-cost-hidden .salary-cost-sensitive::after{
+      content:"مخفي";
+      font-size:20px;
+      font-weight:900;
+      color:#fed7aa;
+    }
+
+
+    /* Dashboard visual saudization charts - no scrollbars */
+    .dashboard-visual-panel{
+      margin-top:16px;
+      border:1px solid rgba(249,115,22,.16);
+      border-radius:24px;
+      background:
+        linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.032)),
+        radial-gradient(circle at top right,rgba(34,197,94,.08),transparent 42%);
+      padding:16px;
+      box-shadow:0 18px 38px rgba(0,0,0,.18);
+    }
+    .dashboard-visual-panel h3{
+      margin:0 0 12px;
+      font-size:20px;
+      color:#fff7ed;
+    }
+    .dashboard-visual-grid{
+      display:grid;
+      grid-template-columns:360px 1fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    .dash-chart-card{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.045);
+      border-radius:22px;
+      padding:15px;
+      box-shadow:0 10px 24px rgba(0,0,0,.13);
+      min-height:260px;
+    }
+    .dash-chart-card h4{
+      margin:0 0 12px;
+      color:#fed7aa;
+      font-size:16px;
+    }
+    .dashboard-pie-wrap{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+      min-height:190px;
+    }
+    .dashboard-pie{
+      width:172px;
+      height:172px;
+      border-radius:50%;
+      background:
+        conic-gradient(
+          #22c55e 0deg var(--saudi-deg),
+          #3b82f6 var(--saudi-deg) var(--non-deg),
+          #f59e0b var(--non-deg) 360deg
+        );
+      box-shadow:
+        0 16px 32px rgba(0,0,0,.24),
+        inset 0 0 0 12px rgba(255,255,255,.045),
+        inset 0 0 0 1px rgba(255,255,255,.12);
+      position:relative;
+    }
+    .dashboard-pie::after{
+      content:"";
+      position:absolute;
+      inset:43px;
+      border-radius:50%;
+      background:radial-gradient(circle at top,#172554,#0f172a 70%);
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .dashboard-pie-center{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      z-index:2;
+      font-weight:900;
+      pointer-events:none;
+    }
+    .dashboard-pie-center b{
+      font-size:25px;
+      color:#fdba74;
+      line-height:1;
+    }
+    .dashboard-pie-center span{
+      font-size:11px;
+      color:#cbd5e1;
+      margin-top:5px;
+    }
+    .dash-legend{
+      display:grid;
+      gap:8px;
+      min-width:145px;
+    }
+    .dash-legend-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:9px;
+      border:1px solid rgba(255,255,255,.09);
+      background:rgba(255,255,255,.04);
+      border-radius:14px;
+      padding:8px 10px;
+      color:#cbd5e1;
+      font-size:12px;
+    }
+    .dash-dot{
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      display:inline-block;
+      margin-inline-end:6px;
+    }
+    .dash-dot.saudi{background:#22c55e}
+    .dash-dot.non{background:#3b82f6}
+    .dash-dot.unknown{background:#f59e0b}
+    .dashboard-bars{
+      display:grid;
+      gap:10px;
+      overflow:visible;
+      max-height:none;
+    }
+    .dashboard-bar-row{
+      display:grid;
+      grid-template-columns:minmax(130px,220px) 1fr 54px;
+      gap:10px;
+      align-items:center;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.035);
+      border-radius:16px;
+      padding:10px 11px;
+    }
+    .dashboard-bar-name{
+      color:#fff;
+      font-weight:800;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .dashboard-bar-track{
+      height:13px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      overflow:hidden;
+      box-shadow:inset 0 1px 4px rgba(0,0,0,.22);
+    }
+    .dashboard-bar-fill{
+      height:100%;
+      width:var(--w);
+      border-radius:999px;
+      background:linear-gradient(90deg,#16a34a,#86efac);
+      box-shadow:0 0 18px rgba(34,197,94,.22);
+    }
+    .dashboard-bar-value{
+      color:#fdba74;
+      font-weight:900;
+      text-align:left;
+      white-space:nowrap;
+    }
+    @media(max-width:1050px){
+      .dashboard-visual-grid{grid-template-columns:1fr}
+      .dashboard-bar-row{grid-template-columns:1fr;gap:8px}
+      .dashboard-bar-value{text-align:right}
+    }
+
+
+    /* Dashboard KPI visual cards - no scrollbars */
+    .dashboard-kpi-visual{
+      margin-top:16px;
+      border:1px solid rgba(249,115,22,.16);
+      border-radius:24px;
+      background:
+        linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.032)),
+        radial-gradient(circle at top right,rgba(249,115,22,.08),transparent 42%);
+      padding:16px;
+      box-shadow:0 18px 38px rgba(0,0,0,.18);
+    }
+    .dashboard-kpi-visual h3{
+      margin:0 0 12px;
+      font-size:20px;
+      color:#fff7ed;
+    }
+    .kpi-visual-grid{
+      display:grid;
+      grid-template-columns:360px 1fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    .kpi-chart-card{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.045);
+      border-radius:22px;
+      padding:15px;
+      box-shadow:0 10px 24px rgba(0,0,0,.13);
+      min-height:250px;
+      overflow:hidden;
+    }
+    .kpi-chart-card h4{
+      margin:0 0 12px;
+      color:#fed7aa;
+      font-size:16px;
+    }
+    .station-pie-wrap{
+      min-height:180px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    .station-pie{
+      width:166px;
+      height:166px;
+      border-radius:50%;
+      background:
+        conic-gradient(
+          #f97316 0deg var(--owned-deg),
+          #38bdf8 var(--owned-deg) 360deg
+        );
+      box-shadow:
+        0 16px 32px rgba(0,0,0,.24),
+        inset 0 0 0 12px rgba(255,255,255,.045),
+        inset 0 0 0 1px rgba(255,255,255,.12);
+      position:relative;
+    }
+    .station-pie::after{
+      content:"";
+      position:absolute;
+      inset:42px;
+      border-radius:50%;
+      background:radial-gradient(circle at top,#172554,#0f172a 70%);
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .station-pie-center{
+      position:absolute;
+      inset:0;
+      z-index:2;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      pointer-events:none;
+      font-weight:900;
+    }
+    .station-pie-center b{
+      color:#fdba74;
+      font-size:25px;
+      line-height:1;
+    }
+    .station-pie-center span{
+      color:#cbd5e1;
+      font-size:11px;
+      margin-top:5px;
+    }
+    .kpi-legend{
+      min-width:150px;
+      display:grid;
+      gap:8px;
+    }
+    .kpi-legend-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:9px;
+      border:1px solid rgba(255,255,255,.09);
+      background:rgba(255,255,255,.04);
+      border-radius:14px;
+      padding:8px 10px;
+      color:#cbd5e1;
+      font-size:12px;
+    }
+    .kpi-dot{
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      display:inline-block;
+      margin-inline-end:6px;
+    }
+    .kpi-dot.owned{background:#f97316}
+    .kpi-dot.operated{background:#38bdf8}
+    .kpi-bars{
+      display:grid;
+      gap:10px;
+      overflow:visible;
+      max-height:none;
+    }
+    .kpi-bar-row{
+      display:grid;
+      grid-template-columns:minmax(150px,230px) 1fr 72px;
+      gap:10px;
+      align-items:center;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.035);
+      border-radius:16px;
+      padding:10px 11px;
+    }
+    .kpi-bar-name{
+      color:#fff;
+      font-weight:800;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .kpi-bar-track{
+      height:14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      overflow:hidden;
+      box-shadow:inset 0 1px 4px rgba(0,0,0,.22);
+    }
+    .kpi-bar-fill{
+      height:100%;
+      width:var(--w);
+      border-radius:999px;
+      background:linear-gradient(90deg,#f97316,#fed7aa);
+      box-shadow:0 0 18px rgba(249,115,22,.22);
+    }
+    .kpi-bar-fill.blue{
+      background:linear-gradient(90deg,#2563eb,#93c5fd);
+      box-shadow:0 0 18px rgba(59,130,246,.22);
+    }
+    .kpi-bar-fill.green{
+      background:linear-gradient(90deg,#16a34a,#86efac);
+      box-shadow:0 0 18px rgba(34,197,94,.22);
+    }
+    .kpi-bar-value{
+      color:#fdba74;
+      font-weight:900;
+      text-align:left;
+      white-space:nowrap;
+    }
+    @media(max-width:1050px){
+      .kpi-visual-grid{grid-template-columns:1fr}
+      .kpi-bar-row{grid-template-columns:1fr;gap:8px}
+      .kpi-bar-value{text-align:right}
+    }
+
 </style>
 </head>
 <body>
@@ -1311,6 +1731,7 @@
     <div class="drawer-section">IT</div>
     <a class="drawer-link" data-page="quality" href="quality.html">فحص البيانات <span>›</span></a>
     <a class="drawer-link" data-page="compare" href="compare.html">مقارنة النسخ <span>›</span></a>
+    <a class="drawer-link" data-page="saudization" href="saudization.html">تقرير السعودة <span>›</span></a>
     <a class="drawer-link" data-page="converter" href="convert-ultra-easy-excel-to-data.html">تحويل Excel إلى data.js <span>›</span></a>
   </div>
 </nav>
@@ -1333,25 +1754,48 @@
         <div class="eyebrow">Dashboard</div>
         <h2>المؤشرات القيادية</h2>
       </div>
-      <div class="version-card" id="versionCard"></div>
     </div>
 
     <div class="dashboard-grid" id="dashboardGrid"></div>
 
-    <div class="dashboard-split">
-      <div class="dash-section">
-        <h3>أعلى الفروع تكلفة</h3>
-        <div class="rank-list" id="topCostBranches"></div>
+    
+    <section class="dashboard-kpi-visual">
+      <h3>التحليل البصري للمؤشرات التشغيلية</h3>
+      <div class="kpi-visual-grid">
+        <div class="kpi-chart-card">
+          <h4>توزيع المحطات</h4>
+          <div class="station-pie-wrap">
+            <div class="station-pie" id="stationPie">
+              <div class="station-pie-center"><b id="stationPieTotal">0</b><span>محطة</span></div>
+            </div>
+            <div class="kpi-legend" id="stationPieLegend"></div>
+          </div>
+        </div>
+        <div class="kpi-chart-card">
+          <h4>مقارنة المؤشرات الرئيسية</h4>
+          <div class="kpi-bars" id="dashboardKpiBars"></div>
+        </div>
       </div>
+    </section>
+
+    <section class="saudization-panel">
+      <h3>تحليلات السعودة</h3>
+      <div class="saudization-grid" id="saudizationGrid"></div>
+    </section>
+<div class="dashboard-split">
       <div class="dash-section">
-        <h3>حالة البيانات</h3>
-        <div class="rank-list" id="qualitySummary"></div>
+        <h3>أعلى الإدارات والأقسام تكلفة</h3>
+                <div class="dashboard-cost-toggle">
+          <button class="btn icon-btn" id="dashboardCostToggleBtn" title="إظهار / إخفاء التكلفة">
+            <span class="btn-label">إظهار التكلفة</span>
+          </button>
+        </div>
+<div class="rank-list" id="topCostBranches"></div>
       </div>
     </div>
 
     <div class="dashboard-actions">
       <a class="btn icon-btn" href="org.html"><span class="btn-label">فتح الهيكل التنظيمي</span></a>
-      <a class="btn icon-btn" href="quality.html"><span class="btn-label">فحص البيانات</span></a>
     </div>
   </section>
 
@@ -1427,6 +1871,136 @@ function countDepartments(){
       ));
   }).length;
 }
+
+function isDepartmentCostCenter(node){
+  // القرار الصريح في البيانات هو المصدر الأول للحقيقة.
+  // true  = يدخل في تقرير أعلى مراكز التكلفة.
+  // false = لا يدخل، حتى لو كان عنده تابعين كثير.
+  if(node && Object.prototype.hasOwnProperty.call(node, 'is_cost_center')){
+    return node.is_cost_center === true;
+  }
+
+  // Fallback للبيانات القديمة التي لا تحتوي is_cost_center:
+  // ندخل الإدارات والأقسام فقط، ونستبعد الحاويات العليا والأشخاص والمحطات.
+  const type = String(node.type || '').trim();
+  if(type === 'department' || type === 'division') return true;
+  return false;
+}
+
+
+function personNationalityGroup(node){
+  const g = String(node.nationality_group || node.nationality || '').trim().toLowerCase();
+  if(['saudi','سعودي','ksa','sa'].includes(g)) return 'saudi';
+  if(['non_saudi','non-saudi','nonsaudi','غير سعودي','غير_سعودي','expat'].includes(g)) return 'non_saudi';
+  return 'unknown';
+}
+function saudizationStatsForNode(root){
+  const rows = flattenNodes(root).filter(x => isPerson(x.node));
+  const saudi = rows.filter(x => personNationalityGroup(x.node) === 'saudi');
+  const nonSaudi = rows.filter(x => personNationalityGroup(x.node) === 'non_saudi');
+  const unknown = rows.filter(x => personNationalityGroup(x.node) === 'unknown');
+  const totalKnown = saudi.length + nonSaudi.length;
+  const totalAll = rows.length;
+  const saudiSalary = saudi.reduce((s,x)=>s+Number(x.node.salary||0),0);
+  const nonSaudiSalary = nonSaudi.reduce((s,x)=>s+Number(x.node.salary||0),0);
+  const knownRatio = totalKnown ? Math.round((saudi.length / totalKnown) * 100) : 0;
+  const companyRatio = totalAll ? Math.round((saudi.length / totalAll) * 100) : 0;
+  return {
+    saudiCount: saudi.length,
+    nonSaudiCount: nonSaudi.length,
+    unknownCount: unknown.length,
+    saudiSalary,
+    nonSaudiSalary,
+    knownRatio,
+    companyRatio
+  };
+}
+
+
+function personNationalityGroup(node){
+  const g = String(node.nationality_group || node.nationality || '').trim().toLowerCase();
+  if(['saudi','سعودي','ksa','sa'].includes(g)) return 'saudi';
+  if(['non_saudi','non-saudi','nonsaudi','غير سعودي','غير_سعودي','expat'].includes(g)) return 'non_saudi';
+  return 'unknown';
+}
+function saudizationStatsForNode(root){
+  const rows = flattenNodes(root).filter(x => isPerson(x.node));
+  const saudi = rows.filter(x => personNationalityGroup(x.node) === 'saudi');
+  const nonSaudi = rows.filter(x => personNationalityGroup(x.node) === 'non_saudi');
+  const unknown = rows.filter(x => personNationalityGroup(x.node) === 'unknown');
+  const totalKnown = saudi.length + nonSaudi.length;
+  const totalAll = rows.length;
+  const saudiSalary = saudi.reduce((s,x)=>s+Number(x.node.salary||0),0);
+  const nonSaudiSalary = nonSaudi.reduce((s,x)=>s+Number(x.node.salary||0),0);
+  return {
+    saudiCount: saudi.length,
+    nonSaudiCount: nonSaudi.length,
+    unknownCount: unknown.length,
+    saudiSalary,
+    nonSaudiSalary,
+    knownRatio: totalKnown ? Math.round((saudi.length / totalKnown) * 100) : 0,
+    companyRatio: totalAll ? Math.round((saudi.length / totalAll) * 100) : 0
+  };
+}
+
+
+
+function renderDashboardKpiVisual(metrics){
+  const owned = Number(metrics.ownedStations || 0);
+  const operated = Number(metrics.operatedStations || 0);
+  const stationWorkers = Number(metrics.stationWorkers || 0);
+  const adminEmployees = Number(metrics.allEmployees || 0);
+  const totalStations = owned + operated;
+  const ownedDeg = totalStations ? Math.round((owned / totalStations) * 360) : 0;
+
+  const pie = document.getElementById('stationPie');
+  if(pie) pie.style.setProperty('--owned-deg', ownedDeg + 'deg');
+
+  const stationPieTotal = document.getElementById('stationPieTotal');
+  if(stationPieTotal) stationPieTotal.textContent = totalStations;
+
+  const legend = document.getElementById('stationPieLegend');
+  if(legend){
+    legend.innerHTML = `
+      <div class="kpi-legend-item"><span><i class="kpi-dot owned"></i>محطات مملوكة</span><b>${owned}</b></div>
+      <div class="kpi-legend-item"><span><i class="kpi-dot operated"></i>محطات مشغلة</span><b>${operated}</b></div>
+    `;
+  }
+
+  const maxValue = Math.max(owned, operated, stationWorkers, adminEmployees, 1);
+  const bars = document.getElementById('dashboardKpiBars');
+  if(bars){
+    const rows = [
+      {name:'المحطات المملوكة', value:owned, cls:''},
+      {name:'المحطات المشغلة', value:operated, cls:'blue'},
+      {name:'عدد العاملين بالمحطات', value:stationWorkers, cls:'green'},
+      {name:'عدد الموظفين الإداريين', value:adminEmployees, cls:''}
+    ];
+    bars.innerHTML = rows.map(r => `
+      <div class="kpi-bar-row">
+        <div class="kpi-bar-name">${r.name}</div>
+        <div class="kpi-bar-track"><div class="kpi-bar-fill ${r.cls}" style="--w:${Math.round((r.value/maxValue)*100)}%"></div></div>
+        <div class="kpi-bar-value">${r.value}</div>
+      </div>
+    `).join('');
+  }
+}
+
+function renderSaudizationAnalytics(metrics){
+  const el = document.getElementById('saudizationGrid');
+  if(!el) return;
+  const s = metrics?.saudization || saudizationStatsForNode(data.company);
+  el.innerHTML = `
+    <div class="saud-card"><div class="n">${s.saudiCount || 0}</div><div class="l">الموظفون السعوديون</div></div>
+    <div class="saud-card"><div class="n">${s.nonSaudiCount || 0}</div><div class="l">الموظفون غير السعوديين</div></div>
+    <div class="saud-card"><div class="n salary-cost-sensitive">${money(s.saudiSalary || 0)}</div><div class="l">تكلفة رواتب السعوديين</div></div>
+    <div class="saud-card"><div class="n salary-cost-sensitive">${money(s.nonSaudiSalary || 0)}</div><div class="l">تكلفة رواتب غير السعوديين</div></div>
+    <div class="saud-card"><div class="n">${s.knownRatio || 0}%</div><div class="l">نسبة السعوديين من البيانات المصنفة</div></div>
+    <div class="saud-card"><div class="n">${s.companyRatio || 0}%</div><div class="l">نسبة السعوديين على نطاق الشركة</div></div>
+    <div class="saud-card"><div class="n">${s.unknownCount || 0}</div><div class="l">موظفون بلا تصنيف جنسية</div></div>
+  `;
+}
+
 function dashboardMetrics(){
   const flat=flattenNodes(data.company);
   return {
@@ -1437,9 +2011,10 @@ function dashboardMetrics(){
     ownedStations: flat.filter(x=>x.node.station && (x.node.station_kind||x.node.stationType||'owned')==='owned').length,
     operatedStations: flat.filter(x=>x.node.station && (x.node.station_kind||x.node.stationType)==='operated').length,
     stationWorkers: countStationWorkers(data.company),
-    topCost: flat.filter(x=>(x.node.children||[]).length>0).map(x=>({name:x.node.name||'-',cost:computeCost(x.node),path:x.path.join(' › ')})).filter(x=>x.cost>0).sort((a,b)=>b.cost-a.cost).slice(0,5),
+    topCost: flat.filter(x=>isDepartmentCostCenter(x.node)).map(x=>({name:x.node.name||'-',cost:computeCost(x.node),path:x.path.join(' › ')})).filter(x=>x.cost>0).sort((a,b)=>b.cost-a.cost).slice(0,5),
     quality: analyzeDataQuality(),
-    meta: data.meta||{}
+    meta: data.meta||{},
+    saudization: saudizationStatsForNode(data.company)
   };
 }
 function analyzeDataQuality(){
@@ -1468,12 +2043,6 @@ function analyzeDataQuality(){
 initAppMenu('dashboard');
 function renderDashboard(){
   const m=dashboardMetrics();
-  const meta=m.meta||{};
-  document.getElementById('versionCard').innerHTML = `
-    <div><b>الإصدار:</b> ${meta.version || 'v1.0'}</div>
-    <div><b>آخر تحديث:</b> ${meta.lastUpdated || '-'}</div>
-    <div><b>ملاحظات:</b> ${meta.notes || ''}</div>
-  `;
   document.getElementById('dashboardGrid').innerHTML = `
     <div class="dash-metric"><div class="n">${m.allEmployees}</div><div class="l">عدد الموظفين ككل</div></div>
     <div class="dash-metric"><div class="n">${m.departments}</div><div class="l">الأقسام والإدارات</div></div>
@@ -1483,19 +2052,42 @@ function renderDashboard(){
     <div class="dash-metric"><div class="n">${m.operatedStations}</div><div class="l">المحطات المشغلة</div></div>
     <div class="dash-metric"><div class="n">${m.stationWorkers}</div><div class="l">عمال المحطات</div></div>
   `;
+  
+  
+  renderDashboardKpiVisual(m);
+renderSaudizationAnalytics(m);
   document.getElementById('topCostBranches').innerHTML = m.topCost.length ? m.topCost.map((b,i)=>`
     <div class="rank-item"><b>${i+1}. ${b.name}</b><span>${money(b.cost)}</span></div>
   `).join('') : '<div class="rank-item"><b>لا توجد بيانات تكلفة كافية</b><span>-</span></div>';
-
-  const errors=m.quality.filter(i=>i.level==='error').length;
-  const warnings=m.quality.filter(i=>i.level==='warning').length;
-  document.getElementById('qualitySummary').innerHTML = `
-    <div class="rank-item"><b>أخطاء</b><span>${errors}</span></div>
-    <div class="rank-item"><b>تحذيرات</b><span>${warnings}</span></div>
-    <div class="rank-item"><b>إجمالي الملاحظات</b><span>${m.quality.length}</span></div>
-  `;
 }
 renderDashboard();
+
+document.body.classList.add('dashboard-cost-hidden');
+const DASHBOARD_COST_ACCESS_CODE = '1234';
+const dashboardCostToggleBtn = document.getElementById('dashboardCostToggleBtn');
+function updateDashboardCostButton(){
+  if(!dashboardCostToggleBtn) return;
+  const hidden = document.body.classList.contains('dashboard-cost-hidden');
+  const label = dashboardCostToggleBtn.querySelector('.btn-label');
+  if(label) label.textContent = hidden ? 'إظهار التكلفة' : 'إخفاء التكلفة';
+  dashboardCostToggleBtn.title = hidden ? 'إظهار التكلفة' : 'إخفاء التكلفة';
+}
+dashboardCostToggleBtn?.addEventListener('click', () => {
+  const hidden = document.body.classList.contains('dashboard-cost-hidden');
+  if(hidden){
+    const code = prompt('أدخل رمز إظهار التكلفة');
+    if(code !== DASHBOARD_COST_ACCESS_CODE){
+      alert('الرمز غير صحيح');
+      return;
+    }
+    document.body.classList.remove('dashboard-cost-hidden');
+  }else{
+    document.body.classList.add('dashboard-cost-hidden');
+  }
+  updateDashboardCostButton();
+});
+updateDashboardCostButton();
+
 </script>
 </body>
 </html>
