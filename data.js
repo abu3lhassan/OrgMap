@@ -2,849 +2,3305 @@ const data = {
   "meta": {
     "version": "v1.0",
     "lastUpdated": "-",
-    "notes": "Dummy Data"
+    "notes": "Balanced rollback: old clean visual style with direct departments"
   },
   "company": {
-    "name": "الشركة",
+    "name": "مجلس الإدارة",
+    "subtitle": "Board of Directors",
+    "type": "company",
     "is_cost_center": false,
+    "layout": "vertical",
     "tone": "primary",
-    "image": "ologo.png",
+    "status": "active",
+    "notes": "أعلى الهرم",
     "children": [
       {
-        "name": "الادارة التنفيذية",
+        "name": "أعضاء مجلس الإدارة",
+        "subtitle": "Board Members",
+        "type": "division",
         "is_cost_center": false,
+        "layout": "horizontal",
         "tone": "secondary",
-        "type": "executive_root",
+        "status": "active",
+        "notes": "مجموعة أفقية لأعضاء المجلس",
         "children": [
           {
-            "name": "COO",
+            "name": "رئيس مجلس الإدارة",
+            "subtitle": "رئيس مجلس الإدارة",
+            "type": "employee",
             "is_cost_center": false,
-            "subtitle": "مدير العمليات",
-            "salary": 44000,
-            "tone": "vacant",
-            "layout": "vertical",
-            "children": [
-              {
-                "name": "المدراء الاقليميون",
-                "is_cost_center": false,
-                "tone": "secondary",
-                "layout": "horizontal",
-                "children": [
-                  {
-                    "name": "مدير اقليمي 1",
-                    "salary": 22000,
-                    "tone": "dark",
-                    "layout": "vertical",
-                    "children": [
-                      {
-                        "name": "مدراء المناطق",
-                        "is_cost_center": false,
-                        "tone": "dark",
-                        "layout": "horizontal",
-                        "children": [
-                          {
-                            "name": "مدير منطقة الرياض 1",
-                            "salary": 15000,
-                            "tone": "purple",
-                            "layout": "vertical",
-                            "children": [
-                              {
-                                "name": "مشرفو المحطات",
-                                "is_cost_center": false,
-                                "tone": "dark",
-                                "layout": "horizontal",
-                                "children": [
-                                  {
-                                    "name": "مشرف محطة الرياض 1",
-                                    "salary": 0,
-                                    "tone": "dark",
-                                    "layout": "vertical",
-                                    "children": [
-                                      {
-                                        "name": "محطة الرياض 1",
-                                        "subtitle": "Station",
-                                        "salary": 0,
-                                        "tone": "dark",
-                                        "layout": "vertical",
-                                        "station": true,
-                                        "station_workers": 8,
-                                        "children": [
-                                          {
-                                            "name": "مشرف محطة الرياض 1",
-                                            "subtitle": "Station Supervisor",
-                                            "salary": 7500,
-                                            "tone": "dark",
-                                            "children": []
-                                          },
-                                          {
-                                            "name": "عمالة المحطة",
-                                            "subtitle": "8 Staff",
-                                            "salary": 20500,
-                                            "tone": "dark",
-                                            "children": []
-                                          }
-                                        ]
-                                      }
-                                    ]
-                                  },
-                                  {
-                                    "name": "مشرف محطة الرياض 2",
-                                    "salary": 0,
-                                    "tone": "dark",
-                                    "layout": "vertical",
-                                    "children": [
-                                      {
-                                        "name": "محطة الرياض 2",
-                                        "subtitle": "Station",
-                                        "salary": 0,
-                                        "tone": "dark",
-                                        "layout": "vertical",
-                                        "station": true,
-                                        "station_workers": 9,
-                                        "children": [
-                                          {
-                                            "name": "مشرف محطة الرياض 2",
-                                            "subtitle": "Station Supervisor",
-                                            "salary": 7500,
-                                            "tone": "dark",
-                                            "children": []
-                                          },
-                                          {
-                                            "name": "عمالة المحطة",
-                                            "subtitle": "9 Staff",
-                                            "salary": 22000,
-                                            "tone": "dark",
-                                            "children": []
-                                          }
-                                        ]
-                                      }
-                                    ]
-                                  }
-                                ]
-                              }
-                            ]
-                          },
-                          {
-                            "name": "مدير منطقة الرياض 2",
-                            "salary": 15000,
-                            "tone": "purple",
-                            "layout": "vertical",
-                            "children": [
-                              {
-                                "name": "مشرفو المحطات",
-                                "tone": "dark",
-                                "layout": "horizontal",
-                                "children": [
-                                  {
-                                    "name": "مشرف محطة الخرج",
-                                    "salary": 0,
-                                    "tone": "dark",
-                                    "layout": "vertical",
-                                    "children": [
-                                      {
-                                        "name": "محطة الخرج",
-                                        "subtitle": "Station",
-                                        "salary": 27000,
-                                        "tone": "dark",
-                                        "layout": "vertical",
-                                        "station": true,
-                                        "station_workers": 7,
-                                        "children": [
-                                          {
-                                            "name": "عمالة المحطة",
-                                            "subtitle": "7 Staff",
-                                            "salary": 19500,
-                                            "tone": "dark",
-                                            "children": []
-                                          }
-                                        ]
-                                      }
-                                    ]
-                                  },
-                                  {
-                                    "name": "مشرف محطة الدوادمي",
-                                    "salary": 0,
-                                    "tone": "dark",
-                                    "layout": "vertical",
-                                    "children": [
-                                      {
-                                        "name": "محطة الدوادمي",
-                                        "subtitle": "Station",
-                                        "salary": 26500,
-                                        "tone": "dark",
-                                        "layout": "vertical",
-                                        "station": true,
-                                        "station_workers": 7,
-                                        "children": [
-                                          {
-                                            "name": "عمالة المحطة",
-                                            "subtitle": "7 Staff",
-                                            "salary": 19000,
-                                            "tone": "dark",
-                                            "children": []
-                                          }
-                                        ]
-                                      }
-                                    ]
-                                  }
-                                ]
-                              }
-                            ]
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "name": "مدير اقليمي 2",
-                    "salary": 22000,
-                    "tone": "dark",
-                    "layout": "vertical",
-                    "children": [
-                      {
-                        "name": "مدراء المناطق",
-                        "tone": "dark",
-                        "layout": "horizontal",
-                        "children": [
-                          {
-                            "name": "مدير منطقة جدة",
-                            "salary": 15000,
-                            "tone": "purple",
-                            "layout": "vertical",
-                            "children": [
-                              {
-                                "name": "مشرفو المحطات",
-                                "tone": "dark",
-                                "layout": "horizontal",
-                                "children": [
-                                  {
-                                    "name": "مشرف محطة جدة 1",
-                                    "salary": 0,
-                                    "tone": "dark",
-                                    "layout": "vertical",
-                                    "children": [
-                                      {
-                                        "name": "محطة جدة 1",
-                                        "subtitle": "Station",
-                                        "salary": 30000,
-                                        "tone": "dark",
-                                        "layout": "vertical",
-                                        "station": true,
-                                        "station_workers": 8,
-                                        "children": [
-                                          {
-                                            "name": "عمالة المحطة",
-                                            "subtitle": "8 Staff",
-                                            "salary": 21500,
-                                            "tone": "dark",
-                                            "children": []
-                                          }
-                                        ]
-                                      }
-                                    ]
-                                  },
-                                  {
-                                    "name": "مشرف محطة جدة 2",
-                                    "salary": 0,
-                                    "tone": "dark",
-                                    "layout": "vertical",
-                                    "children": [
-                                      {
-                                        "name": "محطة جدة 2",
-                                        "subtitle": "Station",
-                                        "salary": 32000,
-                                        "tone": "dark",
-                                        "layout": "vertical",
-                                        "station": true,
-                                        "station_workers": 9,
-                                        "children": [
-                                          {
-                                            "name": "عمالة المحطة",
-                                            "subtitle": "9 Staff",
-                                            "salary": 23000,
-                                            "tone": "dark",
-                                            "children": []
-                                          }
-                                        ]
-                                      }
-                                    ]
-                                  }
-                                ]
-                              }
-                            ]
-                          },
-                          {
-                            "name": "مدير منطقة مكة",
-                            "salary": 15000,
-                            "tone": "purple",
-                            "layout": "vertical",
-                            "children": [
-                              {
-                                "name": "مشرفو المحطات",
-                                "tone": "dark",
-                                "layout": "horizontal",
-                                "children": [
-                                  {
-                                    "name": "مشرف محطة مكة 1",
-                                    "salary": 0,
-                                    "tone": "dark",
-                                    "layout": "vertical",
-                                    "children": [
-                                      {
-                                        "name": "محطة مكة 1",
-                                        "subtitle": "Station",
-                                        "salary": 29000,
-                                        "tone": "dark",
-                                        "layout": "vertical",
-                                        "station": true,
-                                        "station_workers": 8,
-                                        "children": [
-                                          {
-                                            "name": "عمالة المحطة",
-                                            "subtitle": "8 Staff",
-                                            "salary": 21000,
-                                            "tone": "dark",
-                                            "children": []
-                                          }
-                                        ]
-                                      }
-                                    ]
-                                  },
-                                  {
-                                    "name": "مشرف محطة مكة 2",
-                                    "salary": 0,
-                                    "tone": "dark",
-                                    "layout": "vertical",
-                                    "children": [
-                                      {
-                                        "name": "محطة مكة 2",
-                                        "subtitle": "Station",
-                                        "salary": 31000,
-                                        "tone": "dark",
-                                        "layout": "vertical",
-                                        "station": true,
-                                        "station_workers": 9,
-                                        "children": [
-                                          {
-                                            "name": "عمالة المحطة",
-                                            "subtitle": "9 Staff",
-                                            "salary": 22500,
-                                            "tone": "dark",
-                                            "children": []
-                                          }
-                                        ]
-                                      }
-                                    ]
-                                  }
-                                ]
-                              }
-                            ]
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "name": "مدير اقليمي 3",
-                    "salary": 22000,
-                    "tone": "dark",
-                    "layout": "vertical",
-                    "children": [
-                      {
-                        "name": "مدراء المناطق",
-                        "tone": "dark",
-                        "layout": "horizontal",
-                        "children": [
-                          {
-                            "name": "مدير منطقة الشرقية",
-                            "salary": 15000,
-                            "tone": "purple",
-                            "layout": "vertical",
-                            "children": [
-                              {
-                                "name": "مشرفو المحطات",
-                                "tone": "dark",
-                                "layout": "horizontal",
-                                "children": [
-                                  {
-                                    "name": "مشرف محطة الدمام 1",
-                                    "salary": 0,
-                                    "tone": "dark",
-                                    "layout": "vertical",
-                                    "children": [
-                                      {
-                                        "name": "محطة الدمام 1",
-                                        "subtitle": "Station",
-                                        "salary": 32000,
-                                        "tone": "dark",
-                                        "layout": "vertical",
-                                        "station": true,
-                                        "station_workers": 9,
-                                        "children": [
-                                          {
-                                            "name": "عمالة المحطة",
-                                            "subtitle": "9 Staff",
-                                            "salary": 23000,
-                                            "tone": "dark",
-                                            "children": []
-                                          }
-                                        ]
-                                      }
-                                    ]
-                                  },
-                                  {
-                                    "name": "مشرف محطة الخبر 1",
-                                    "salary": 0,
-                                    "tone": "dark",
-                                    "layout": "vertical",
-                                    "children": [
-                                      {
-                                        "name": "محطة الخبر 1",
-                                        "subtitle": "Station",
-                                        "salary": 30000,
-                                        "tone": "dark",
-                                        "layout": "vertical",
-                                        "station": true,
-                                        "station_workers": 8,
-                                        "children": [
-                                          {
-                                            "name": "عمالة المحطة",
-                                            "subtitle": "8 Staff",
-                                            "salary": 21500,
-                                            "tone": "dark",
-                                            "children": []
-                                          }
-                                        ]
-                                      }
-                                    ]
-                                  }
-                                ]
-                              }
-                            ]
-                          },
-                          {
-                            "name": "مدير منطقة القصيم",
-                            "salary": 15000,
-                            "tone": "purple",
-                            "layout": "vertical",
-                            "children": [
-                              {
-                                "name": "مشرفو المحطات",
-                                "tone": "dark",
-                                "layout": "horizontal",
-                                "children": [
-                                  {
-                                    "name": "مشرف محطة بريدة",
-                                    "salary": 0,
-                                    "tone": "dark",
-                                    "layout": "vertical",
-                                    "children": [
-                                      {
-                                        "name": "محطة بريدة",
-                                        "subtitle": "Station",
-                                        "salary": 27500,
-                                        "tone": "dark",
-                                        "layout": "vertical",
-                                        "station": true,
-                                        "station_workers": 7,
-                                        "children": [
-                                          {
-                                            "name": "عمالة المحطة",
-                                            "subtitle": "7 Staff",
-                                            "salary": 19500,
-                                            "tone": "dark",
-                                            "children": []
-                                          }
-                                        ]
-                                      }
-                                    ]
-                                  },
-                                  {
-                                    "name": "مشرف محطة عنيزة",
-                                    "salary": 0,
-                                    "tone": "dark",
-                                    "layout": "vertical",
-                                    "children": [
-                                      {
-                                        "name": "محطة عنيزة",
-                                        "subtitle": "Station",
-                                        "salary": 26500,
-                                        "tone": "dark",
-                                        "layout": "vertical",
-                                        "station": true,
-                                        "station_workers": 7,
-                                        "children": [
-                                          {
-                                            "name": "عمالة المحطة",
-                                            "subtitle": "7 Staff",
-                                            "salary": 19000,
-                                            "tone": "dark",
-                                            "children": []
-                                          }
-                                        ]
-                                      }
-                                    ]
-                                  }
-                                ]
-                              }
-                            ]
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "name": "CFO",
-            "is_cost_center": false,
-            "subtitle": "المدير المالي",
-            "salary": 38000,
-            "tone": "warning",
-            "layout": "vertical",
-            "children": [
-              {
-                "name": "المالية والمحاسبة",
-                "is_cost_center": true,
-                "tone": "warning",
-                "layout": "vertical",
-                "children": [
-                  {
-                    "name": "كبير المحاسبين",
-                    "salary": 20000,
-                    "tone": "dark",
-                    "layout": "horizontal",
-                    "children": [
-                      {
-                        "name": "محاسب 1",
-                        "subtitle": "Accountant",
-                        "salary": 9000,
-                        "tone": "dark",
-                        "children": []
-                      },
-                      {
-                        "name": "محاسب 2",
-                        "subtitle": "Accountant",
-                        "salary": 9000,
-                        "tone": "dark",
-                        "children": []
-                      },
-                      {
-                        "name": "محاسب 3",
-                        "subtitle": "Accountant",
-                        "salary": 9000,
-                        "tone": "dark",
-                        "children": []
-                      }
-                    ]
-                  },
-                  {
-                    "name": "الرواتب",
-                    "is_cost_center": true,
-                    "tone": "dark",
-                    "layout": "horizontal",
-                    "children": [
-                      {
-                        "name": "مسؤول رواتب",
-                        "subtitle": "Payroll Officer",
-                        "salary": 10500,
-                        "tone": "dark",
-                        "children": []
-                      },
-                      {
-                        "name": "مساعد رواتب",
-                        "subtitle": "Payroll Assistant",
-                        "salary": 7500,
-                        "tone": "dark",
-                        "children": []
-                      }
-                    ]
-                  },
-                  {
-                    "name": "الخزينة",
-                    "is_cost_center": true,
-                    "tone": "dark",
-                    "layout": "vertical",
-                    "children": [
-                      {
-                        "name": "أمين صندوق",
-                        "subtitle": "Treasury Officer",
-                        "salary": 9000,
-                        "tone": "dark",
-                        "children": []
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "name": "CEO",
-            "is_cost_center": false,
-            "subtitle": "المدير التنفيذي",
-            "salary": 52000,
-            "tone": "primary",
             "layout": "horizontal",
+            "tone": "secondary",
+            "status": "active",
+            "children": []
+          },
+          {
+            "name": "نائب رئيس مجلس الإدارة",
+            "subtitle": "نائب رئيس مجلس الإدارة",
+            "type": "employee",
+            "is_cost_center": false,
+            "layout": "horizontal",
+            "tone": "secondary",
+            "status": "active",
+            "children": []
+          },
+          {
+            "name": "عضو مجلس الإدارة 1",
+            "subtitle": "عضو",
+            "type": "employee",
+            "is_cost_center": false,
+            "layout": "horizontal",
+            "tone": "secondary",
+            "status": "active",
+            "children": []
+          },
+          {
+            "name": "عضو مجلس الإدارة 2",
+            "subtitle": "عضو",
+            "type": "employee",
+            "is_cost_center": false,
+            "layout": "horizontal",
+            "tone": "secondary",
+            "status": "active",
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "الشركة",
+        "subtitle": "Company",
+        "type": "division",
+        "is_cost_center": false,
+        "layout": "vertical",
+        "tone": "primary",
+        "status": "active",
+        "image": "ologo.png",
+        "notes": "تحت مجلس الإدارة",
+        "children": [
+          {
+            "name": "الإدارة التنفيذية",
+            "subtitle": "Executive Management",
+            "type": "executive_root",
+            "is_cost_center": false,
+            "layout": "vertical",
+            "tone": "secondary",
+            "status": "active",
+            "notes": "تحت الشركة مباشرة؛ CEO فوق الإدارات.",
             "children": [
               {
-                "name": "ادارة الموارد البشرية",
-                "is_cost_center": true,
-                "tone": "dark",
-                "layout": "vertical",
+                "name": "عبدالعزيز البراك",
+                "subtitle": "الرئيس التنفيذي CEO",
+                "type": "c_level",
+                "is_cost_center": false,
+                "layout": "horizontal",
+                "tone": "primary",
+                "status": "active",
+                "notes": "عضو مجلس الإدارة - رئيس تنفيذي. تحته CFO و COO والإدارات مباشرة بدون أدوار C-Level إضافية.",
                 "children": [
                   {
-                    "name": "مدير الموارد البشرية",
-                    "salary": 22000,
-                    "tone": "purple",
-                    "layout": "horizontal",
+                    "name": "CFO",
+                    "subtitle": "الرئيس المالي",
+                    "type": "c_level",
+                    "is_cost_center": false,
+                    "layout": "vertical",
+                    "tone": "warning",
+                    "status": "active",
+                    "notes": "تحت CEO؛ تحته الإدارة المالية",
                     "children": [
                       {
-                        "name": "ادارة الخدمات المساندة",
+                        "name": "الإدارة المالية",
+                        "subtitle": "Finance Dept",
+                        "type": "department",
                         "is_cost_center": true,
-                        "tone": "dark",
                         "layout": "vertical",
+                        "tone": "dark",
+                        "status": "active",
+                        "notes": "تحت CFO؛ المدير ثم الموظفون أفقيًا",
                         "children": [
                           {
-                            "name": "مدير الخدمات المساندة",
-                            "subtitle": "Support Services Manager",
-                            "salary": 15000,
-                            "tone": "dark",
-                            "children": []
-                          },
-                          {
-                            "name": "منسق خدمات",
-                            "subtitle": "Support Coordinator",
-                            "salary": 8000,
-                            "tone": "dark",
-                            "children": []
-                          },
-                          {
-                            "name": "موظف خدمات مساندة",
-                            "subtitle": "Officer",
-                            "salary": 7000,
-                            "tone": "dark",
-                            "children": []
-                          }
-                        ]
-                      },
-                      {
-                        "name": "ادارة خدمة العملاء",
-                        "is_cost_center": true,
-                        "tone": "dark",
-                        "layout": "vertical",
-                        "children": [
-                          {
-                            "name": "مدير خدمة العملاء",
-                            "subtitle": "Customer Service Manager",
-                            "salary": 15000,
-                            "tone": "dark",
-                            "children": []
-                          },
-                          {
-                            "name": "ممثل خدمة عملاء 1",
-                            "subtitle": "Customer Service Officer",
-                            "salary": 7500,
-                            "tone": "dark",
-                            "children": []
-                          },
-                          {
-                            "name": "ممثل خدمة عملاء 2",
-                            "subtitle": "Customer Service Officer",
-                            "salary": 7500,
-                            "tone": "dark",
-                            "children": []
-                          }
-                        ]
-                      },
-                      {
-                        "name": "موظفو الموارد البشرية",
-                        "is_cost_center": true,
-                        "tone": "dark",
-                        "layout": "vertical",
-                        "children": [
-                          {
-                            "name": "أخصائي موارد بشرية 1",
-                            "subtitle": "HR Officer",
-                            "salary": 9000,
-                            "tone": "dark",
-                            "children": []
-                          },
-                          {
-                            "name": "أخصائي موارد بشرية 2",
-                            "subtitle": "HR Officer",
-                            "salary": 9000,
-                            "tone": "dark",
-                            "children": []
-                          },
-                          {
-                            "name": "مسؤول شؤون موظفين",
-                            "subtitle": "Personnel Officer",
-                            "salary": 8500,
-                            "tone": "dark",
-                            "children": []
-                          }
-                        ]
-                      }
-                    ],
-                    "type": "employee",
-                    "nationality_group": "saudi",
-                    "status": "active"
-                  }
-                ]
-              },
-              {
-                "name": "ادارة تقنية المعلومات",
-                "is_cost_center": true,
-                "tone": "dark",
-                "layout": "vertical",
-                "children": [
-                  {
-                    "name": "مدير تقنية المعلومات",
-                    "salary": 24000,
-                    "tone": "purple",
-                    "layout": "horizontal",
-                    "children": [
-                      {
-                        "name": "قسم الدعم الفني",
-                        "is_cost_center": true,
-                        "tone": "dark",
-                        "layout": "vertical",
-                        "children": [
-                          {
-                            "name": "رئيس الدعم الفني",
-                            "subtitle": "Support Lead",
-                            "salary": 12000,
-                            "tone": "dark",
-                            "layout": "vertical",
+                            "name": "المدير المالي",
+                            "subtitle": "Finance Director",
+                            "type": "manager",
+                            "is_cost_center": false,
+                            "layout": "horizontal",
+                            "tone": "purple",
+                            "status": "active",
+                            "notes": "مدير الإدارة؛ الموظفون تحته أفقيًا",
                             "children": [
                               {
-                                "name": "تجربة",
-                                "subtitle": "موظف تجربة",
+                                "name": "موظف 1 - المالية",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
                                 "type": "employee",
-                                "salary": 4000,
-                                "tone": "dark",
+                                "is_cost_center": false,
                                 "layout": "vertical",
+                                "tone": "dark",
                                 "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              },
+                              {
+                                "name": "موظف 2 - المالية",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              },
+                              {
+                                "name": "موظف 3 - المالية",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
                                 "children": []
                               }
                             ]
-                          },
-                          {
-                            "name": "فني دعم 1",
-                            "subtitle": "Support Technician",
-                            "salary": 8000,
-                            "tone": "dark",
-                            "children": [],
-                            "type": "employee",
-                            "nationality_group": "saudi",
-                            "layout": "vertical",
-                            "status": "active"
-                          },
-                          {
-                            "name": "فني دعم 2",
-                            "subtitle": "Support Technician",
-                            "salary": 8000,
-                            "tone": "dark",
-                            "children": []
-                          }
-                        ]
-                      },
-                      {
-                        "name": "قسم كاميرات المراقبة",
-                        "is_cost_center": true,
-                        "tone": "dark",
-                        "layout": "vertical",
-                        "children": [
-                          {
-                            "name": "مشرف CCTV",
-                            "subtitle": "CCTV Supervisor",
-                            "salary": 11500,
-                            "tone": "dark",
-                            "children": []
-                          },
-                          {
-                            "name": "فني كاميرات 1",
-                            "subtitle": "CCTV Technician",
-                            "salary": 7500,
-                            "tone": "dark",
-                            "children": []
-                          },
-                          {
-                            "name": "فني كاميرات 2",
-                            "subtitle": "CCTV Technician",
-                            "salary": 7500,
-                            "tone": "dark",
-                            "children": []
-                          }
-                        ]
-                      },
-                      {
-                        "name": "قسم البنية التحتية والأنظمة",
-                        "is_cost_center": true,
-                        "tone": "dark",
-                        "layout": "vertical",
-                        "children": [
-                          {
-                            "name": "مهندس أنظمة",
-                            "subtitle": "Systems Engineer",
-                            "salary": 14000,
-                            "tone": "dark",
-                            "children": []
-                          },
-                          {
-                            "name": "مسؤول شبكات",
-                            "subtitle": "Network Administrator",
-                            "salary": 12000,
-                            "tone": "dark",
-                            "children": []
                           }
                         ]
                       }
-                    ],
-                    "subtitle": "مدير تقنية المعلومات",
-                    "type": "employee",
-                    "nationality_group": "saudi",
-                    "status": "active"
-                  }
-                ]
-              },
-              {
-                "name": "قسم المشتريات",
-                "is_cost_center": true,
-                "tone": "dark",
-                "layout": "vertical",
-                "children": [
+                    ]
+                  },
                   {
-                    "name": "مدير المشتريات",
-                    "salary": 18000,
-                    "tone": "purple",
-                    "layout": "horizontal",
+                    "name": "COO - شاغر",
+                    "subtitle": "رئيس العمليات التنفيذي",
+                    "type": "c_level",
+                    "is_cost_center": false,
+                    "layout": "vertical",
+                    "tone": "vacant",
+                    "status": "vacant",
+                    "notes": "تحت CEO؛ منصب شاغر، وتحته التشغيل والمدراء الإقليميون والمحطات",
                     "children": [
                       {
-                        "name": "أخصائي مشتريات 1",
-                        "subtitle": "Procurement Officer",
-                        "salary": 8500,
+                        "name": "إدارة العمليات",
+                        "subtitle": "Operations",
+                        "type": "department",
+                        "is_cost_center": true,
+                        "layout": "vertical",
                         "tone": "dark",
-                        "children": []
+                        "status": "active",
+                        "notes": "تحت COO؛ مدير العمليات ثم موظفون أفقيًا",
+                        "children": [
+                          {
+                            "name": "مدير العمليات / الافتتاحات",
+                            "subtitle": "Operations / Openings Manager",
+                            "type": "manager",
+                            "is_cost_center": false,
+                            "layout": "horizontal",
+                            "tone": "vacant",
+                            "status": "vacant",
+                            "notes": "منصب شاغر؛ الموظفون تحته أفقيًا",
+                            "children": [
+                              {
+                                "name": "موظف 1 - العمليات",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              },
+                              {
+                                "name": "موظف 2 - العمليات",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
                       },
                       {
-                        "name": "أخصائي مشتريات 2",
-                        "subtitle": "Procurement Officer",
-                        "salary": 8500,
+                        "name": "المدراء الإقليميون",
+                        "subtitle": "Regional Managers",
+                        "type": "division",
+                        "is_cost_center": false,
+                        "layout": "horizontal",
+                        "tone": "secondary",
+                        "status": "active",
+                        "notes": "مجموعة عرض للمدراء الإقليميين تحت COO",
+                        "children": [
+                          {
+                            "name": "مدير إقليمي - الرياض",
+                            "subtitle": "Regional Manager - الرياض",
+                            "type": "regional_manager",
+                            "is_cost_center": false,
+                            "layout": "horizontal",
+                            "tone": "purple",
+                            "status": "active",
+                            "notes": "مدراء المناطق تحته أفقيًا",
+                            "children": [
+                              {
+                                "name": "مدير منطقة الرياض 1",
+                                "subtitle": "مدير منطقة",
+                                "type": "area_manager",
+                                "is_cost_center": false,
+                                "layout": "horizontal",
+                                "tone": "purple",
+                                "status": "active",
+                                "notes": "مدير منطقة؛ المحطات تحته أفقيًا",
+                                "children": [
+                                  {
+                                    "name": "AJZALA",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة AJZALA",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - AJZALA",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - AJZALA",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "OWEMER",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة OWEMER",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - OWEMER",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - OWEMER",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "TWAIQ",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة TWAIQ",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - TWAIQ",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - TWAIQ",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "ZEER",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة ZEER",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - ZEER",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - ZEER",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "MAWEED",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة MAWEED",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - MAWEED",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - MAWEED",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "ABA ALKHEL",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة ABA ALKHEL",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - ABA ALKHEL",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - ABA ALKHEL",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "ABU BKER",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة ABU BKER",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - ABU BKER",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - ABU BKER",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "Al Araid 1",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة Al Araid 1",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - Al Araid 1",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - Al Araid 1",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "مدير منطقة الرياض 2",
+                                "subtitle": "مدير منطقة",
+                                "type": "area_manager",
+                                "is_cost_center": false,
+                                "layout": "horizontal",
+                                "tone": "purple",
+                                "status": "active",
+                                "notes": "مدير منطقة؛ المحطات تحته أفقيًا",
+                                "children": [
+                                  {
+                                    "name": "RAYA",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة RAYA",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - RAYA",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - RAYA",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "SADDI",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة SADDI",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - SADDI",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - SADDI",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "SAHLA",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة SAHLA",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - SAHLA",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - SAHLA",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "LABAN",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة LABAN",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - LABAN",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - LABAN",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "HWEDI",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة HWEDI",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - HWEDI",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - HWEDI",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "MANSORA",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة MANSORA",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - MANSORA",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - MANSORA",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "NASSEM",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة NASSEM",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - NASSEM",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - NASSEM",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "Al Araid 2",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة Al Araid 2",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - Al Araid 2",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - Al Araid 2",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "name": "مدير إقليمي - الشرقية",
+                            "subtitle": "Regional Manager - الشرقية",
+                            "type": "regional_manager",
+                            "is_cost_center": false,
+                            "layout": "horizontal",
+                            "tone": "purple",
+                            "status": "active",
+                            "notes": "مدراء المناطق تحته أفقيًا",
+                            "children": [
+                              {
+                                "name": "مدير منطقة الشرقية 1",
+                                "subtitle": "مدير منطقة",
+                                "type": "area_manager",
+                                "is_cost_center": false,
+                                "layout": "horizontal",
+                                "tone": "purple",
+                                "status": "active",
+                                "notes": "مدير منطقة؛ المحطات تحته أفقيًا",
+                                "children": [
+                                  {
+                                    "name": "HAMADI",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة HAMADI",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - HAMADI",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - HAMADI",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "AZIZYA -1",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة AZIZYA -1",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - AZIZYA -1",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - AZIZYA -1",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "ASKAR",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة ASKAR",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - ASKAR",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - ASKAR",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "UM AL-SAHIK",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة UM AL-SAHIK",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - UM AL-SAHIK",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - UM AL-SAHIK",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "SIHAT",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة SIHAT",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - SIHAT",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - SIHAT",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "MUBARKYAH",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة MUBARKYAH",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - MUBARKYAH",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - MUBARKYAH",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "SALASL 1",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة SALASL 1",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - SALASL 1",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - SALASL 1",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "RABIYA & NASAAR",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة RABIYA & NASAAR",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - RABIYA & NASAAR",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - RABIYA & NASAAR",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "MASHRGEEN",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة MASHRGEEN",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - MASHRGEEN",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - MASHRGEEN",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "RAKA",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة RAKA",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - RAKA",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - RAKA",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "مدير منطقة الشرقية 2",
+                                "subtitle": "مدير منطقة",
+                                "type": "area_manager",
+                                "is_cost_center": false,
+                                "layout": "horizontal",
+                                "tone": "purple",
+                                "status": "active",
+                                "notes": "مدير منطقة؛ المحطات تحته أفقيًا",
+                                "children": [
+                                  {
+                                    "name": "SUMAAN",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة SUMAAN",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - SUMAAN",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - SUMAAN",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "AZIZYA -2",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة AZIZYA -2",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - AZIZYA -2",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - AZIZYA -2",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "FAISALYAH",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة FAISALYAH",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - FAISALYAH",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - FAISALYAH",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "JUBAIL-1",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة JUBAIL-1",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - JUBAIL-1",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - JUBAIL-1",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "GHADEER",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة GHADEER",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - GHADEER",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - GHADEER",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "SHATI",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة SHATI",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - SHATI",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - SHATI",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "SALASL 2",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة SALASL 2",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - SALASL 2",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - SALASL 2",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "YARMOUK",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة YARMOUK",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - YARMOUK",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - YARMOUK",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "JASSER",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة JASSER",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - JASSER",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - JASSER",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "REZEZA",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة REZEZA",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - REZEZA",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - REZEZA",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "مدير منطقة الشرقية 3",
+                                "subtitle": "مدير منطقة",
+                                "type": "area_manager",
+                                "is_cost_center": false,
+                                "layout": "horizontal",
+                                "tone": "purple",
+                                "status": "active",
+                                "notes": "مدير منطقة؛ المحطات تحته أفقيًا",
+                                "children": [
+                                  {
+                                    "name": "KHAWARZME",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة KHAWARZME",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - KHAWARZME",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - KHAWARZME",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "SHADGEM",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة SHADGEM",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - SHADGEM",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - SHADGEM",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "KHATHLAN",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة KHATHLAN",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - KHATHLAN",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - KHATHLAN",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "JUBAIL-2",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة JUBAIL-2",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - JUBAIL-2",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - JUBAIL-2",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "KHUDARYAH",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة KHUDARYAH",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - KHUDARYAH",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - KHUDARYAH",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "ZOHOR",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة ZOHOR",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - ZOHOR",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - ZOHOR",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "DANA",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة DANA",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - DANA",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - DANA",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "AJYAD",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة AJYAD",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - AJYAD",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - AJYAD",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "SEEF",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة SEEF",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - SEEF",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - SEEF",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "name": "مدير إقليمي - الغربية",
+                            "subtitle": "Regional Manager - الغربية",
+                            "type": "regional_manager",
+                            "is_cost_center": false,
+                            "layout": "horizontal",
+                            "tone": "purple",
+                            "status": "active",
+                            "notes": "مدراء المناطق تحته أفقيًا",
+                            "children": [
+                              {
+                                "name": "مدير منطقة الغربية 1",
+                                "subtitle": "مدير منطقة",
+                                "type": "area_manager",
+                                "is_cost_center": false,
+                                "layout": "horizontal",
+                                "tone": "purple",
+                                "status": "active",
+                                "notes": "مدير منطقة؛ المحطات تحته أفقيًا",
+                                "children": [
+                                  {
+                                    "name": "Saddi Madinh",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة Saddi Madinh",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - Saddi Madinh",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - Saddi Madinh",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "Al Rahily",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة Al Rahily",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - Al Rahily",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - Al Rahily",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "Jabri",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة Jabri",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - Jabri",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - Jabri",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "Yabs",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة Yabs",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - Yabs",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - Yabs",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "Tabaa sarea'a",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة Tabaa sarea'a",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - Tabaa sarea'a",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - Tabaa sarea'a",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "All Hail",
+                                    "subtitle": "Station",
+                                    "type": "station",
+                                    "station": true,
+                                    "is_cost_center": false,
+                                    "salary": 0,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "children": [
+                                      {
+                                        "name": "مشرف محطة All Hail",
+                                        "subtitle": "مشرف محطة",
+                                        "type": "station_supervisor",
+                                        "is_cost_center": false,
+                                        "layout": "horizontal",
+                                        "tone": "dark",
+                                        "status": "active",
+                                        "notes": "Placeholder؛ عدّل الاسم والبيانات لاحقًا",
+                                        "children": [
+                                          {
+                                            "name": "عامل 1 - All Hail",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "عامل 2 - All Hail",
+                                            "subtitle": "عامل محطة",
+                                            "type": "worker",
+                                            "is_cost_center": false,
+                                            "layout": "vertical",
+                                            "tone": "dark",
+                                            "status": "active",
+                                            "notes": "Placeholder",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "جميع الإدارات",
+                    "subtitle": "All Departments",
+                    "type": "division",
+                    "is_cost_center": false,
+                    "layout": "horizontal",
+                    "tone": "secondary",
+                    "status": "active",
+                    "notes": "كونتينر بصري يجمع الإدارات التي لا تحتاج C-Level Director",
+                    "children": [
+                      {
+                        "name": "إدارة الخدمات المساندة",
+                        "subtitle": "Support Services Department",
+                        "type": "department",
+                        "is_cost_center": true,
+                        "layout": "horizontal",
                         "tone": "dark",
-                        "children": []
+                        "status": "active",
+                        "notes": "تحت C-Level المسؤول؛ الأقسام تظهر أفقيًا",
+                        "children": [
+                          {
+                            "name": "قسم الموارد البشرية",
+                            "subtitle": "HR Department",
+                            "type": "division",
+                            "is_cost_center": true,
+                            "layout": "horizontal",
+                            "tone": "dark",
+                            "status": "active",
+                            "notes": "تحت إدارة الخدمات المساندة",
+                            "children": [
+                              {
+                                "name": "مدير الموارد البشرية",
+                                "subtitle": "HR Manager - شاغر",
+                                "type": "manager",
+                                "is_cost_center": false,
+                                "layout": "horizontal",
+                                "tone": "vacant",
+                                "status": "vacant",
+                                "notes": "منصب شاغر؛ الموظفون تحته أفقيًا",
+                                "children": [
+                                  {
+                                    "name": "موظف 1 - الموارد البشرية",
+                                    "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                    "type": "employee",
+                                    "is_cost_center": false,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "Placeholder",
+                                    "children": []
+                                  },
+                                  {
+                                    "name": "موظف 2 - الموارد البشرية",
+                                    "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                    "type": "employee",
+                                    "is_cost_center": false,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "Placeholder",
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "name": "قسم خدمة العملاء",
+                            "subtitle": "Customer Service",
+                            "type": "division",
+                            "is_cost_center": true,
+                            "layout": "horizontal",
+                            "tone": "dark",
+                            "status": "active",
+                            "notes": "تحت إدارة الخدمات المساندة",
+                            "children": [
+                              {
+                                "name": "مسؤول خدمة العملاء",
+                                "subtitle": "Customer Service Lead - شاغر",
+                                "type": "manager",
+                                "is_cost_center": false,
+                                "layout": "horizontal",
+                                "tone": "vacant",
+                                "status": "vacant",
+                                "notes": "منصب شاغر؛ الموظفون تحته أفقيًا",
+                                "children": [
+                                  {
+                                    "name": "موظف 1 - خدمة العملاء",
+                                    "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                    "type": "employee",
+                                    "is_cost_center": false,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "Placeholder",
+                                    "children": []
+                                  },
+                                  {
+                                    "name": "موظف 2 - خدمة العملاء",
+                                    "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                    "type": "employee",
+                                    "is_cost_center": false,
+                                    "layout": "vertical",
+                                    "tone": "dark",
+                                    "status": "active",
+                                    "notes": "Placeholder",
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "name": "إدارة تطوير الأعمال",
+                        "subtitle": "Development Dept",
+                        "type": "department",
+                        "is_cost_center": true,
+                        "layout": "vertical",
+                        "tone": "dark",
+                        "status": "active",
+                        "notes": "تحت C-Level المسؤول؛ مدير الإدارة ثم الموظفون أفقيًا",
+                        "children": [
+                          {
+                            "name": "مدير تطوير الأعمال",
+                            "subtitle": "Business Development Manager",
+                            "type": "manager",
+                            "is_cost_center": false,
+                            "layout": "horizontal",
+                            "tone": "purple",
+                            "status": "active",
+                            "notes": "مدير الإدارة؛ الموظفون تحته أفقيًا",
+                            "children": [
+                              {
+                                "name": "موظف 1 - تطوير الأعمال",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              },
+                              {
+                                "name": "موظف 2 - تطوير الأعمال",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "name": "إدارة تقنية المعلومات",
+                        "subtitle": "IT Dept",
+                        "type": "department",
+                        "is_cost_center": true,
+                        "layout": "vertical",
+                        "tone": "dark",
+                        "status": "active",
+                        "notes": "تحت C-Level المسؤول؛ مدير الإدارة ثم الموظفون أفقيًا",
+                        "children": [
+                          {
+                            "name": "مدير تقنية المعلومات",
+                            "subtitle": "IT Manager",
+                            "type": "manager",
+                            "is_cost_center": false,
+                            "layout": "horizontal",
+                            "tone": "purple",
+                            "status": "active",
+                            "notes": "مدير الإدارة؛ الموظفون تحته أفقيًا",
+                            "children": [
+                              {
+                                "name": "موظف 1 - تقنية المعلومات",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              },
+                              {
+                                "name": "موظف 2 - تقنية المعلومات",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "name": "إدارة المشاريع",
+                        "subtitle": "Project Dept",
+                        "type": "department",
+                        "is_cost_center": true,
+                        "layout": "vertical",
+                        "tone": "dark",
+                        "status": "active",
+                        "notes": "تحت C-Level المسؤول؛ مدير الإدارة ثم الموظفون أفقيًا",
+                        "children": [
+                          {
+                            "name": "مدير المشاريع",
+                            "subtitle": "Project Manager",
+                            "type": "manager",
+                            "is_cost_center": false,
+                            "layout": "horizontal",
+                            "tone": "purple",
+                            "status": "active",
+                            "notes": "مدير الإدارة؛ الموظفون تحته أفقيًا",
+                            "children": [
+                              {
+                                "name": "موظف 1 - المشاريع",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              },
+                              {
+                                "name": "موظف 2 - المشاريع",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              },
+                              {
+                                "name": "موظف 3 - المشاريع",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "name": "إدارة المشتريات",
+                        "subtitle": "Procurement Dept",
+                        "type": "department",
+                        "is_cost_center": true,
+                        "layout": "vertical",
+                        "tone": "dark",
+                        "status": "active",
+                        "notes": "تحت C-Level المسؤول؛ مدير الإدارة ثم الموظفون أفقيًا",
+                        "children": [
+                          {
+                            "name": "مدير المشتريات",
+                            "subtitle": "Procurement Manager",
+                            "type": "manager",
+                            "is_cost_center": false,
+                            "layout": "horizontal",
+                            "tone": "purple",
+                            "status": "active",
+                            "notes": "مدير الإدارة؛ الموظفون تحته أفقيًا",
+                            "children": [
+                              {
+                                "name": "موظف 1 - المشتريات",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              },
+                              {
+                                "name": "موظف 2 - المشتريات",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "name": "إدارة الصيانة",
+                        "subtitle": "Maintenance Dept",
+                        "type": "department",
+                        "is_cost_center": true,
+                        "layout": "vertical",
+                        "tone": "dark",
+                        "status": "active",
+                        "notes": "تحت C-Level المسؤول؛ مدير الإدارة ثم الموظفون أفقيًا",
+                        "children": [
+                          {
+                            "name": "مدير الصيانة",
+                            "subtitle": "Maintenance Manager",
+                            "type": "manager",
+                            "is_cost_center": false,
+                            "layout": "horizontal",
+                            "tone": "purple",
+                            "status": "active",
+                            "notes": "مدير الإدارة؛ الموظفون تحته أفقيًا",
+                            "children": [
+                              {
+                                "name": "موظف 1 - الصيانة",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              },
+                              {
+                                "name": "موظف 2 - الصيانة",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              },
+                              {
+                                "name": "موظف 3 - الصيانة",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "name": "إدارة الأملاك",
+                        "subtitle": "Property Dept",
+                        "type": "department",
+                        "is_cost_center": true,
+                        "layout": "vertical",
+                        "tone": "dark",
+                        "status": "active",
+                        "notes": "تحت C-Level المسؤول؛ مدير الإدارة ثم الموظفون أفقيًا",
+                        "children": [
+                          {
+                            "name": "مدير الأملاك",
+                            "subtitle": "Property Manager",
+                            "type": "manager",
+                            "is_cost_center": false,
+                            "layout": "horizontal",
+                            "tone": "purple",
+                            "status": "active",
+                            "notes": "مدير الإدارة؛ الموظفون تحته أفقيًا",
+                            "children": [
+                              {
+                                "name": "موظف 1 - الأملاك",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              },
+                              {
+                                "name": "موظف 2 - الأملاك",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "name": "إدارة الجودة",
+                        "subtitle": "Quality Dept",
+                        "type": "department",
+                        "is_cost_center": true,
+                        "layout": "vertical",
+                        "tone": "dark",
+                        "status": "active",
+                        "notes": "تحت C-Level المسؤول؛ مدير الإدارة ثم الموظفون أفقيًا",
+                        "children": [
+                          {
+                            "name": "مدير الجودة",
+                            "subtitle": "Quality Manager",
+                            "type": "manager",
+                            "is_cost_center": false,
+                            "layout": "horizontal",
+                            "tone": "purple",
+                            "status": "active",
+                            "notes": "مدير الإدارة؛ الموظفون تحته أفقيًا",
+                            "children": [
+                              {
+                                "name": "موظف 1 - الجودة",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              },
+                              {
+                                "name": "موظف 2 - الجودة",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "name": "إدارة السلامة",
+                        "subtitle": "Safety Dept",
+                        "type": "department",
+                        "is_cost_center": true,
+                        "layout": "vertical",
+                        "tone": "dark",
+                        "status": "active",
+                        "notes": "تحت C-Level المسؤول؛ مدير الإدارة ثم الموظفون أفقيًا",
+                        "children": [
+                          {
+                            "name": "مدير السلامة",
+                            "subtitle": "Safety Manager",
+                            "type": "manager",
+                            "is_cost_center": false,
+                            "layout": "horizontal",
+                            "tone": "purple",
+                            "status": "active",
+                            "notes": "مدير الإدارة؛ الموظفون تحته أفقيًا",
+                            "children": [
+                              {
+                                "name": "موظف 1 - السلامة",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              },
+                              {
+                                "name": "موظف 2 - السلامة",
+                                "subtitle": "يتم تعبئة الاسم والمسمى والراتب والجنسية لاحقًا",
+                                "type": "employee",
+                                "is_cost_center": false,
+                                "layout": "vertical",
+                                "tone": "dark",
+                                "status": "active",
+                                "notes": "Placeholder",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
                       }
                     ]
                   }
                 ]
               }
-            ],
-            "type": "employee",
-            "nationality_group": "saudi",
-            "status": "active"
+            ]
           }
         ]
       }

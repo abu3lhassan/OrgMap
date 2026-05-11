@@ -1,0 +1,18 @@
+@"
+# Local generated templates and packages
+*.xlsx
+*.xls
+*.csv
+*.zip
+
+# Temporary package notes
+README-WOW.txt
+README-DIRECT-DEPARTMENTS.txt
+README-FINAL-CLEAN.txt
+README-BALANCED-ROLLBACK.txt
+README-SUPPORT-HORIZONTAL.txt
+README-ALL-DEPARTMENTS.txt
+
+# Local temp folders
+org-map-level-up-github/
+"@ | Set-Content -Encoding UTF8 .gitignore

@@ -1307,6 +1307,90 @@
       font-feature-settings:"tnum" 1;
     }
 
+
+    /* Stable clean layout: all departments container + support services horizontal */
+    html,body{overflow-x:hidden}
+    .tree{max-width:100%;overflow:visible}
+
+    .multi-wrap{
+      max-width:1680px;
+      min-width:0 !important;
+      width:100%;
+      overflow:visible;
+    }
+    .multi-branches{
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:flex-start;
+      gap:28px;
+      max-width:100%;
+      padding-inline:14px;
+    }
+    .branch-slot{
+      flex:0 1 270px;
+      min-width:230px;
+      max-width:310px;
+    }
+    .branch-slot > .node > .card{
+      width:100%;
+      min-width:230px;
+      max-width:310px;
+    }
+    .multi-topline{
+      width:min(1180px,calc(100vw - 120px));
+      margin-inline:auto;
+    }
+
+    /* Make "جميع الإدارات" act as a clean visual container under CEO */
+    .all-departments-node > .children > .multi-wrap{
+      width:min(1500px,96vw);
+      max-width:min(1500px,96vw);
+      margin-inline:auto;
+    }
+    .all-departments-node > .children > .multi-wrap > .multi-branches{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(230px,270px));
+      justify-content:center;
+      gap:30px 34px;
+      width:100%;
+    }
+    .all-departments-node > .children > .multi-wrap > .multi-branches > .branch-slot{
+      min-width:230px;
+      max-width:270px;
+      width:270px;
+    }
+
+    /* Force HR and Customer Service under Support Services to sit side-by-side */
+    .support-services-node > .children > .multi-wrap{
+      width:max-content;
+      max-width:760px;
+      margin-inline:auto;
+    }
+    .support-services-node > .children > .multi-wrap > .multi-branches{
+      display:flex;
+      flex-wrap:nowrap !important;
+      justify-content:center;
+      gap:28px;
+      width:max-content;
+      max-width:760px;
+    }
+    .support-services-node > .children > .multi-wrap > .multi-branches > .branch-slot{
+      flex:0 0 260px;
+      width:260px;
+      min-width:260px;
+      max-width:260px;
+    }
+
+    @media (max-width:900px){
+      .multi-branches{gap:18px}
+      .branch-slot{min-width:220px;max-width:280px}
+      .branch-slot > .node > .card{min-width:220px;max-width:280px}
+      .support-services-node > .children > .multi-wrap > .multi-branches{
+        flex-wrap:wrap !important;
+        width:100%;
+      }
+    }
+
 </style>
 </head>
 <body>
@@ -1624,6 +1708,9 @@ function renderNode(node, depth = 0){
   const isExecutiveRoot = node.type === "executive_root";
   const el = document.createElement("div");
   el.className = "node";
+  if(node.name === "جميع الإدارات"){ el.classList.add("all-departments-node"); }
+  if(node.name === "إدارة الخدمات المساندة"){ el.classList.add("support-services-node"); }
+  if(node.name === "الشركة"){ el.classList.add("company-node"); }
   el.dataset.depth = String(depth);
   el.__orgNode = node;
 
@@ -1631,7 +1718,7 @@ function renderNode(node, depth = 0){
   el.appendChild(card);
   if(hasChildren){
     let childrenWrap;
-    if(isExecutiveRoot){
+    if(isExecutiveRoot && node.children.length > 1){
       childrenWrap = document.createElement("div");
       childrenWrap.className = "children";
 
@@ -1676,6 +1763,11 @@ document.getElementById("tree").appendChild(treeRoot);
 
 const firstChildNode = treeRoot.querySelector(":scope > .children .node");
 if(firstChildNode){ firstChildNode.classList.add("open"); }
+const defaultOpenNodes = [
+  treeRoot,
+  ...treeRoot.querySelectorAll('.node[data-depth="1"], .node[data-depth="2"], .node[data-depth="3"]')
+];
+defaultOpenNodes.forEach(n => n.classList.add('open'));
 
 document.getElementById("metric-total-cost").textContent = money(computeCost(data.company));
 document.getElementById("metric-stations").textContent = countStations(data.company);
