@@ -1457,8 +1457,9 @@
     <div class="metrics">
       <div class="metric salary-metric"><div class="label">إجمالي رواتب الشركة</div><div class="value salary-sensitive" id="metric-total-cost">-</div><div class="value salary-placeholder">مخفي</div></div>
       <div class="metric"><div class="label">عدد المحطات</div><div class="value" id="metric-stations">-</div></div>
-      <div class="metric"><div class="label">عدد المحطات المملوكة</div><div class="value" id="metric-owned-stations">-</div></div>
+      <div class="metric"><div class="label">عدد المحطات المستأجرة</div><div class="value" id="metric-owned-stations">-</div></div>
       <div class="metric"><div class="label">عدد المحطات المشغلة</div><div class="value" id="metric-operated-stations">-</div></div>
+      <div class="metric"><div class="label">عدد محطات الامتياز التجاري</div><div class="value" id="metric-franchise-stations">-</div></div>
       <div class="metric"><div class="label">عدد العاملين بالمحطات</div><div class="value" id="metric-station-workers">-</div></div>
       <div class="metric"><div class="label">عدد الموظفين الإداريين</div><div class="value" id="metric-admin-employees">-</div></div>
     </div>
@@ -1544,8 +1545,13 @@ function countStations(node){
 function countStationWorkers(node){
   return Number(node.station_workers || 0) + (node.children || []).reduce((s, child) => s + countStationWorkers(child), 0);
 }
+function stationKindLabel(kind){
+  if(kind === 'operated') return 'المحطات المشغلة';
+  if(kind === 'franchise') return 'محطات الامتياز التجاري';
+  return 'المحطات المستأجرة';
+}
 function countStationKind(node, kind){
-  const currentKind = node.station ? String(node.station_kind || node.stationType || 'owned') : '';
+  const currentKind = node.station ? String(node.station_kind || node.stationType || 'leased') : '';
   return (node.station && currentKind === kind ? 1 : 0) + (node.children || []).reduce((s, child) => s + countStationKind(child, kind), 0);
 }
 function countAdminEmployees(node){
@@ -1771,8 +1777,9 @@ defaultOpenNodes.forEach(n => n.classList.add('open'));
 
 document.getElementById("metric-total-cost").textContent = money(computeCost(data.company));
 document.getElementById("metric-stations").textContent = countStations(data.company);
-document.getElementById("metric-owned-stations").textContent = countStationKind(data.company, 'owned');
+document.getElementById("metric-owned-stations").textContent = countStationKind(data.company, 'leased');
 document.getElementById("metric-operated-stations").textContent = countStationKind(data.company, 'operated');
+document.getElementById("metric-franchise-stations").textContent = countStationKind(data.company, 'franchise');
 document.getElementById("metric-station-workers").textContent = countStationWorkers(data.company);
 document.getElementById("metric-admin-employees").textContent = countAdminEmployees(data.company);
 
@@ -1958,6 +1965,13 @@ function showDetails(node){
     ['عدد المحطات داخل الفرع', analytics.stations],
     ['عدد عمال المحطات داخل الفرع', analytics.stationWorkers]
   ];
+
+  if(node.station){
+    rows.push(['نوع المحطة', stationKindLabel(String(node.station_kind || node.stationType || 'leased'))]);
+    if(node.station_code) rows.push(['رمز المحطة', node.station_code]);
+    if(node.city) rows.push(['المدينة', node.city]);
+    if(node.district) rows.push(['الحي', node.district]);
+  }
 
   if(node.station_workers){
     rows.push(['عدد عمال هذه المحطة', node.station_workers]);

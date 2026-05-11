@@ -1436,8 +1436,9 @@ function dashboardMetrics(){
     departments: countDepartments(),
     managers: flat.filter(x=>isManager(x.node)).length,
     executives: flat.filter(x=>isExecutive(x.node)).length,
-    ownedStations: flat.filter(x=>x.node.station && (x.node.station_kind||x.node.stationType||'owned')==='owned').length,
+    leasedStations: flat.filter(x=>x.node.station && (x.node.station_kind||x.node.stationType||'leased')==='leased').length,
     operatedStations: flat.filter(x=>x.node.station && (x.node.station_kind||x.node.stationType)==='operated').length,
+    franchiseStations: flat.filter(x=>x.node.station && (x.node.station_kind||x.node.stationType)==='franchise').length,
     topCost: flat.filter(x=>(x.node.children||[]).length>0).map(x=>({name:x.node.name||'-',cost:computeCost(x.node),path:x.path.join(' › ')})).filter(x=>x.cost>0).sort((a,b)=>b.cost-a.cost).slice(0,5),
     quality: analyzeDataQuality(),
     meta: data.meta||{}

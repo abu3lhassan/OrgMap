@@ -70,7 +70,7 @@
 
     .meta-grid{
       display:grid;
-      grid-template-columns:180px 200px 1fr auto;
+      grid-template-columns:180px 200px 1fr 160px auto;
       gap:10px;
       align-items:end;
       margin-top:12px;
@@ -117,6 +117,10 @@
       <div>
         <label>ملاحظات الإصدار</label>
         <textarea id="metaNotesInput" placeholder="مثال: تحديث لوحة القيادة وتحليلات السعودة"></textarea>
+      </div>
+      <div>
+        <label>نسبة النطاق %</label>
+        <input id="nitaqatPercentageInput" type="number" min="0" max="100" step="0.01" placeholder="مثال: 35.50" />
       </div>
       <button class="primary-btn" id="todayMetaBtn" type="button">تاريخ اليوم</button>
     </div>
@@ -173,7 +177,7 @@ function isVacantNode(node){
 
 let rootData=null, selectedId=null, idCounter=1;
 const personTypes=new Set(["c_level","manager","employee","regional_manager","area_manager","station_supervisor","worker"]);
-const els={list:document.getElementById("employeeList"),stats:document.getElementById("stats"),status:document.getElementById("statusBox"),output:document.getElementById("output"),search:document.getElementById("searchInput"),nationalityFilter:document.getElementById("nationalityFilter"),parentFilter:document.getElementById("parentFilter"),selectedPath:document.getElementById("selectedPathBox"),metaVersion:document.getElementById("metaVersionInput"),metaLastUpdated:document.getElementById("metaLastUpdatedInput"),metaNotes:document.getElementById("metaNotesInput"),file:document.getElementById("fileInput"),name:document.getElementById("nameInput"),subtitle:document.getElementById("subtitleInput"),type:document.getElementById("typeInput"),salary:document.getElementById("salaryInput"),nationality:document.getElementById("nationalityInput"),parent:document.getElementById("parentInput"),layout:document.getElementById("layoutInput"),tone:document.getElementById("toneInput"),statusInput:document.getElementById("statusInput"),image:document.getElementById("imageInput"),notes:document.getElementById("notesInput"),formTitle:document.getElementById("formTitle")};
+const els={list:document.getElementById("employeeList"),stats:document.getElementById("stats"),status:document.getElementById("statusBox"),output:document.getElementById("output"),search:document.getElementById("searchInput"),nationalityFilter:document.getElementById("nationalityFilter"),parentFilter:document.getElementById("parentFilter"),selectedPath:document.getElementById("selectedPathBox"),metaVersion:document.getElementById("metaVersionInput"),metaLastUpdated:document.getElementById("metaLastUpdatedInput"),metaNotes:document.getElementById("metaNotesInput"),nitaqatPercentage:document.getElementById("nitaqatPercentageInput"),file:document.getElementById("fileInput"),name:document.getElementById("nameInput"),subtitle:document.getElementById("subtitleInput"),type:document.getElementById("typeInput"),salary:document.getElementById("salaryInput"),nationality:document.getElementById("nationalityInput"),parent:document.getElementById("parentInput"),layout:document.getElementById("layoutInput"),tone:document.getElementById("toneInput"),statusInput:document.getElementById("statusInput"),image:document.getElementById("imageInput"),notes:document.getElementById("notesInput"),formTitle:document.getElementById("formTitle")};
 function setStatus(msg,kind=""){els.status.className="status "+kind;els.status.textContent=msg}
 function cloneData(obj){return JSON.parse(JSON.stringify(obj))}
 function ensureData(){if(rootData)return;try{if(typeof data!=="undefined"){rootData=cloneData(data);normalizeTree();loadMetaForm();setStatus("تم تحميل data.js تلقائيًا.","ok")}}catch(e){}if(!rootData){rootData={meta:{version:"v1.0",lastUpdated:"-",notes:""},company:{name:"الشركة",type:"company",layout:"vertical",tone:"primary",children:[]}};loadMetaForm();setStatus("لم يتم تحميل data.js تلقائيًا. ارفع الملف يدويًا.","bad")}}
@@ -185,18 +189,22 @@ function parentOptions(){const selected=selectedId?flattenAll().find(x=>x.id===s
 
 function ensureMeta(){
   if(!rootData.meta) rootData.meta = {};
+  if(!rootData.meta.nitaqat) rootData.meta.nitaqat = {percentage:0};
 }
 function loadMetaForm(){
   ensureMeta();
   if(els.metaVersion) els.metaVersion.value = rootData.meta.version || "v1.0";
   if(els.metaLastUpdated) els.metaLastUpdated.value = rootData.meta.lastUpdated && rootData.meta.lastUpdated !== "-" ? rootData.meta.lastUpdated : "";
   if(els.metaNotes) els.metaNotes.value = rootData.meta.notes || "";
+  if(els.nitaqatPercentage) els.nitaqatPercentage.value = Number(rootData.meta.nitaqat?.percentage || 0);
 }
 function saveMetaFromForm(){
   ensureMeta();
   rootData.meta.version = els.metaVersion?.value.trim() || "v1.0";
   rootData.meta.lastUpdated = els.metaLastUpdated?.value || "-";
   rootData.meta.notes = els.metaNotes?.value.trim() || "";
+  const nitaqatValue = Number(els.nitaqatPercentage?.value || 0);
+  rootData.meta.nitaqat = { percentage: Math.max(0, Math.min(100, Number.isFinite(nitaqatValue) ? nitaqatValue : 0)) };
 }
 function setMetaToday(){
   const d = new Date();
@@ -270,6 +278,7 @@ document.getElementById("todayMetaBtn")?.addEventListener("click",setMetaToday);
 els.metaVersion?.addEventListener("input",()=>{saveMetaFromForm();updateOutput();});
 els.metaLastUpdated?.addEventListener("change",()=>{saveMetaFromForm();updateOutput();});
 els.metaNotes?.addEventListener("input",()=>{saveMetaFromForm();updateOutput();});
+els.nitaqatPercentage?.addEventListener("input",()=>{saveMetaFromForm();updateOutput();});
 els.search.addEventListener("input",renderList);
 els.type.addEventListener("change",applyAutoToneByType);
 document.getElementById("nationalityFilter")?.addEventListener("change",renderList);

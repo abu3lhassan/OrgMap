@@ -2,7 +2,7 @@ const data = {
   "meta": {
     "version": "v1.0",
     "lastUpdated": "-",
-    "notes": "Balanced rollback: old clean visual style with direct departments"
+    "notes": "Dummy Data - تحديث أنواع المحطات: مستأجرة / مشغلة / امتياز تجاري"
   },
   "company": {
     "name": "مجلس الإدارة",
@@ -262,7 +262,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المستأجرة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة AJZALA",
@@ -298,7 +298,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "leased",
+                                    "station_type_label": "المحطات المستأجرة",
+                                    "stationType": "leased",
+                                    "station_code": "ST-001",
+                                    "city": "الرياض",
+                                    "district": "حي تجريبي 1",
+                                    "station_workers": 6
                                   },
                                   {
                                     "name": "OWEMER",
@@ -310,7 +317,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المشغلة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة OWEMER",
@@ -346,7 +353,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "operated",
+                                    "station_type_label": "المحطات المشغلة",
+                                    "stationType": "operated",
+                                    "station_code": "ST-002",
+                                    "city": "الدمام",
+                                    "district": "حي تجريبي 2",
+                                    "station_workers": 7
                                   },
                                   {
                                     "name": "TWAIQ",
@@ -358,7 +372,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - محطات الامتياز التجاري؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة TWAIQ",
@@ -394,7 +408,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "franchise",
+                                    "station_type_label": "محطات الامتياز التجاري",
+                                    "stationType": "franchise",
+                                    "station_code": "ST-003",
+                                    "city": "جدة",
+                                    "district": "حي تجريبي 3",
+                                    "station_workers": 8
                                   },
                                   {
                                     "name": "ZEER",
@@ -406,7 +427,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المستأجرة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة ZEER",
@@ -442,7 +463,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "leased",
+                                    "station_type_label": "المحطات المستأجرة",
+                                    "stationType": "leased",
+                                    "station_code": "ST-004",
+                                    "city": "الخرج",
+                                    "district": "حي تجريبي 4",
+                                    "station_workers": 9
                                   },
                                   {
                                     "name": "MAWEED",
@@ -454,7 +482,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المشغلة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة MAWEED",
@@ -490,7 +518,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "operated",
+                                    "station_type_label": "المحطات المشغلة",
+                                    "stationType": "operated",
+                                    "station_code": "ST-005",
+                                    "city": "الخبر",
+                                    "district": "حي تجريبي 5",
+                                    "station_workers": 10
                                   },
                                   {
                                     "name": "ABA ALKHEL",
@@ -502,7 +537,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - محطات الامتياز التجاري؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة ABA ALKHEL",
@@ -538,7 +573,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "franchise",
+                                    "station_type_label": "محطات الامتياز التجاري",
+                                    "stationType": "franchise",
+                                    "station_code": "ST-006",
+                                    "city": "مكة",
+                                    "district": "حي تجريبي 6",
+                                    "station_workers": 6
                                   },
                                   {
                                     "name": "ABU BKER",
@@ -550,7 +592,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المستأجرة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة ABU BKER",
@@ -586,7 +628,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "leased",
+                                    "station_type_label": "المحطات المستأجرة",
+                                    "stationType": "leased",
+                                    "station_code": "ST-007",
+                                    "city": "المدينة",
+                                    "district": "حي تجريبي 7",
+                                    "station_workers": 7
                                   },
                                   {
                                     "name": "Al Araid 1",
@@ -598,7 +647,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المشغلة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة Al Araid 1",
@@ -634,7 +683,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "operated",
+                                    "station_type_label": "المحطات المشغلة",
+                                    "stationType": "operated",
+                                    "station_code": "ST-008",
+                                    "city": "الأحساء",
+                                    "district": "حي تجريبي 8",
+                                    "station_workers": 8
                                   }
                                 ]
                               },
@@ -658,7 +714,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - محطات الامتياز التجاري؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة RAYA",
@@ -694,7 +750,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "franchise",
+                                    "station_type_label": "محطات الامتياز التجاري",
+                                    "stationType": "franchise",
+                                    "station_code": "ST-009",
+                                    "city": "الطائف",
+                                    "district": "حي تجريبي 9",
+                                    "station_workers": 9
                                   },
                                   {
                                     "name": "SADDI",
@@ -706,7 +769,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المستأجرة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة SADDI",
@@ -742,7 +805,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "leased",
+                                    "station_type_label": "المحطات المستأجرة",
+                                    "stationType": "leased",
+                                    "station_code": "ST-010",
+                                    "city": "الرياض",
+                                    "district": "حي تجريبي 10",
+                                    "station_workers": 10
                                   },
                                   {
                                     "name": "SAHLA",
@@ -754,7 +824,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المشغلة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة SAHLA",
@@ -790,7 +860,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "operated",
+                                    "station_type_label": "المحطات المشغلة",
+                                    "stationType": "operated",
+                                    "station_code": "ST-011",
+                                    "city": "الدمام",
+                                    "district": "حي تجريبي 11",
+                                    "station_workers": 6
                                   },
                                   {
                                     "name": "LABAN",
@@ -802,7 +879,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - محطات الامتياز التجاري؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة LABAN",
@@ -838,7 +915,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "franchise",
+                                    "station_type_label": "محطات الامتياز التجاري",
+                                    "stationType": "franchise",
+                                    "station_code": "ST-012",
+                                    "city": "جدة",
+                                    "district": "حي تجريبي 12",
+                                    "station_workers": 7
                                   },
                                   {
                                     "name": "HWEDI",
@@ -850,7 +934,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المستأجرة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة HWEDI",
@@ -886,7 +970,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "leased",
+                                    "station_type_label": "المحطات المستأجرة",
+                                    "stationType": "leased",
+                                    "station_code": "ST-013",
+                                    "city": "الخرج",
+                                    "district": "حي تجريبي 13",
+                                    "station_workers": 8
                                   },
                                   {
                                     "name": "MANSORA",
@@ -898,7 +989,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المشغلة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة MANSORA",
@@ -934,7 +1025,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "operated",
+                                    "station_type_label": "المحطات المشغلة",
+                                    "stationType": "operated",
+                                    "station_code": "ST-014",
+                                    "city": "الخبر",
+                                    "district": "حي تجريبي 14",
+                                    "station_workers": 9
                                   },
                                   {
                                     "name": "NASSEM",
@@ -946,7 +1044,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - محطات الامتياز التجاري؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة NASSEM",
@@ -982,7 +1080,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "franchise",
+                                    "station_type_label": "محطات الامتياز التجاري",
+                                    "stationType": "franchise",
+                                    "station_code": "ST-015",
+                                    "city": "مكة",
+                                    "district": "حي تجريبي 15",
+                                    "station_workers": 10
                                   },
                                   {
                                     "name": "Al Araid 2",
@@ -994,7 +1099,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المستأجرة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة Al Araid 2",
@@ -1030,7 +1135,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "leased",
+                                    "station_type_label": "المحطات المستأجرة",
+                                    "stationType": "leased",
+                                    "station_code": "ST-016",
+                                    "city": "المدينة",
+                                    "district": "حي تجريبي 16",
+                                    "station_workers": 6
                                   }
                                 ]
                               }
@@ -1066,7 +1178,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المشغلة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة HAMADI",
@@ -1102,7 +1214,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "operated",
+                                    "station_type_label": "المحطات المشغلة",
+                                    "stationType": "operated",
+                                    "station_code": "ST-017",
+                                    "city": "الأحساء",
+                                    "district": "حي تجريبي 17",
+                                    "station_workers": 7
                                   },
                                   {
                                     "name": "AZIZYA -1",
@@ -1114,7 +1233,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - محطات الامتياز التجاري؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة AZIZYA -1",
@@ -1150,7 +1269,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "franchise",
+                                    "station_type_label": "محطات الامتياز التجاري",
+                                    "stationType": "franchise",
+                                    "station_code": "ST-018",
+                                    "city": "الطائف",
+                                    "district": "حي تجريبي 18",
+                                    "station_workers": 8
                                   },
                                   {
                                     "name": "ASKAR",
@@ -1162,7 +1288,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المستأجرة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة ASKAR",
@@ -1198,7 +1324,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "leased",
+                                    "station_type_label": "المحطات المستأجرة",
+                                    "stationType": "leased",
+                                    "station_code": "ST-019",
+                                    "city": "الرياض",
+                                    "district": "حي تجريبي 19",
+                                    "station_workers": 9
                                   },
                                   {
                                     "name": "UM AL-SAHIK",
@@ -1210,7 +1343,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المشغلة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة UM AL-SAHIK",
@@ -1246,7 +1379,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "operated",
+                                    "station_type_label": "المحطات المشغلة",
+                                    "stationType": "operated",
+                                    "station_code": "ST-020",
+                                    "city": "الدمام",
+                                    "district": "حي تجريبي 20",
+                                    "station_workers": 10
                                   },
                                   {
                                     "name": "SIHAT",
@@ -1258,7 +1398,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - محطات الامتياز التجاري؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة SIHAT",
@@ -1294,7 +1434,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "franchise",
+                                    "station_type_label": "محطات الامتياز التجاري",
+                                    "stationType": "franchise",
+                                    "station_code": "ST-021",
+                                    "city": "جدة",
+                                    "district": "حي تجريبي 21",
+                                    "station_workers": 6
                                   },
                                   {
                                     "name": "MUBARKYAH",
@@ -1306,7 +1453,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المستأجرة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة MUBARKYAH",
@@ -1342,7 +1489,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "leased",
+                                    "station_type_label": "المحطات المستأجرة",
+                                    "stationType": "leased",
+                                    "station_code": "ST-022",
+                                    "city": "الخرج",
+                                    "district": "حي تجريبي 22",
+                                    "station_workers": 7
                                   },
                                   {
                                     "name": "SALASL 1",
@@ -1354,7 +1508,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المشغلة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة SALASL 1",
@@ -1390,7 +1544,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "operated",
+                                    "station_type_label": "المحطات المشغلة",
+                                    "stationType": "operated",
+                                    "station_code": "ST-023",
+                                    "city": "الخبر",
+                                    "district": "حي تجريبي 23",
+                                    "station_workers": 8
                                   },
                                   {
                                     "name": "RABIYA & NASAAR",
@@ -1402,7 +1563,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - محطات الامتياز التجاري؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة RABIYA & NASAAR",
@@ -1438,7 +1599,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "franchise",
+                                    "station_type_label": "محطات الامتياز التجاري",
+                                    "stationType": "franchise",
+                                    "station_code": "ST-024",
+                                    "city": "مكة",
+                                    "district": "حي تجريبي 24",
+                                    "station_workers": 9
                                   },
                                   {
                                     "name": "MASHRGEEN",
@@ -1450,7 +1618,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المستأجرة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة MASHRGEEN",
@@ -1486,7 +1654,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "leased",
+                                    "station_type_label": "المحطات المستأجرة",
+                                    "stationType": "leased",
+                                    "station_code": "ST-025",
+                                    "city": "المدينة",
+                                    "district": "حي تجريبي 25",
+                                    "station_workers": 10
                                   },
                                   {
                                     "name": "RAKA",
@@ -1498,7 +1673,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المشغلة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة RAKA",
@@ -1534,7 +1709,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "operated",
+                                    "station_type_label": "المحطات المشغلة",
+                                    "stationType": "operated",
+                                    "station_code": "ST-026",
+                                    "city": "الأحساء",
+                                    "district": "حي تجريبي 26",
+                                    "station_workers": 6
                                   }
                                 ]
                               },
@@ -1558,7 +1740,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - محطات الامتياز التجاري؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة SUMAAN",
@@ -1594,7 +1776,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "franchise",
+                                    "station_type_label": "محطات الامتياز التجاري",
+                                    "stationType": "franchise",
+                                    "station_code": "ST-027",
+                                    "city": "الطائف",
+                                    "district": "حي تجريبي 27",
+                                    "station_workers": 7
                                   },
                                   {
                                     "name": "AZIZYA -2",
@@ -1606,7 +1795,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المستأجرة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة AZIZYA -2",
@@ -1642,7 +1831,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "leased",
+                                    "station_type_label": "المحطات المستأجرة",
+                                    "stationType": "leased",
+                                    "station_code": "ST-028",
+                                    "city": "الرياض",
+                                    "district": "حي تجريبي 28",
+                                    "station_workers": 8
                                   },
                                   {
                                     "name": "FAISALYAH",
@@ -1654,7 +1850,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المشغلة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة FAISALYAH",
@@ -1690,7 +1886,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "operated",
+                                    "station_type_label": "المحطات المشغلة",
+                                    "stationType": "operated",
+                                    "station_code": "ST-029",
+                                    "city": "الدمام",
+                                    "district": "حي تجريبي 29",
+                                    "station_workers": 9
                                   },
                                   {
                                     "name": "JUBAIL-1",
@@ -1702,7 +1905,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - محطات الامتياز التجاري؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة JUBAIL-1",
@@ -1738,7 +1941,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "franchise",
+                                    "station_type_label": "محطات الامتياز التجاري",
+                                    "stationType": "franchise",
+                                    "station_code": "ST-030",
+                                    "city": "جدة",
+                                    "district": "حي تجريبي 30",
+                                    "station_workers": 10
                                   },
                                   {
                                     "name": "GHADEER",
@@ -1750,7 +1960,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المستأجرة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة GHADEER",
@@ -1786,7 +1996,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "leased",
+                                    "station_type_label": "المحطات المستأجرة",
+                                    "stationType": "leased",
+                                    "station_code": "ST-031",
+                                    "city": "الخرج",
+                                    "district": "حي تجريبي 31",
+                                    "station_workers": 6
                                   },
                                   {
                                     "name": "SHATI",
@@ -1798,7 +2015,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المشغلة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة SHATI",
@@ -1834,7 +2051,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "operated",
+                                    "station_type_label": "المحطات المشغلة",
+                                    "stationType": "operated",
+                                    "station_code": "ST-032",
+                                    "city": "الخبر",
+                                    "district": "حي تجريبي 32",
+                                    "station_workers": 7
                                   },
                                   {
                                     "name": "SALASL 2",
@@ -1846,7 +2070,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - محطات الامتياز التجاري؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة SALASL 2",
@@ -1882,7 +2106,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "franchise",
+                                    "station_type_label": "محطات الامتياز التجاري",
+                                    "stationType": "franchise",
+                                    "station_code": "ST-033",
+                                    "city": "مكة",
+                                    "district": "حي تجريبي 33",
+                                    "station_workers": 8
                                   },
                                   {
                                     "name": "YARMOUK",
@@ -1894,7 +2125,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المستأجرة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة YARMOUK",
@@ -1930,7 +2161,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "leased",
+                                    "station_type_label": "المحطات المستأجرة",
+                                    "stationType": "leased",
+                                    "station_code": "ST-034",
+                                    "city": "المدينة",
+                                    "district": "حي تجريبي 34",
+                                    "station_workers": 9
                                   },
                                   {
                                     "name": "JASSER",
@@ -1942,7 +2180,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المشغلة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة JASSER",
@@ -1978,7 +2216,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "operated",
+                                    "station_type_label": "المحطات المشغلة",
+                                    "stationType": "operated",
+                                    "station_code": "ST-035",
+                                    "city": "الأحساء",
+                                    "district": "حي تجريبي 35",
+                                    "station_workers": 10
                                   },
                                   {
                                     "name": "REZEZA",
@@ -1990,7 +2235,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - محطات الامتياز التجاري؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة REZEZA",
@@ -2026,7 +2271,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "franchise",
+                                    "station_type_label": "محطات الامتياز التجاري",
+                                    "stationType": "franchise",
+                                    "station_code": "ST-036",
+                                    "city": "الطائف",
+                                    "district": "حي تجريبي 36",
+                                    "station_workers": 6
                                   }
                                 ]
                               },
@@ -2050,7 +2302,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المستأجرة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة KHAWARZME",
@@ -2086,7 +2338,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "leased",
+                                    "station_type_label": "المحطات المستأجرة",
+                                    "stationType": "leased",
+                                    "station_code": "ST-037",
+                                    "city": "الرياض",
+                                    "district": "حي تجريبي 37",
+                                    "station_workers": 7
                                   },
                                   {
                                     "name": "SHADGEM",
@@ -2098,7 +2357,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المشغلة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة SHADGEM",
@@ -2134,7 +2393,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "operated",
+                                    "station_type_label": "المحطات المشغلة",
+                                    "stationType": "operated",
+                                    "station_code": "ST-038",
+                                    "city": "الدمام",
+                                    "district": "حي تجريبي 38",
+                                    "station_workers": 8
                                   },
                                   {
                                     "name": "KHATHLAN",
@@ -2146,7 +2412,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - محطات الامتياز التجاري؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة KHATHLAN",
@@ -2182,7 +2448,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "franchise",
+                                    "station_type_label": "محطات الامتياز التجاري",
+                                    "stationType": "franchise",
+                                    "station_code": "ST-039",
+                                    "city": "جدة",
+                                    "district": "حي تجريبي 39",
+                                    "station_workers": 9
                                   },
                                   {
                                     "name": "JUBAIL-2",
@@ -2194,7 +2467,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المستأجرة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة JUBAIL-2",
@@ -2230,7 +2503,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "leased",
+                                    "station_type_label": "المحطات المستأجرة",
+                                    "stationType": "leased",
+                                    "station_code": "ST-040",
+                                    "city": "الخرج",
+                                    "district": "حي تجريبي 40",
+                                    "station_workers": 10
                                   },
                                   {
                                     "name": "KHUDARYAH",
@@ -2242,7 +2522,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المشغلة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة KHUDARYAH",
@@ -2278,7 +2558,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "operated",
+                                    "station_type_label": "المحطات المشغلة",
+                                    "stationType": "operated",
+                                    "station_code": "ST-041",
+                                    "city": "الخبر",
+                                    "district": "حي تجريبي 41",
+                                    "station_workers": 6
                                   },
                                   {
                                     "name": "ZOHOR",
@@ -2290,7 +2577,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - محطات الامتياز التجاري؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة ZOHOR",
@@ -2326,7 +2613,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "franchise",
+                                    "station_type_label": "محطات الامتياز التجاري",
+                                    "stationType": "franchise",
+                                    "station_code": "ST-042",
+                                    "city": "مكة",
+                                    "district": "حي تجريبي 42",
+                                    "station_workers": 7
                                   },
                                   {
                                     "name": "DANA",
@@ -2338,7 +2632,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المستأجرة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة DANA",
@@ -2374,7 +2668,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "leased",
+                                    "station_type_label": "المحطات المستأجرة",
+                                    "stationType": "leased",
+                                    "station_code": "ST-043",
+                                    "city": "المدينة",
+                                    "district": "حي تجريبي 43",
+                                    "station_workers": 8
                                   },
                                   {
                                     "name": "AJYAD",
@@ -2386,7 +2687,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المشغلة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة AJYAD",
@@ -2422,7 +2723,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "operated",
+                                    "station_type_label": "المحطات المشغلة",
+                                    "stationType": "operated",
+                                    "station_code": "ST-044",
+                                    "city": "الأحساء",
+                                    "district": "حي تجريبي 44",
+                                    "station_workers": 9
                                   },
                                   {
                                     "name": "SEEF",
@@ -2434,7 +2742,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - محطات الامتياز التجاري؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة SEEF",
@@ -2470,7 +2778,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "franchise",
+                                    "station_type_label": "محطات الامتياز التجاري",
+                                    "stationType": "franchise",
+                                    "station_code": "ST-045",
+                                    "city": "الطائف",
+                                    "district": "حي تجريبي 45",
+                                    "station_workers": 10
                                   }
                                 ]
                               }
@@ -2506,7 +2821,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المستأجرة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة Saddi Madinh",
@@ -2542,7 +2857,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "leased",
+                                    "station_type_label": "المحطات المستأجرة",
+                                    "stationType": "leased",
+                                    "station_code": "ST-046",
+                                    "city": "الرياض",
+                                    "district": "حي تجريبي 46",
+                                    "station_workers": 6
                                   },
                                   {
                                     "name": "Al Rahily",
@@ -2554,7 +2876,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المشغلة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة Al Rahily",
@@ -2590,7 +2912,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "operated",
+                                    "station_type_label": "المحطات المشغلة",
+                                    "stationType": "operated",
+                                    "station_code": "ST-047",
+                                    "city": "الدمام",
+                                    "district": "حي تجريبي 47",
+                                    "station_workers": 7
                                   },
                                   {
                                     "name": "Jabri",
@@ -2602,7 +2931,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - محطات الامتياز التجاري؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة Jabri",
@@ -2638,7 +2967,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "franchise",
+                                    "station_type_label": "محطات الامتياز التجاري",
+                                    "stationType": "franchise",
+                                    "station_code": "ST-048",
+                                    "city": "جدة",
+                                    "district": "حي تجريبي 48",
+                                    "station_workers": 8
                                   },
                                   {
                                     "name": "Yabs",
@@ -2650,7 +2986,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المستأجرة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة Yabs",
@@ -2686,7 +3022,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "leased",
+                                    "station_type_label": "المحطات المستأجرة",
+                                    "stationType": "leased",
+                                    "station_code": "ST-049",
+                                    "city": "الخرج",
+                                    "district": "حي تجريبي 49",
+                                    "station_workers": 9
                                   },
                                   {
                                     "name": "Tabaa sarea'a",
@@ -2698,7 +3041,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - المحطات المشغلة؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة Tabaa sarea'a",
@@ -2734,7 +3077,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "operated",
+                                    "station_type_label": "المحطات المشغلة",
+                                    "stationType": "operated",
+                                    "station_code": "ST-050",
+                                    "city": "الخبر",
+                                    "district": "حي تجريبي 50",
+                                    "station_workers": 10
                                   },
                                   {
                                     "name": "All Hail",
@@ -2746,7 +3096,7 @@ const data = {
                                     "layout": "vertical",
                                     "tone": "dark",
                                     "status": "active",
-                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال",
+                                    "notes": "محطة Placeholder؛ تحتها مشرف وعمال - محطات الامتياز التجاري؛ بيانات Dummy قابلة للتعديل.",
                                     "children": [
                                       {
                                         "name": "مشرف محطة All Hail",
@@ -2782,7 +3132,14 @@ const data = {
                                           }
                                         ]
                                       }
-                                    ]
+                                    ],
+                                    "station_kind": "franchise",
+                                    "station_type_label": "محطات الامتياز التجاري",
+                                    "stationType": "franchise",
+                                    "station_code": "ST-051",
+                                    "city": "مكة",
+                                    "district": "حي تجريبي 51",
+                                    "station_workers": 6
                                   }
                                 ]
                               }
