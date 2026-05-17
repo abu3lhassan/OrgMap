@@ -4,6 +4,7 @@
 # - data_exports/it_tickets.csv
 # - data_exports/maintenance_requests.csv
 # - data_exports/hr_requests.csv
+# - data_exports/procurement_requests.csv
 # Generates:
 # - dashboard-data.js
 
@@ -81,6 +82,46 @@ function Test-HrPendingStatus {
         $s -eq "under review" -or
         $s -eq "open" -or
         $s -eq "new"
+    )
+}
+
+function Test-ProcurementInProgressStatus {
+    param([string]$Status)
+
+    $s = ($Status + "").Trim().ToLower()
+
+    return (
+        $s -eq "new" -or
+        $s -eq "pending" -or
+        $s -eq "in progress" -or
+        $s -eq "under review" -or
+        $s -eq "ordered"
+    )
+}
+
+function Test-ProcurementPendingApprovalStatus {
+    param([string]$Status)
+
+    $s = ($Status + "").Trim().ToLower()
+
+    return (
+        $s -eq "pending approval" -or
+        $s -eq "approval" -or
+        $s -eq "awaiting approval"
+    )
+}
+
+function Test-ProcurementClosedStatus {
+    param([string]$Status)
+
+    $s = ($Status + "").Trim().ToLower()
+
+    return (
+        $s -eq "completed" -or
+        $s -eq "closed" -or
+        $s -eq "cancelled" -or
+        $s -eq "canceled" -or
+        $s -eq "rejected"
     )
 }
 
@@ -266,6 +307,55 @@ function Analyze-HrRequests {
     }
 }
 
+function Analyze-ProcurementRequests {
+    param([string]$FileName)
+
+    $Rows = Get-CsvRows $FileName
+
+    $InProgress = 0
+    $PendingApproval = 0
+    $Overdue = 0
+    $Closed = 0
+    $Now = Get-Date
+
+    foreach ($Row in $Rows) {
+        $Status = $Row.status
+        $DueDate = Get-DateOrNull $Row.due_date
+
+        $IsClosed = Test-ProcurementClosedStatus $Status
+
+        if (Test-ProcurementInProgressStatus $Status) {
+            $InProgress++
+        }
+
+        if (Test-ProcurementPendingApprovalStatus $Status) {
+            $PendingApproval++
+        }
+
+        if ($IsClosed) {
+            $Closed++
+        }
+
+        if ((-not $IsClosed) -and $null -ne $DueDate -and $DueDate -lt $Now) {
+            $Overdue++
+        }
+    }
+
+    $Missing = @()
+    if (-not (Test-HasColumn $Rows "requesting_department")) { $Missing += "requesting_department" }
+    if (-not (Test-HasColumn $Rows "status")) { $Missing += "status" }
+    if (-not (Test-HasColumn $Rows "created_at")) { $Missing += "created_at" }
+
+    return [ordered]@{
+        rows = $Rows.Count
+        inProgress = $InProgress
+        pendingApproval = $PendingApproval
+        overdue = $Overdue
+        closed = $Closed
+        missing = $Missing
+    }
+}
+
 function Get-Quality {
     param(
         [int]$RowCount,
@@ -345,13 +435,15 @@ $Today = Get-Date -Format "yyyy-MM-dd"
 $It = Analyze-Requests -FileName "it_tickets.csv" -Label $itLabel -RecommendedContextColumns @("department")
 $Maintenance = Analyze-Requests -FileName "maintenance_requests.csv" -Label $maintenanceLabel -RecommendedContextColumns @("station", "department")
 $Hr = Analyze-HrRequests -FileName "hr_requests.csv"
+$Procurement = Analyze-ProcurementRequests -FileName "procurement_requests.csv"
 
 $ItQuality = Get-Quality -RowCount $It.rows -Missing $It.missing -FileName "data_exports/it_tickets.csv"
 $MaintenanceQuality = Get-Quality -RowCount $Maintenance.rows -Missing $Maintenance.missing -FileName "data_exports/maintenance_requests.csv"
 $HrQuality = Get-Quality -RowCount $Hr.rows -Missing $Hr.missing -FileName "data_exports/hr_requests.csv"
+$ProcurementQuality = Get-Quality -RowCount $Procurement.rows -Missing $Procurement.missing -FileName "data_exports/procurement_requests.csv"
 
-$OpenTotal = $It.open + $Maintenance.open + $Hr.totalPending
-$OverdueTotal = $It.overdue + $Maintenance.overdue
+$OpenTotal = $It.open + $Maintenance.open + $Hr.totalPending + $Procurement.inProgress + $Procurement.pendingApproval
+$OverdueTotal = $It.overdue + $Maintenance.overdue + $Procurement.overdue
 $CriticalTotal = $It.critical + $Maintenance.critical
 
 $Bottlenecks = @()
@@ -366,6 +458,11 @@ if ($Maintenance.open -gt 0) {
 
 if ($Hr.totalPending -gt 0) {
     $Bottlenecks += New-Bottleneck -Department $hrLabel -Open $Hr.totalPending -Overdue 0 -Critical 0 -Reason "There are $($Hr.totalPending) HR requests pending based on the export file."
+}
+
+$ProcurementOpen = $Procurement.inProgress + $Procurement.pendingApproval
+if ($ProcurementOpen -gt 0) {
+    $Bottlenecks += New-Bottleneck -Department $procurementLabel -Open $ProcurementOpen -Overdue $Procurement.overdue -Critical 0 -Reason "There are $ProcurementOpen procurement requests in progress or pending approval."
 }
 
 $TopBottleneck = $undefined
@@ -386,6 +483,11 @@ if ($Maintenance.rows -eq 0) { $Alerts += "Maintenance export file has not been 
 
 if ($Hr.totalPending -gt 0) { $Alerts += "There are $($Hr.totalPending) HR requests pending." }
 if ($Hr.rows -eq 0) { $Alerts += "HR export file has not been loaded yet." }
+
+if ($Procurement.inProgress -gt 0) { $Alerts += "There are $($Procurement.inProgress) procurement requests in progress." }
+if ($Procurement.pendingApproval -gt 0) { $Alerts += "There are $($Procurement.pendingApproval) procurement requests pending approval." }
+if ($Procurement.overdue -gt 0) { $Alerts += "There are $($Procurement.overdue) overdue procurement requests." }
+if ($Procurement.rows -eq 0) { $Alerts += "Procurement export file has not been loaded yet." }
 
 $Alerts += "Finance and license data are not added yet."
 
@@ -439,10 +541,10 @@ $DashboardData = [ordered]@{
 
     procurement = [ordered]@{
         label = $procurementLabel
-        inProgress = 0
-        pendingApproval = 0
-        overdue = 0
-        status = $waiting
+        inProgress = $Procurement.inProgress
+        pendingApproval = $Procurement.pendingApproval
+        overdue = $Procurement.overdue
+        status = $ProcurementQuality.status
     }
 
     finance = [ordered]@{
@@ -509,3 +611,8 @@ Write-Host "HR pending permission: $($Hr.pendingPermission)"
 Write-Host "HR pending business trip: $($Hr.pendingBusinessTrip)"
 Write-Host "HR pending work permit: $($Hr.pendingWorkPermit)"
 Write-Host "HR total pending: $($Hr.totalPending)"
+Write-Host "Procurement rows: $($Procurement.rows)"
+Write-Host "Procurement in progress: $($Procurement.inProgress)"
+Write-Host "Procurement pending approval: $($Procurement.pendingApproval)"
+Write-Host "Procurement overdue: $($Procurement.overdue)"
+Write-Host "Procurement closed: $($Procurement.closed)"
