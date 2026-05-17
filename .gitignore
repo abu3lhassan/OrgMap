@@ -1,4 +1,7 @@
-@"
+# Local dashboard exports - do not publish sensitive raw data
+data_exports/*
+!data_exports/.gitkeep
+
 # Local generated templates and packages
 *.xlsx
 *.xls
@@ -15,4 +18,7 @@ README-ALL-DEPARTMENTS.txt
 
 # Local temp folders
 org-map-level-up-github/
-"@ | Set-Content -Encoding UTF8 .gitignore
+
+# OS/editor files
+.DS_Store
+Thumbs.db
