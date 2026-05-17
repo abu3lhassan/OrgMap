@@ -11,20 +11,20 @@ window.managementDashboardData = {
     "note": "هذه اللوحة تعرض مؤشرات مجمعة فقط ولا تحتوي على تفاصيل الطلبات."
   },
   "summary": {
-    "openRequests": 9,
-    "overdueRequests": 0,
-    "criticalRequests": 0,
+    "openRequests": 2,
+    "overdueRequests": 2,
+    "criticalRequests": 2,
     "pendingInvoices": 0,
     "expiringLicenses": 0,
     "bottleneckDepartment": "تقنية المعلومات"
   },
   "it": {
     "label": "تقنية المعلومات",
-    "open": 9,
-    "critical": 0,
-    "overdue": 0,
-    "closed": 8,
-    "averageAgeDays": 8,
+    "open": 2,
+    "critical": 2,
+    "overdue": 2,
+    "closed": 1,
+    "averageAgeDays": 5,
     "status": "محدث"
   },
   "maintenance": {
@@ -69,24 +69,26 @@ window.managementDashboardData = {
   "bottlenecks": [
     {
       "department": "تقنية المعلومات",
-      "open": 9,
-      "overdue": 0,
-      "critical": 0,
-      "score": 9,
-      "level": "متوسط",
-      "reason": "There are 9 open IT tickets based on the export file."
+      "open": 2,
+      "overdue": 2,
+      "critical": 2,
+      "score": 18,
+      "level": "عالي",
+      "reason": "There are 2 open IT tickets based on the export file."
     }
   ],
   "alerts": [
-    "There are 9 open IT tickets.",
+    "There are 2 open IT tickets.",
+    "There are 2 critical IT tickets.",
+    "There are 2 overdue IT tickets.",
     "Maintenance data is waiting for first export file.",
     "HR data is waiting for first export file.",
     "Finance and license data are not added yet."
 ],
   "dataQuality": {
     "it": {
-      "status": "جزئي",
-      "message": "IT file is readable, but these columns are missing: priority, due_date, department."
+      "status": "محدث",
+      "message": "IT file loaded successfully."
     },
     "maintenance": {
       "status": "غير متوفر",
