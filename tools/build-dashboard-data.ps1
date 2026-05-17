@@ -3,6 +3,7 @@
 # Reads:
 # - data_exports/it_tickets.csv
 # - data_exports/maintenance_requests.csv
+# - data_exports/hr_requests.csv
 # Generates:
 # - dashboard-data.js
 
@@ -67,6 +68,37 @@ function Test-CriticalPriority {
         $s -eq "p1" -or
         $s -eq "p0"
     )
+}
+
+function Test-HrPendingStatus {
+    param([string]$Status)
+
+    $s = ($Status + "").Trim().ToLower()
+
+    return (
+        $s -eq "pending" -or
+        $s -eq "in progress" -or
+        $s -eq "under review" -or
+        $s -eq "open" -or
+        $s -eq "new"
+    )
+}
+
+function Normalize-HrRequestType {
+    param([string]$RequestType)
+
+    $s = ($RequestType + "").Trim().ToLower()
+
+    if ($s -eq "leave") { return "leave" }
+    if ($s -eq "vacation") { return "leave" }
+    if ($s -eq "permission") { return "permission" }
+    if ($s -eq "business_trip") { return "business_trip" }
+    if ($s -eq "business trip") { return "business_trip" }
+    if ($s -eq "trip") { return "business_trip" }
+    if ($s -eq "work_permit") { return "work_permit" }
+    if ($s -eq "work permit") { return "work_permit" }
+
+    return $s
 }
 
 function Get-DateOrNull {
@@ -183,6 +215,57 @@ function Analyze-Requests {
     }
 }
 
+function Analyze-HrRequests {
+    param([string]$FileName)
+
+    $Rows = Get-CsvRows $FileName
+
+    $PendingLeave = 0
+    $PendingPermission = 0
+    $PendingBusinessTrip = 0
+    $PendingWorkPermit = 0
+
+    foreach ($Row in $Rows) {
+        $Type = Normalize-HrRequestType $Row.request_type
+        $Status = $Row.status
+
+        if (-not (Test-HrPendingStatus $Status)) {
+            continue
+        }
+
+        if ($Type -eq "leave") {
+            $PendingLeave++
+        }
+        elseif ($Type -eq "permission") {
+            $PendingPermission++
+        }
+        elseif ($Type -eq "business_trip") {
+            $PendingBusinessTrip++
+        }
+        elseif ($Type -eq "work_permit") {
+            $PendingWorkPermit++
+        }
+    }
+
+    $Missing = @()
+    if (-not (Test-HasColumn $Rows "employee_department")) { $Missing += "employee_department" }
+    if (-not (Test-HasColumn $Rows "request_type")) { $Missing += "request_type" }
+    if (-not (Test-HasColumn $Rows "status")) { $Missing += "status" }
+    if (-not (Test-HasColumn $Rows "created_at")) { $Missing += "created_at" }
+
+    $TotalPending = $PendingLeave + $PendingPermission + $PendingBusinessTrip + $PendingWorkPermit
+
+    return [ordered]@{
+        rows = $Rows.Count
+        pendingLeave = $PendingLeave
+        pendingPermission = $PendingPermission
+        pendingBusinessTrip = $PendingBusinessTrip
+        pendingWorkPermit = $PendingWorkPermit
+        totalPending = $TotalPending
+        missing = $Missing
+    }
+}
+
 function Get-Quality {
     param(
         [int]$RowCount,
@@ -255,16 +338,19 @@ $financeLabel = U "\u0627\u0644\u0645\u0627\u0644\u064a\u0629"
 $licensesLabel = U "\u0627\u0644\u0631\u062e\u0635"
 $waiting = U "\u0628\u0627\u0646\u062a\u0638\u0627\u0631 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a"
 $undefined = U "\u063a\u064a\u0631 \u0645\u062d\u062f\u062f"
+$notAvailable = U "\u063a\u064a\u0631 \u0645\u062a\u0648\u0641\u0631"
 
 $Today = Get-Date -Format "yyyy-MM-dd"
 
 $It = Analyze-Requests -FileName "it_tickets.csv" -Label $itLabel -RecommendedContextColumns @("department")
 $Maintenance = Analyze-Requests -FileName "maintenance_requests.csv" -Label $maintenanceLabel -RecommendedContextColumns @("station", "department")
+$Hr = Analyze-HrRequests -FileName "hr_requests.csv"
 
 $ItQuality = Get-Quality -RowCount $It.rows -Missing $It.missing -FileName "data_exports/it_tickets.csv"
 $MaintenanceQuality = Get-Quality -RowCount $Maintenance.rows -Missing $Maintenance.missing -FileName "data_exports/maintenance_requests.csv"
+$HrQuality = Get-Quality -RowCount $Hr.rows -Missing $Hr.missing -FileName "data_exports/hr_requests.csv"
 
-$OpenTotal = $It.open + $Maintenance.open
+$OpenTotal = $It.open + $Maintenance.open + $Hr.totalPending
 $OverdueTotal = $It.overdue + $Maintenance.overdue
 $CriticalTotal = $It.critical + $Maintenance.critical
 
@@ -276,6 +362,10 @@ if ($It.open -gt 0) {
 
 if ($Maintenance.open -gt 0) {
     $Bottlenecks += New-Bottleneck -Department $maintenanceLabel -Open $Maintenance.open -Overdue $Maintenance.overdue -Critical $Maintenance.critical -Reason "There are $($Maintenance.open) open maintenance requests based on the export file."
+}
+
+if ($Hr.totalPending -gt 0) {
+    $Bottlenecks += New-Bottleneck -Department $hrLabel -Open $Hr.totalPending -Overdue 0 -Critical 0 -Reason "There are $($Hr.totalPending) HR requests pending based on the export file."
 }
 
 $TopBottleneck = $undefined
@@ -294,7 +384,9 @@ if ($Maintenance.critical -gt 0) { $Alerts += "There are $($Maintenance.critical
 if ($Maintenance.overdue -gt 0) { $Alerts += "There are $($Maintenance.overdue) overdue maintenance requests." }
 if ($Maintenance.rows -eq 0) { $Alerts += "Maintenance export file has not been loaded yet." }
 
-$Alerts += "HR data is waiting for first export file."
+if ($Hr.totalPending -gt 0) { $Alerts += "There are $($Hr.totalPending) HR requests pending." }
+if ($Hr.rows -eq 0) { $Alerts += "HR export file has not been loaded yet." }
+
 $Alerts += "Finance and license data are not added yet."
 
 $DashboardData = [ordered]@{
@@ -337,12 +429,12 @@ $DashboardData = [ordered]@{
 
     hr = [ordered]@{
         label = $hrLabel
-        pendingLeave = 0
-        pendingPermission = 0
-        pendingBusinessTrip = 0
-        pendingWorkPermit = 0
-        totalPending = 0
-        status = $waiting
+        pendingLeave = $Hr.pendingLeave
+        pendingPermission = $Hr.pendingPermission
+        pendingBusinessTrip = $Hr.pendingBusinessTrip
+        pendingWorkPermit = $Hr.pendingWorkPermit
+        totalPending = $Hr.totalPending
+        status = $HrQuality.status
     }
 
     procurement = [ordered]@{
@@ -376,16 +468,13 @@ $DashboardData = [ordered]@{
     dataQuality = [ordered]@{
         it = $ItQuality
         maintenance = $MaintenanceQuality
-        hr = [ordered]@{
-            status = U "\u063a\u064a\u0631 \u0645\u062a\u0648\u0641\u0631"
-            message = "HR export file has not been uploaded yet."
-        }
+        hr = $HrQuality
         finance = [ordered]@{
-            status = U "\u063a\u064a\u0631 \u0645\u062a\u0648\u0641\u0631"
+            status = $notAvailable
             message = "Finance export file has not been uploaded yet."
         }
         licenses = [ordered]@{
-            status = U "\u063a\u064a\u0631 \u0645\u062a\u0648\u0641\u0631"
+            status = $notAvailable
             message = "Licenses export file has not been uploaded yet."
         }
     }
@@ -414,3 +503,9 @@ Write-Host "Maintenance open: $($Maintenance.open)"
 Write-Host "Maintenance closed: $($Maintenance.closed)"
 Write-Host "Maintenance critical: $($Maintenance.critical)"
 Write-Host "Maintenance overdue: $($Maintenance.overdue)"
+Write-Host "HR rows: $($Hr.rows)"
+Write-Host "HR pending leave: $($Hr.pendingLeave)"
+Write-Host "HR pending permission: $($Hr.pendingPermission)"
+Write-Host "HR pending business trip: $($Hr.pendingBusinessTrip)"
+Write-Host "HR pending work permit: $($Hr.pendingWorkPermit)"
+Write-Host "HR total pending: $($Hr.totalPending)"
