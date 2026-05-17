@@ -3,108 +3,143 @@
 // Summary indicators only. Do not store sensitive request details here.
 
 window.managementDashboardData = {
-  "meta": {
-    "title": "لوحة المتابعة الإدارية",
-    "version": "v1.0",
-    "lastUpdated": "2026-05-17",
-    "dataSource": "Excel / CSV exports",
-    "note": "هذه اللوحة تعرض مؤشرات مجمعة فقط ولا تحتوي على تفاصيل الطلبات."
-  },
-  "summary": {
-    "openRequests": 2,
-    "overdueRequests": 2,
-    "criticalRequests": 2,
-    "pendingInvoices": 0,
-    "expiringLicenses": 0,
-    "bottleneckDepartment": "تقنية المعلومات"
-  },
-  "it": {
-    "label": "تقنية المعلومات",
-    "open": 2,
-    "critical": 2,
-    "overdue": 2,
-    "closed": 1,
-    "averageAgeDays": 5,
-    "status": "محدث"
-  },
-  "maintenance": {
-    "label": "الصيانة",
-    "open": 0,
-    "critical": 0,
-    "overdue": 0,
-    "closed": 0,
-    "averageAgeDays": 0,
-    "status": "بانتظار البيانات"
-  },
-  "hr": {
-    "label": "الموارد البشرية",
-    "pendingLeave": 0,
-    "pendingPermission": 0,
-    "pendingBusinessTrip": 0,
-    "pendingWorkPermit": 0,
-    "totalPending": 0,
-    "status": "بانتظار البيانات"
-  },
-  "procurement": {
-    "label": "المشتريات",
-    "inProgress": 0,
-    "pendingApproval": 0,
-    "overdue": 0,
-    "status": "بانتظار البيانات"
-  },
-  "finance": {
-    "label": "المالية",
-    "pendingInvoices": 0,
-    "pendingContractorPayments": 0,
-    "overduePayments": 0,
-    "status": "بانتظار البيانات"
-  },
-  "licenses": {
-    "label": "الرخص",
-    "expiringIn30Days": 0,
-    "expiringIn60Days": 0,
-    "expired": 0,
-    "status": "بانتظار البيانات"
-  },
-  "bottlenecks": [
-    {
-      "department": "تقنية المعلومات",
-      "open": 2,
-      "overdue": 2,
-      "critical": 2,
-      "score": 18,
-      "level": "عالي",
-      "reason": "There are 2 open IT tickets based on the export file."
-    }
-  ],
-  "alerts": [
-    "There are 2 open IT tickets.",
-    "There are 2 critical IT tickets.",
-    "There are 2 overdue IT tickets.",
-    "Maintenance data is waiting for first export file.",
-    "HR data is waiting for first export file.",
-    "Finance and license data are not added yet."
-],
-  "dataQuality": {
-    "it": {
-      "status": "محدث",
-      "message": "IT file loaded successfully."
-    },
-    "maintenance": {
-      "status": "غير متوفر",
-      "message": "Maintenance export file has not been uploaded yet."
-    },
-    "hr": {
-      "status": "غير متوفر",
-      "message": "HR export file has not been uploaded yet."
-    },
-    "finance": {
-      "status": "غير متوفر",
-      "message": "Finance export file has not been uploaded yet."
-    },
-    "licenses": {
-      "status": "غير متوفر",
-      "message": "Licenses export file has not been uploaded yet."
-    }
-  }
+    "meta":  {
+                 "title":  "لوحة المتابعة الإدارية",
+                 "version":  "v1.0",
+                 "lastUpdated":  "2026-05-17",
+                 "dataSource":  "Excel / CSV exports",
+                 "note":  "هذه اللوحة تعرض مؤشرات مجمعة فقط ولا تحتوي على تفاصيل الطلبات."
+             },
+    "summary":  {
+                    "openRequests":  7,
+                    "overdueRequests":  10,
+                    "criticalRequests":  4,
+                    "pendingInvoices":  3,
+                    "expiringLicenses":  0,
+                    "bottleneckDepartment":  "المشتريات"
+                },
+    "it":  {
+               "label":  "تقنية المعلومات",
+               "open":  2,
+               "critical":  2,
+               "overdue":  2,
+               "closed":  1,
+               "averageAgeDays":  6,
+               "status":  "محدث"
+           },
+    "maintenance":  {
+                        "label":  "الصيانة",
+                        "open":  2,
+                        "critical":  2,
+                        "overdue":  2,
+                        "closed":  1,
+                        "averageAgeDays":  6,
+                        "status":  "محدث"
+                    },
+    "hr":  {
+               "label":  "الموارد البشرية",
+               "pendingLeave":  0,
+               "pendingPermission":  0,
+               "pendingBusinessTrip":  0,
+               "pendingWorkPermit":  0,
+               "pendingOther":  0,
+               "totalPending":  0,
+               "status":  "جزئي"
+           },
+    "procurement":  {
+                        "label":  "المشتريات",
+                        "inProgress":  2,
+                        "pendingApproval":  1,
+                        "overdue":  3,
+                        "status":  "محدث"
+                    },
+    "finance":  {
+                    "label":  "المالية",
+                    "pendingInvoices":  1,
+                    "pendingContractorPayments":  2,
+                    "overduePayments":  3,
+                    "status":  "محدث"
+                },
+    "licenses":  {
+                     "label":  "الرخص",
+                     "expiringIn30Days":  0,
+                     "expiringIn60Days":  0,
+                     "expired":  0,
+                     "status":  "غير متوفر"
+                 },
+    "bottlenecks":  [
+                        {
+                            "department":  "تقنية المعلومات",
+                            "open":  2,
+                            "overdue":  2,
+                            "critical":  2,
+                            "score":  18,
+                            "level":  "عالي",
+                            "reason":  "There are 2 open IT tickets based on the export file."
+                        },
+                        {
+                            "department":  "الصيانة",
+                            "open":  2,
+                            "overdue":  2,
+                            "critical":  2,
+                            "score":  18,
+                            "level":  "عالي",
+                            "reason":  "There are 2 open maintenance requests based on the export file."
+                        },
+                        {
+                            "department":  "المشتريات",
+                            "open":  3,
+                            "overdue":  3,
+                            "critical":  0,
+                            "score":  12,
+                            "level":  "عالي",
+                            "reason":  "There are 3 procurement requests in progress or pending approval."
+                        },
+                        {
+                            "department":  "المالية",
+                            "open":  3,
+                            "overdue":  3,
+                            "critical":  0,
+                            "score":  12,
+                            "level":  "عالي",
+                            "reason":  "There are 3 pending finance items based on the export file."
+                        }
+                    ],
+    "alerts":  [
+                   "There are 2 open IT tickets.",
+                   "There are 2 critical IT tickets.",
+                   "There are 2 overdue IT tickets.",
+                   "There are 2 open maintenance requests.",
+                   "There are 2 critical maintenance requests.",
+                   "There are 2 overdue maintenance requests.",
+                   "There are 2 procurement requests in progress.",
+                   "There are 1 procurement requests pending approval.",
+                   "There are 3 overdue procurement requests.",
+                   "There are 1 pending invoices.",
+                   "There are 2 pending contractor payments.",
+                   "There are 3 overdue finance items.",
+                   "Licenses export file has not been loaded yet."
+               ],
+    "dataQuality":  {
+                        "it":  {
+                                   "status":  "محدث",
+                                   "message":  "File loaded successfully."
+                               },
+                        "maintenance":  {
+                                            "status":  "محدث",
+                                            "message":  "File loaded successfully."
+                                        },
+                        "hr":  {
+                                   "status":  "جزئي",
+                                   "message":  "File is readable, but these columns are missing: employee_department or Department, request_type or Request Type, status or Request Status, created_at."
+                               },
+                        "finance":  {
+                                        "status":  "محدث",
+                                        "message":  "File loaded successfully."
+                                    },
+                        "licenses":  {
+                                         "status":  "غير متوفر",
+                                         "message":  "data_exports/licenses.csv was not found or is empty."
+                                     }
+                    }
 };
