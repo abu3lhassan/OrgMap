@@ -11,7 +11,7 @@ window.managementDashboardData = {
                  "note":  "هذه اللوحة تعرض مؤشرات مجمعة فقط ولا تحتوي على تفاصيل الطلبات."
              },
     "summary":  {
-                    "openRequests":  7,
+                    "openRequests":  28,
                     "overdueRequests":  10,
                     "criticalRequests":  4,
                     "pendingInvoices":  3,
@@ -38,13 +38,13 @@ window.managementDashboardData = {
                     },
     "hr":  {
                "label":  "الموارد البشرية",
-               "pendingLeave":  0,
+               "pendingLeave":  17,
                "pendingPermission":  0,
                "pendingBusinessTrip":  0,
-               "pendingWorkPermit":  0,
-               "pendingOther":  0,
-               "totalPending":  0,
-               "status":  "جزئي"
+               "pendingWorkPermit":  2,
+               "pendingOther":  2,
+               "totalPending":  21,
+               "status":  "محدث"
            },
     "procurement":  {
                         "label":  "المشتريات",
@@ -87,6 +87,15 @@ window.managementDashboardData = {
                             "reason":  "There are 2 open maintenance requests based on the export file."
                         },
                         {
+                            "department":  "الموارد البشرية",
+                            "open":  21,
+                            "overdue":  0,
+                            "critical":  0,
+                            "score":  21,
+                            "level":  "متوسط",
+                            "reason":  "There are 21 HR requests pending based on the export file."
+                        },
+                        {
                             "department":  "المشتريات",
                             "open":  3,
                             "overdue":  3,
@@ -112,6 +121,8 @@ window.managementDashboardData = {
                    "There are 2 open maintenance requests.",
                    "There are 2 critical maintenance requests.",
                    "There are 2 overdue maintenance requests.",
+                   "There are 21 HR requests pending.",
+                   "There are 2 pending HR requests categorized as other.",
                    "There are 2 procurement requests in progress.",
                    "There are 1 procurement requests pending approval.",
                    "There are 3 overdue procurement requests.",
@@ -130,8 +141,8 @@ window.managementDashboardData = {
                                             "message":  "File loaded successfully."
                                         },
                         "hr":  {
-                                   "status":  "جزئي",
-                                   "message":  "File is readable, but these columns are missing: employee_department or Department, request_type or Request Type, status or Request Status, created_at."
+                                   "status":  "محدث",
+                                   "message":  "File loaded successfully."
                                },
                         "finance":  {
                                         "status":  "محدث",
